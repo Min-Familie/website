@@ -8,12 +8,15 @@
   <body>
     <section class="leggInn">
         <h1>Min huskeliste</h1>
+        <!-- <section role="status" aria-live="polite">
+
+        </section> -->
         <form id="nyItemForm" onsubmit="return false">
           <input type="text" id="nyItem" placeholder="E.g. Støvsuge huset...">
-          <button type="button" id="nyButton" name="button" onclick="onClick()">Button</button>
+          <button type="button" id="nyButton" name="button" onclick="onClick()">Legg til</button>
         </form>
         <p id="errorMessage"></p>
-        ***REMOVED*** include '../inc/showTodo.inc.php';***REMOVED***
+        <ul style="list-style:none;padding-left:5px">***REMOVED*** include '../inc/showTodo.inc.php';***REMOVED***</ul>
     </section>
   </body>
 </html>
