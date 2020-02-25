@@ -8,16 +8,14 @@ function onClick(){
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        window.location.reload();
+        location.reload();
+
   ***REMOVED***
 ***REMOVED***;
   xhttp.open("GET", `addItem.php?t="${text}"`, true);
   xhttp.send();
   document.getElementById("nyItemForm").reset();
-  if ((document.getElementById("errorMessage").innerHTML).length > 0 ){
-    document.getElementById("errorMessage").innerHTML = "";
-
-  }
+  // addedFeedback(text);
 }
 function checkMark(id){
   let xhttp = new XMLHttpRequest();
@@ -45,4 +43,19 @@ function checkMark(id){
     window.alert("Something went wrong");
     return;
   }
+}
+// function addedFeedback(todo) {
+//   let liveRegion = document.querySelector('[role="status"]');
+//   liveRegion.textContent = `${todo} lagt til.`;
+// }
+function delItem(id){
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById(`entity${id}`).remove();
+        location.reload();
+  ***REMOVED***
+***REMOVED***;
+  xhttp.open("GET", `../inc/delItem.inc.php?id=${id}`, true);
+  xhttp.send();
 }
