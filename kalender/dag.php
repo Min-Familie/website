@@ -1,4 +1,4 @@
-<?php //https://codepen.io/javiercf/pen/GviKy
+<?php
     // input dag
     if (isset($_GET["day"])) {$inputDay = $_GET["day"];}
     else                     {$inputDay = date("Y-m-d");}
@@ -9,6 +9,20 @@
 
     // familiemedlemmer fra db
     $family = array("Shayan", "Patrick", "Leif", "Aleksander", "Bendik", "Kiran");
+
+    // events fra db
+    $events = array( // sortert etter "kalender" og "tid"
+        array(
+            "kalender"    => "Patrick",
+            "tid"         => 3, // 03:00
+            "tidmin"      => 24, // 03:24
+            "varighet"    => 78, // minutter
+            "tittel"      => "jep",
+            "sted"        => "59.952710, 10.909961", 
+            "beskrivelse" => "besøk",
+            "displayet"   => False
+        )
+    );
 ?>
 
 <!DOCTYPE html>
@@ -40,24 +54,35 @@
 
             <tbody>
                 <?php
-                    for ($i=0; $i<=24; $i++) {
+                    for ($kl=0; $kl<=23; $kl++) { // for hver time
                         echo "<tr>";
-                        echo "<td class=\"hour\" rowspan=\"4\">".substr("0$i:00", -5)."</td>";
-                        for ($j=0; $j<sizeof($family); $j++) {
-                            echo "<td></td>";
-                        }
-                        echo "</tr>";
+                        echo "<td class=\"hour\" rowspan=\"4\">".substr("0$kl:00", -5)."</td>";
 
-                        for ($k=0; $k<=2; $k++) {
-                            echo "<tr>";
-                            for ($j=0; $j<sizeof($family); $j++) {
-                                echo "<td></td>";
+                        for ($min=0; $min<4; $min++) { // for hvert kvarter: fyll opp de 4 kolonne
+                            if ($min!=0) {echo "<tr>";} // første gang er den allerede echoet
+                            foreach ($family as $person) { // for hver row
+                                // bytte ut "varighet" antall <td> med <td rowspan=\"$varighet\"></td>
+                                // hvis ny event
+                                if (!$events[0]["displayet"] && $events[0]["kalender"] == $person && $kl==$events[0]["tid"] && $min==intdiv($events[0]["tidmin"], 15)) {
+                                    $varighet = intdiv($events[0]["varighet"], 15);
+                                    echo "<td class=\"event\" rowspan=\"$varighet\">".$events[0]["tittel"]."</td>"; 
+                                    $varighet -= 1;
+                                    $events[0]["displayet"] = True;
+                                } 
+
+                                // hvis 
+                                else if (isset($varighet) && $events[0]["kalender"]==$person && $varighet!=0) {$varighet-=1;}
+                                
+                                else {echo "<td></td>";} 
                             }
                             echo "</tr>";
                         }
+
                     }
                 ?>
             </tbody>
+
         </table>
+
     </body>
 </html>
