@@ -2,6 +2,20 @@ a {
     text-decoration: none;
 }
 table {
+    overflow-y: auto; 
+}
+table thead th { 
+    position: sticky; 
+    top: 0; 
+    z-index: 1;
+}
+.event {
+  background: blue;
+}
+
+
+/* https://codepen.io/javiercf/pen/GviKy */
+table {
     font-family: sans-serif;
     width: 100%;
     border-spacing: 0;
@@ -115,7 +129,4 @@ table {
 ***REMOVED***
   }
 
-
-table          { overflow-y: auto; }
-table thead th { position: sticky; top: 0; z-index: 1;}
 
