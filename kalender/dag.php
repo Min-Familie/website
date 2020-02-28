@@ -33,7 +33,7 @@
         $events = array();
         while($row = $result -> fetch_assoc()){
             $event = array(
-                "kalender"    => $row['navn'],
+                "Author"    => $row['navn'],
                 "tid"         => $row['timer'], // 03:00
                 "tidmin"      => $row['min'], // 03:24
                 "varighet"    => $row['varighet'], // minutter
@@ -63,13 +63,13 @@
 
 
 
-
+    
     $family = array("Shayan", "Patrick", "Leif", "Aleksander", "Bendik", "Kiran");
     $events = array(                                                                                 // sortert etter varigeht (lengste først), fordi kun en event kan starte samtidig
         array(
             "Author"    => "Patrick",
             "tid"         => 4, // 03:00
-            "tidmin"      => 40, // 03:24
+            "tidmin"      => 20, // 03:24
             "varighet"    => 120, // minutter
             "tittel"      => "jep",
             "sted"        => "59.952710, 10.909961", 
@@ -176,37 +176,20 @@
                                         // hvis ny event
                                         $now = $hrs==$affair["tid"] && $qrt==intdiv($affair["tidmin"], 15);
                                         if ($affair["Author"]==$person && $now) {
+                                            
                                             // hvis ruta ovenfor har event og den ikke er ferdig i den ruta: utsett start med 15 minutter, slik at den sjekker igjen neste gang. Ellers, gjør som vanlig:
-                                            /*
                                             // har ruta ovenfor en event?
-                                            for ($i=0; $i<5; $i++) {
-                                                $y1 = $hrs;
-                                                $y2 = $qrt;
-                                                if ($qrt==0) {$y1 --; $y2=3;} // forrige celle 
-                                                else         {$y2 --;}
-                                                $empty = True;
-                                                foreach ($occupied as $coord) {
-                                                    if ([$y1, $y2, $person] == $coord[0]) {
-                                                        $empty = False;
-                                                        break; // stopper å lete videre
-                                                ***REMOVED***
+                                            $y1 = $hrs;
+                                            $y2 = $qrt;
+                                            if ($qrt==0) {$y1 --; $y2=3;} // forrige celle 
+                                            else         {$y2 --;}
+                                            $empty = True;
+                                            foreach ($occupied as $coord) {
+                                                if ([$y1, $y2, $person] == $coord[0]) {
+                                                    $empty = False;
+                                                    break; // stopper å lete videre
                                             ***REMOVED***
-                                                if (!$empty) {
-                                                    if ($affair["tidmin"]>=45) {$affair["tid"] ++; $affair["tidmin"] = 0;} 
-                                                    else                       {$affair["tidmin"] += 15;}
-                                            ***REMOVED***
-                                        ***REMOVED*** //while (!$empty);
-
-                                            /*
-                                            // er ruta over den siste til eventen?
-                                            $closingCell = False;
-                                            $y1 = $coord[0][0];
-                                            $y2 = $coord[0][1];
-                                            $duration = $coord[1]; // hvor mange celler eventen går over
-                                            $dy = $y1*4 + $y2; // hvor mange celler fra start. Dette regnestykket er ikke helt riktig...
-                                            echo $dy; echo "<br>";// endre affair med dy
-                                            //$affair["varighet"] = ;
-                                            */
+                                        ***REMOVED***
 
                                             echo "<td class=\"event\" 
                                             rowspan=\"".intdiv($affair["varighet"], 15)."\"> </td>";
@@ -229,3 +212,41 @@
 
     </body>
 </html>
+
+
+
+
+
+
+***REMOVED***
+/*
+                                            if (!$empty) {
+                                                
+                                                if (intdiv($affair["tidmin"], 15) == 3) {$affair['tid']++; $affair['tidmin']=0;}
+                                                else                                    {$affair['tidmin']++;}
+                                                $event = array(
+                                                    "Author"      => $affair['Author'],
+                                                    "tid"         => $affair['tid'], // 03:00
+                                                    "tidmin"      => $affair['tidmin'], // 03:24
+                                                    "varighet"    => $affair['varighet'], // minutter
+                                                    "tittel"      => $affair['tittel'],
+                                                    "sted"        => $affair['sted']
+                                                );
+                                                array_push($events, $event);
+                                                /*
+                                                if ($affair["tidmin"]>=45) {$affair["tid"] ++; $affair["tidmin"] = 0;} 
+                                                else                       {$affair["tidmin"] += 15;}*/
+                                            //}
+                                            //else {
+                                            /*
+                                            // er ruta over den siste til eventen?
+                                            $closingCell = False;
+                                            $y1 = $coord[0][0];
+                                            $y2 = $coord[0][1];
+                                            $duration = $coord[1]; // hvor mange celler eventen går over
+                                            $dy = $y1*4 + $y2; // hvor mange celler fra start. Dette regnestykket er ikke helt riktig...
+                                            echo $dy; echo "<br>";// endre affair med dy
+                                            //$affair["varighet"] = ;
+                                            */
+
+?>
