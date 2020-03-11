@@ -1,17 +1,4 @@
 <?php
-    /*
-        SQL:
-        CREATE DATABASE project;
-        USE project;
-        CREATE TABLE familie(id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT, navn VARCHAR(255));
-        CREATE TABLE kalender(id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT, timer INTEGER, min INTEGER, varighet INTEGER, tittel VARCHAR(255), person INTEGER, sted VARCHAR(255));
-    */
-    
-
-    //include '../inc/db.inc.php';
-
-
-    // functions
     function getFamily($con){
         $family = array();
         $sql = "SELECT navn FROM familie";
@@ -22,6 +9,7 @@
         return $family;
     }
     
+
     
     function getEvents($con){
         $sql = "SELECT familie.id, familie.navn, kalender.timer, kalender.min, kalender.varighet, kalender.tittel, kalender.sted, kalender.person
@@ -33,7 +21,7 @@
         $events = array();
         while($row = $result -> fetch_assoc()){
             $event = array(
-                "Author"    => $row['navn'],
+                "Author"      => $row['navn'],
                 "tid"         => $row['timer'], // 03:00
                 "tidmin"      => $row['min'], // 03:24
                 "varighet"    => $row['varighet'], // minutter
@@ -44,6 +32,68 @@
         }
         return $events;
     }
+
+
+
+    function mergeEvets($event1, $event2) {
+        $title = $event1["tittel"] . $event2["tittel"];
+        $location = $event1["sted"] . $event2["sted"];
+        $author = $event1["Author"];
+
+        if ($event1["tid"] < $event2["tid"]) {$tid = $event1["tid"];}
+        else                                 {$tid = $event2["tid"];}
+        $earliest = $event1["tid"] < $event2["tid"] && $event1["tidmin"] < $event2["tidmin"];
+        if ($earliest) {$tidmin = $event1["tidmin"];}
+        else           {$tidmin = $event2["tidmin"];}
+
+        // veldig midlertidig!!!
+        $duration = $event1["varighet"] + $event2["varighet"];
+
+        $event = array(
+            "Author"      => $author,
+            "tid"         => $tid,
+            "tidmin"      => $tidmin,
+            "varighet"    => $duration,
+            "tittel"      => $title,
+            "sted"        => $location,
+        );
+        return $event;
+    }
+
+
+
+    function getEventOfCoords ($coord, $events, $family) {
+        for ($hrs=0; $hrs<=23; $hrs++) { // for hver time
+            for ($qrt=0; $qrt<4; $qrt++) { // for hvert kvarter
+                foreach ($family as $person) { // for hver row => for hver celle
+
+                    foreach ($events as $affair) {
+                        $cells = [];
+                        // hvis event starter
+                        $now = $hrs==$affair["tid"] && $qrt==intdiv($affair["tidmin"], 15);
+                        if ($affair["Author"]==$person && $now) {
+
+                            $y1 = $hrs;
+                            $y2 = $qrt;
+                            for ($i=0; $i<intdiv($affair["varighet"], 15); $i++) { // for hver celle eventen tar opp
+
+                                array_push($cells, [$y1, $y2, $person]);
+
+                                // neste klokkeslett
+                                $y2 ++;
+                                if ($y2==4) {$y1++; $y2=0;}
+                            }
+
+                        }
+                        if (in_array($coord, $cells)) {
+                            return $affair;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
     
 /*
     // familiemedlemmer fra db
@@ -52,7 +102,10 @@
     // events fra db
     $events = getEvents($con);
 */
-    
+
+    // tidssone
+    date_default_timezone_set("Europe/Oslo");
+
     // input dag
     if (isset($_GET["day"])) {$inputDay = $_GET["day"];}
     else                     {$inputDay = date("Y-m-d");}
@@ -64,39 +117,45 @@
 
 
     
-    $family = array("Shayan", "Patrick", "Leif", "Aleksander", "Bendik", "Kiran");
-    $events = array(                                                                                 // sortert etter varigeht (lengste først), fordi kun en event kan starte samtidig
+    $family = array("Felles", "Shayan", "Patrick", "Leif", "Aleksander", "Bendik", "Kiran");
+    $events = array( // sortert etter varigeht (lengste først), fordi kun en event kan starte samtidig
         array(
             "Author"    => "Patrick",
-            "tid"         => 4, // 03:00
-            "tidmin"      => 20, // 03:24
+            "tid"         => 3, // 03:00
+            "tidmin"      => 0, // 03:24
             "varighet"    => 120, // minutter
             "tittel"      => "jep",
-            "sted"        => "59.952710, 10.909961", 
-            "beskrivelse" => "besøk"
+            "sted"        => "59.952710, 10.909961"
+        ),
+        array(
+            "Author"    => "Felles",
+            "tid"         => 0, // 03:00
+            "tidmin"      => 0, // 03:24
+            "varighet"    => 30, // minutter
+            "tittel"      => "Middag",
+            "sted"        => "59.952710, 10.909961"
         ),
         array(
             "Author"    => "Patrick",
             "tid"         => 2,
             "tidmin"      => 20,
-            "varighet"    => 120,
+            "varighet"    => 90,
             "tittel"      => "jha",
-            "sted"        => "59.952710, 10.909961", 
-            "beskrivelse" => "besøk"
+            "sted"        => "59.952710, 10.909961"
         ),
         array(
             "Author"    => "Leif",
-            "tid"         => 15,
-            "tidmin"      => 15,
+            "tid"         => 3,
+            "tidmin"      => 0,
             "varighet"    => 90,
             "tittel"      => "ja",
-            "sted"        => "59.952710, 10.909961", 
-            "beskrivelse" => "besøk"
+            "sted"        => "59.952710, 10.909961"
         )
     );
 
     // array med hvilke celler i koordinatform som er okkupert
-    $occupied = array();
+    occupationTest:
+    $occupied = [];
 
     for ($hrs=0; $hrs<=23; $hrs++) { // for hver time
         for ($qrt=0; $qrt<4; $qrt++) { // for hvert kvarter
@@ -110,8 +169,29 @@
                         $y1 = $hrs;
                         $y2 = $qrt;
                         for ($i=0; $i<intdiv($affair["varighet"], 15); $i++) { // for hver celle eventen tar opp
-                            //array_push($occupied, [$y1, $y2, $person]);
-                            array_push($occupied, [[$y1, $y2, $person], intdiv($affair["varighet"], 15)]);
+                            
+                            // hvis den allerede er der, slå sammen eventsene
+                            if (in_array([$y1, $y2, $person], $occupied)) {
+                                // for hver time, kvarter. Hvis event starter, finn koordinatene den tar opp. Sjekk om koordinatet er der.
+                                $event2 = getEventOfCoords([$y1, $y2, $person], $events, $family);
+                                array_push($events, mergeEvets($affair, $event2));
+
+                                // fjern $event2 og $affair fra events
+                                $key = array_search($event2, $events); 
+                                unset($events[$key]);
+                                $key = array_search($affair, $events); 
+                                unset($events[$key]);
+
+                                // begyn på ny, fordi arrayen $events er endret
+                                goto occupationTest; 
+                            }
+
+                            // plass til event
+                            else {
+                                array_push($occupied, [$y1, $y2, $person]);
+                            }
+
+                            // neste klokkeslett
                             $y2 ++;
                             if ($y2==4) {$y1++; $y2=0;}
                         }
@@ -123,6 +203,8 @@
         }
     }
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -138,9 +220,9 @@
             <thead>
                 <tr>
                     <th>
-                        <a href="dag.php"> i dag</a>
-                        <a href="dag.php?day=<?php echo $prevDay; ?>"> <</a>
-                        <a href="dag.php?day=<?php echo $nextDay; ?>"> ></a>
+                        <a href="day.php"> i dag</a>
+                        <a href="day.php?day=<?php echo $prevDay; ?>"> <</a>
+                        <a href="day.php?day=<?php echo $nextDay; ?>"> ></a>
                         <?php echo $inputDay; ?>
                     </th>
                     <?php
@@ -164,7 +246,7 @@
                                 $empty = ! in_array([$hrs, $qrt, $person], $occupied);
                                 $empty = True;
                                 foreach ($occupied as $coord) {
-                                    if ([$hrs, $qrt, $person] == $coord[0]) {
+                                    if ([$hrs, $qrt, $person] == $coord) {
                                         $empty = False;
                                         break; // stopper å lete videre
                                     }
@@ -176,24 +258,8 @@
                                         // hvis ny event
                                         $now = $hrs==$affair["tid"] && $qrt==intdiv($affair["tidmin"], 15);
                                         if ($affair["Author"]==$person && $now) {
-                                            
-                                            // hvis ruta ovenfor har event og den ikke er ferdig i den ruta: utsett start med 15 minutter, slik at den sjekker igjen neste gang. Ellers, gjør som vanlig:
-                                            // har ruta ovenfor en event?
-                                            $y1 = $hrs;
-                                            $y2 = $qrt;
-                                            if ($qrt==0) {$y1 --; $y2=3;} // forrige celle 
-                                            else         {$y2 --;}
-                                            $empty = True;
-                                            foreach ($occupied as $coord) {
-                                                if ([$y1, $y2, $person] == $coord[0]) {
-                                                    $empty = False;
-                                                    break; // stopper å lete videre
-                                                }
-                                            }
-
                                             echo "<td class=\"event\" 
                                             rowspan=\"".intdiv($affair["varighet"], 15)."\"> </td>";
-
                                             break; // stopper å lete videre
                                         }
                                     }
@@ -212,41 +278,3 @@
 
     </body>
 </html>
-
-
-
-
-
-
-<?php
-/*
-                                            if (!$empty) {
-                                                
-                                                if (intdiv($affair["tidmin"], 15) == 3) {$affair['tid']++; $affair['tidmin']=0;}
-                                                else                                    {$affair['tidmin']++;}
-                                                $event = array(
-                                                    "Author"      => $affair['Author'],
-                                                    "tid"         => $affair['tid'], // 03:00
-                                                    "tidmin"      => $affair['tidmin'], // 03:24
-                                                    "varighet"    => $affair['varighet'], // minutter
-                                                    "tittel"      => $affair['tittel'],
-                                                    "sted"        => $affair['sted']
-                                                );
-                                                array_push($events, $event);
-                                                /*
-                                                if ($affair["tidmin"]>=45) {$affair["tid"] ++; $affair["tidmin"] = 0;} 
-                                                else                       {$affair["tidmin"] += 15;}*/
-                                            //}
-                                            //else {
-                                            /*
-                                            // er ruta over den siste til eventen?
-                                            $closingCell = False;
-                                            $y1 = $coord[0][0];
-                                            $y2 = $coord[0][1];
-                                            $duration = $coord[1]; // hvor mange celler eventen går over
-                                            $dy = $y1*4 + $y2; // hvor mange celler fra start. Dette regnestykket er ikke helt riktig...
-                                            echo $dy; echo "<br>";// endre affair med dy
-                                            //$affair["varighet"] = ;
-                                            */
-
-?>
