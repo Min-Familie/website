@@ -117,7 +117,7 @@
 
 
     
-    $family = array("Shayan", "Patrick", "Leif", "Aleksander", "Bendik", "Kiran");
+    $family = array("Felles", "Shayan", "Patrick", "Leif", "Aleksander", "Bendik", "Kiran");
     $events = array( // sortert etter varigeht (lengste først), fordi kun en event kan starte samtidig
         array(
             "Author"    => "Patrick",
@@ -125,8 +125,15 @@
             "tidmin"      => 0, // 03:24
             "varighet"    => 120, // minutter
             "tittel"      => "jep",
-            "sted"        => "59.952710, 10.909961", 
-            "beskrivelse" => "besøk"
+            "sted"        => "59.952710, 10.909961"
+        ),
+        array(
+            "Author"    => "Felles",
+            "tid"         => 0, // 03:00
+            "tidmin"      => 0, // 03:24
+            "varighet"    => 30, // minutter
+            "tittel"      => "Middag",
+            "sted"        => "59.952710, 10.909961"
         ),
         array(
             "Author"    => "Patrick",
@@ -134,8 +141,7 @@
             "tidmin"      => 20,
             "varighet"    => 90,
             "tittel"      => "jha",
-            "sted"        => "59.952710, 10.909961", 
-            "beskrivelse" => "besøk"
+            "sted"        => "59.952710, 10.909961"
         ),
         array(
             "Author"    => "Leif",
@@ -143,8 +149,7 @@
             "tidmin"      => 0,
             "varighet"    => 90,
             "tittel"      => "ja",
-            "sted"        => "59.952710, 10.909961", 
-            "beskrivelse" => "besøk"
+            "sted"        => "59.952710, 10.909961"
         )
     );
 
@@ -241,7 +246,7 @@
                                 $empty = ! in_array([$hrs, $qrt, $person], $occupied);
                                 $empty = True;
                                 foreach ($occupied as $coord) {
-                                    if ([$hrs, $qrt, $person] == $coord) { // if ([$hrs, $qrt, $person] == $coord[0]) {
+                                    if ([$hrs, $qrt, $person] == $coord) {
                                         $empty = False;
                                         break; // stopper å lete videre
                                     }
@@ -253,24 +258,8 @@
                                         // hvis ny event
                                         $now = $hrs==$affair["tid"] && $qrt==intdiv($affair["tidmin"], 15);
                                         if ($affair["Author"]==$person && $now) {
-                                            
-                                            // hvis ruta ovenfor har event og den ikke er ferdig i den ruta: utsett start med 15 minutter, slik at den sjekker igjen neste gang. Ellers, gjør som vanlig:
-                                            // har ruta ovenfor en event?
-                                            $y1 = $hrs;
-                                            $y2 = $qrt;
-                                            if ($qrt==0) {$y1 --; $y2=3;} // forrige celle 
-                                            else         {$y2 --;}
-                                            $empty = True;
-                                            foreach ($occupied as $coord) {
-                                                if ([$y1, $y2, $person] == $coord) { //if ([$y1, $y2, $person] == $coord[0]) {
-                                                    $empty = False;
-                                                    break; // stopper å lete videre
-                                                }
-                                            }
-
                                             echo "<td class=\"event\" 
                                             rowspan=\"".intdiv($affair["varighet"], 15)."\"> </td>";
-
                                             break; // stopper å lete videre
                                         }
                                     }
