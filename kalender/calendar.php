@@ -1,4 +1,6 @@
 ***REMOVED***
+    date_default_timezone_set("Europe/Oslo");
+
     // input måned
     if (isset($_GET["month"])) {$inputMonth = $_GET["month"];}
     else                       {$inputMonth = date("Y-m");}
@@ -12,6 +14,7 @@
     $day = date("d");
     $month = date("m", strtotime($inputMonth));
     $year = date("Y", strtotime($inputMonth));
+    $yearMonth = date('Y-m', strtotime($inputMonth));
     $nextMonth = date('Y-m', strtotime($inputMonth." +1 month"));
     $prevMonth = date('Y-m', strtotime($inputMonth." -1 month"));
 
@@ -31,16 +34,8 @@
     );
 
     // antall dager i denne og den forrige måneden
-    $nDays = cal_days_in_month(
-        CAL_GREGORIAN, 
-        $month, 
-        $year
-    );
-    $nDaysPrev = cal_days_in_month(
-        CAL_GREGORIAN, 
-        date("m", strtotime($prevMonth)), 
-        date("Y", strtotime($prevMonth))
-    );
+    $nDays     = date('t', strtotime($yearMonth));
+    $nDaysPrev = date('t', strtotime($prevMonth));
 
     // hvilken ukedag er dag 1 i måneden
     $getdate = getdate(mktime(null, null, null, $month, 1, $year));
@@ -64,9 +59,9 @@
     <body>
         <table>
             <caption> 
-                <a href="kalender.php"> i dag</a>
-                <a href="kalender.php?month=***REMOVED*** echo $prevMonth;***REMOVED***"> <</a>
-                <a href="kalender.php?month=***REMOVED*** echo $nextMonth;***REMOVED***"> ></a>
+                <a href="calendar.php"> i dag</a>
+                <a href="calendar.php?month=***REMOVED*** echo $prevMonth;***REMOVED***"> <</a>
+                <a href="calendar.php?month=***REMOVED*** echo $nextMonth;***REMOVED***"> ></a>
                 ***REMOVED*** echo $monthsText[$month] . " " . $year;***REMOVED*** 
             </caption>
     
@@ -89,12 +84,12 @@
                             $weekday = $nDaysPrev-$i;
                             if ($pastMonth || $currentMonth) { // hvis denne eller en tidligere måned
                                 echo "<td class=\"past\">   
-                                      <a href=\"dag.php?day=$prevMonth"."-"."$weekday\">$weekday</a> 
+                                      <a href=\"day.php?day=$prevMonth"."-"."$weekday\">$weekday</a> 
                                       </td>";
                         ***REMOVED***
                             else {
                                 echo "<td class=\"future\"> 
-                                      <a href=\"dag.php?day=$prevMonth"."-"."$weekday\">$weekday</a> 
+                                      <a href=\"day.php?day=$prevMonth"."-"."$weekday\">$weekday</a> 
                                       </td>";
                         ***REMOVED***
                     ***REMOVED***
@@ -103,12 +98,17 @@
                         for ($i = 1; $i <= 7-$firstSquare; $i++) {
                             if (($pastMonth) || ($i < $day && $currentMonth)) { // hvis en tidligere måned, eller en tidligere dag i måneden
                                 echo "<td class=\"past\">   
-                                      <a href=\"dag.php?day=$inputMonth"."-"."$i\">$i</a> 
+                                      <a href=\"day.php?day=$inputMonth"."-"."$i\">$i</a> 
+                                      </td>";
+                        ***REMOVED***
+                            else if ($i == $day && $currentMonth) {
+                                echo "<td class=\"today\"> 
+                                      <a href=\"day.php?day=$inputMonth"."-"."$i\">$i</a> 
                                       </td>";
                         ***REMOVED***
                             else {
                                 echo "<td class=\"future\"> 
-                                      <a href=\"dag.php?day=$inputMonth"."-"."$i\">$i</a> 
+                                      <a href=\"day.php?day=$inputMonth"."-"."$i\">$i</a> 
                                       </td>";
                         ***REMOVED***
                     ***REMOVED***
@@ -121,12 +121,18 @@
                         for ($j=$i, $weekday=1; $j<=$nDays; $j++, $weekday++) {
                             if (($pastMonth) || ($j < $day && $currentMonth)) { // hvis en tidligere måned, eller en tidligere dag i måneden
                                 echo "<td class=\"past\">   
-                                      <a href=\"dag.php?day=$inputMonth"."-"."$j\">$j</a> 
+                                      <a href=\"day.php?day=$inputMonth"."-"."$j\">$j</a> 
+                                      </td>";
+                        ***REMOVED***
+                            else if ($j == $day && $currentMonth) {
+                                echo "<td class=\"today\"> 
+                                      <a href=\"day.php?day=$inputMonth"."-"."$j\">$j</a> 
+                                      <ul> <li></li><li></li><li></li><li></li> </ul>
                                       </td>";
                         ***REMOVED***
                             else {
                                 echo "<td class=\"future\"> 
-                                      <a href=\"dag.php?day=$inputMonth"."-"."$j\">$j</a> 
+                                      <a href=\"day.php?day=$inputMonth"."-"."$j\">$j</a> 
                                       </td>";
                             ***REMOVED***               
                           
@@ -142,12 +148,12 @@
                             for ($i = 1; $i <= 8-$weekday; $i++) {
                                 if ($pastMonth) { // hvis en tidligere måned
                                     echo "<td class=\"past\">   
-                                          <a href=\"dag.php?day=$nextMonth"."-"."$i\">$i</a> 
+                                          <a href=\"day.php?day=$nextMonth"."-"."$i\">$i</a> 
                                           </td>";
                             ***REMOVED***
                                 else {
                                     echo "<td class=\"future\"> 
-                                          <a href=\"dag.php?day=$nextMonth"."-"."$i\">$i</a> 
+                                          <a href=\"day.php?day=$nextMonth"."-"."$i\">$i</a> 
                                           </td>";
                             ***REMOVED***
                     ***REMOVED***
