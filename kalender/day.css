@@ -71,7 +71,6 @@ table {
     border-left: 1px solid #626E7E;
     position: relative;
     height: 32px;
-    cursor: pointer;
   }
   table tbody tr td:last-child {
     border-right: 1px solid #626E7E;
