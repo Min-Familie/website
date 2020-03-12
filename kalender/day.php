@@ -42,13 +42,55 @@
 
         if ($event1["tid"] < $event2["tid"]) {$tid = $event1["tid"];}
         else                                 {$tid = $event2["tid"];}
-        $earliest = $event1["tid"] < $event2["tid"] && $event1["tidmin"] < $event2["tidmin"];
+        $earliest = $event1["tid"].".".$event1["tidmin"] < $event2["tid"].".".$event2["tidmin"];
         if ($earliest) {$tidmin = $event1["tidmin"];}
         else           {$tidmin = $event2["tidmin"];}
+        
+        // når slutter event1?
+        $y1 = $event1["tid"];
+        $y2 = intdiv($event1["tidmin"], 15);
+        for ($i=0; $i<intdiv($event1["varighet"], 15); $i++) { // for hver celle eventen tar opp
+            // neste klokkeslett
+            $y2 ++;
+            if ($y2==4) {$y1++; $y2=0;}
+    ***REMOVED***
+        $event1End = $y1.".".$y2 * 15;
 
-        // veldig midlertidig!!!
-        $duration = $event1["varighet"] + $event2["varighet"];
+        // når slutter event2?
+        $y1 = $event2["tid"];
+        $y2 = intdiv($event2["tidmin"], 15);
+        for ($i=0; $i<intdiv($event2["varighet"], 15); $i++) { // for hver celle eventen tar opp
+            // neste klokkeslett
+            $y2 ++;
+            if ($y2==4) {$y1++; $y2=0;}
+    ***REMOVED***
+        $event2End = $y1.".".$y2 * 15;
 
+        // hvis event1 begynner og event1 slutter sist
+        if      ($earliest && $event1End > $event2End)  {
+            $pieces = explode(".", $event1End);
+            $duration = $pieces[0]*60 + $pieces[1];
+            $duration -= $tid*60 + $tidmin;
+    ***REMOVED***
+        // hvis event1 begynner og event2 slutter sist
+        else if ($earliest && $event1End < $event2End)  {
+            $pieces = explode(".", $event2End);
+            $duration = $pieces[0]*60 + $pieces[1];
+            $duration -= $tid*60 + $tidmin;
+    ***REMOVED***
+        // hvis event2 begynner og event1 slutter sist
+        else if (!$earliest && $event1End > $event2End) {
+            $pieces = explode(".", $event1End);
+            $duration = $pieces[0]*60 + $pieces[1];
+            $duration -= $event2["tid"]*60 + $event2["tidmin"];
+    ***REMOVED***
+        // event2 begynner og event2 slutter sist
+        else                                            {
+            $pieces = explode(".", $event2End);
+            $duration = $pieces[0]*60 + $pieces[1];
+            $duration -= $event2["tid"]*60 + $event2["tidmin"];
+    ***REMOVED***
+        
         $event = array(
             "Author"      => $author,
             "tid"         => $tid,
@@ -80,40 +122,23 @@
     $prevDay = date('Y-m-d', strtotime($inputDay." -1 day"));
 
 
-
-    
+    /////////////////// MIDLERTIDIG \\\\\\\\\\\\\\\\\\\
     $family = array("Felles", "Shayan", "Patrick", "Leif", "Aleksander", "Bendik", "Kiran");
     $events = array( // sortert etter varigeht (lengste først), fordi kun en event kan starte samtidig
         array(
             "Author"    => "Patrick",
-            "tid"         => 3, // 03:00
+            "tid"         => 1, // 03:00
             "tidmin"      => 0, // 03:24
-            "varighet"    => 120, // minutter
+            "varighet"    => 60, // minutter
             "tittel"      => "jep",
-            "sted"        => "59.952710, 10.909961"
-        ),
-        array(
-            "Author"    => "Felles",
-            "tid"         => 0, // 03:00
-            "tidmin"      => 0, // 03:24
-            "varighet"    => 30, // minutter
-            "tittel"      => "Middag",
             "sted"        => "59.952710, 10.909961"
         ),
         array(
             "Author"    => "Patrick",
             "tid"         => 2,
-            "tidmin"      => 20,
-            "varighet"    => 90,
+            "tidmin"      => 15,
+            "varighet"    => 60,
             "tittel"      => "jha",
-            "sted"        => "59.952710, 10.909961"
-        ),
-        array(
-            "Author"    => "Leif",
-            "tid"         => 3,
-            "tidmin"      => 0,
-            "varighet"    => 90,
-            "tittel"      => "ja",
             "sted"        => "59.952710, 10.909961"
         )
     );
@@ -155,7 +180,6 @@
 
                             // plass til event
                             else {
-                                //array_push($occupied, [$y1, $y2, $person]);
                                 array_push($occupied, [[$y1, $y2, $person], $affair]);
                         ***REMOVED***
 
