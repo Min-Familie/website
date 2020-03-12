@@ -59,41 +59,6 @@
         );
         return $event;
     }
-
-
-
-    function getEventOfCoords ($coord, $events, $family) {
-        for ($hrs=0; $hrs<=23; $hrs++) { // for hver time
-            for ($qrt=0; $qrt<4; $qrt++) { // for hvert kvarter
-                foreach ($family as $person) { // for hver row => for hver celle
-
-                    foreach ($events as $affair) {
-                        $cells = [];
-                        // hvis event starter
-                        $now = $hrs==$affair["tid"] && $qrt==intdiv($affair["tidmin"], 15);
-                        if ($affair["Author"]==$person && $now) {
-
-                            $y1 = $hrs;
-                            $y2 = $qrt;
-                            for ($i=0; $i<intdiv($affair["varighet"], 15); $i++) { // for hver celle eventen tar opp
-
-                                array_push($cells, [$y1, $y2, $person]);
-
-                                // neste klokkeslett
-                                $y2 ++;
-                                if ($y2==4) {$y1++; $y2=0;}
-                            }
-
-                        }
-                        if (in_array($coord, $cells)) {
-                            return $affair;
-                        }
-                    }
-
-                }
-            }
-        }
-    }
     
 /*
     // familiemedlemmer fra db
@@ -170,11 +135,13 @@
                         $y2 = $qrt;
                         for ($i=0; $i<intdiv($affair["varighet"], 15); $i++) { // for hver celle eventen tar opp
                             
+                            $coords = array_map(function($i) {return $i[0];}, $occupied);
                             // hvis den allerede er der, slå sammen eventsene
-                            if (in_array([$y1, $y2, $person], $occupied)) {
-                                // for hver time, kvarter. Hvis event starter, finn koordinatene den tar opp. Sjekk om koordinatet er der.
-                                $event2 = getEventOfCoords([$y1, $y2, $person], $events, $family);
-                                array_push($events, mergeEvets($affair, $event2));
+                            if (in_array([$y1, $y2, $person], $coords)) {
+                                $key = array_search([$y1, $y2, $person], $coords);
+                                $event2 = $occupied[$key][1];
+
+                                array_push($events, mergeEvets($affair, $event2)); 
 
                                 // fjern $event2 og $affair fra events
                                 $key = array_search($event2, $events); 
@@ -188,7 +155,8 @@
 
                             // plass til event
                             else {
-                                array_push($occupied, [$y1, $y2, $person]);
+                                //array_push($occupied, [$y1, $y2, $person]);
+                                array_push($occupied, [[$y1, $y2, $person], $affair]);
                             }
 
                             // neste klokkeslett
@@ -202,6 +170,8 @@
             }
         }
     }
+    // kun koordinatene
+    $occupied = array_map(function($i) {return $i[0];}, $occupied);
 ?>
 
 
