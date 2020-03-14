@@ -52,16 +52,16 @@
     <head>
         <title>Kalender - Måned</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css"  href="month.css">
+        <link rel="stylesheet" type="text/css"  href="css/month.css">
         <link rel="icon"       type="image/png" href="favicon.png">
     </head>
 
     <body>
         <table>
             <caption> 
-                <a href="calendar.php"> i dag</a>
-                <a href="calendar.php?month=<?php echo $prevMonth; ?>"> <</a>
-                <a href="calendar.php?month=<?php echo $nextMonth; ?>"> ></a>
+                <a href="calendarMonth.php"> i dag</a>
+                <a href="calendarMonth.php?month=<?php echo $prevMonth; ?>"> <</a>
+                <a href="calendarMonth.php?month=<?php echo $nextMonth; ?>"> ></a>
                 <?php echo $monthsText[$month] . " " . $year; ?> 
             </caption>
     
