@@ -37,7 +37,7 @@
         <link rel="stylesheet" type="text/css"  href="css/day.css">
         <link rel="stylesheet" type="text/css"  href="css/new.css">
         <link rel="icon"       type="image/png" href="favicon.png">
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=KEY&parameters" type="text/javascript"></script>
         <script src="https://unpkg.com/location-picker/dist/location-picker.min.js" type="text/javascript"></script>
     </head>
     <body>
