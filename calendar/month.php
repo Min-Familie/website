@@ -52,16 +52,16 @@
     <head>
         <title>Kalender - Måned</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css"  href="css/month.css">
+        <link rel="stylesheet" type="text/css"  href="../css/month.css">
         <link rel="icon"       type="image/png" href="favicon.png">
     </head>
 
     <body>
         <table>
             <caption> 
-                <a href="calendarMonth.php"> i dag</a>
-                <a href="calendarMonth.php?month=<?php echo $prevMonth; ?>"> <</a>
-                <a href="calendarMonth.php?month=<?php echo $nextMonth; ?>"> ></a>
+                <a href="month.php"> i dag</a>
+                <a href="month.php?month=<?php echo $prevMonth; ?>"> <</a>
+                <a href="month.php?month=<?php echo $nextMonth; ?>"> ></a>
                 <?php echo $monthsText[$month] . " " . $year; ?> 
             </caption>
     
@@ -84,12 +84,12 @@
                             $weekday = $nDaysPrev-$i;
                             if ($pastMonth || $currentMonth) { // hvis denne eller en tidligere måned
                                 echo "<td class=\"past\">   
-                                      <a href=\"day.php?day=$prevMonth"."-"."$weekday\">$weekday</a> 
+                                      <a href=\"public.php?day=$prevMonth"."-"."$weekday\">$weekday</a> 
                                       </td>";
                             }
                             else {
                                 echo "<td class=\"future\"> 
-                                      <a href=\"day.php?day=$prevMonth"."-"."$weekday\">$weekday</a> 
+                                      <a href=\"public.php?day=$prevMonth"."-"."$weekday\">$weekday</a> 
                                       </td>";
                             }
                         }
@@ -98,17 +98,17 @@
                         for ($i = 1; $i <= 7-$firstSquare; $i++) {
                             if (($pastMonth) || ($i < $day && $currentMonth)) { // hvis en tidligere måned, eller en tidligere dag i måneden
                                 echo "<td class=\"past\">   
-                                      <a href=\"day.php?day=$inputMonth"."-"."$i\">$i</a> 
+                                      <a href=\"public.php?day=$inputMonth"."-"."$i\">$i</a> 
                                       </td>";
                             }
                             else if ($i == $day && $currentMonth) {
                                 echo "<td class=\"today\"> 
-                                      <a href=\"day.php?day=$inputMonth"."-"."$i\">$i</a> 
+                                      <a href=\"public.php?day=$inputMonth"."-"."$i\">$i</a> 
                                       </td>";
                             }
                             else {
                                 echo "<td class=\"future\"> 
-                                      <a href=\"day.php?day=$inputMonth"."-"."$i\">$i</a> 
+                                      <a href=\"public.php?day=$inputMonth"."-"."$i\">$i</a> 
                                       </td>";
                             }
                         }
@@ -121,18 +121,18 @@
                         for ($j=$i, $weekday=1; $j<=$nDays; $j++, $weekday++) {
                             if (($pastMonth) || ($j < $day && $currentMonth)) { // hvis en tidligere måned, eller en tidligere dag i måneden
                                 echo "<td class=\"past\">   
-                                      <a href=\"day.php?day=$inputMonth"."-"."$j\">$j</a> 
+                                      <a href=\"public.php?day=$inputMonth"."-"."$j\">$j</a> 
                                       </td>";
                             }
                             else if ($j == $day && $currentMonth) {
                                 echo "<td class=\"today\"> 
-                                      <a href=\"day.php?day=$inputMonth"."-"."$j\">$j</a> 
+                                      <a href=\"public.php?day=$inputMonth"."-"."$j\">$j</a> 
                                       <ul> <li></li><li></li><li></li><li></li> </ul>
                                       </td>";
                             }
                             else {
                                 echo "<td class=\"future\"> 
-                                      <a href=\"day.php?day=$inputMonth"."-"."$j\">$j</a> 
+                                      <a href=\"public.php?day=$inputMonth"."-"."$j\">$j</a> 
                                       </td>";
                                 }               
                           
@@ -148,12 +148,12 @@
                             for ($i = 1; $i <= 8-$weekday; $i++) {
                                 if ($pastMonth) { // hvis en tidligere måned
                                     echo "<td class=\"past\">   
-                                          <a href=\"day.php?day=$nextMonth"."-"."$i\">$i</a> 
+                                          <a href=\"public.php?day=$nextMonth"."-"."$i\">$i</a> 
                                           </td>";
                                 }
                                 else {
                                     echo "<td class=\"future\"> 
-                                          <a href=\"day.php?day=$nextMonth"."-"."$i\">$i</a> 
+                                          <a href=\"public.php?day=$nextMonth"."-"."$i\">$i</a> 
                                           </td>";
                                 }
                         }
