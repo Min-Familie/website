@@ -4,7 +4,7 @@ USE minfamilie;
 
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255),
+    pseudonym VARCHAR(255),
     forename VARCHAR(255),
     surename VARCHAR(255),
     password VARCHAR(255) -- midlertidig
@@ -34,6 +34,7 @@ CREATE TABLE calendarEvents (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255),
     location VARCHAR(255),
+    day DATE,
     startHour INT,
     startMinute INT,
     duration INT,
