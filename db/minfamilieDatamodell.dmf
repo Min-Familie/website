@@ -5,7 +5,7 @@
     <item type="database-table" id="{b869f611-9ac6-4c96-8ee2-45ae655711e9}" >
       <position>
         <x>280.667</x>
-        <y>206</y>
+        <y>206.8</y>
       </position>
       <table>
         <name>todo</name>
@@ -71,16 +71,12 @@
             <required>False</required>
             <primary-key>False</primary-key>
           </column>
-          <column>
-            <required>False</required>
-            <primary-key>False</primary-key>
-          </column>
         </column-list>
       </table>
     </item>
     <item type="database-table" id="{c711be58-696a-4a43-bb57-f974497168b0}" >
       <position>
-        <x>166</x>
+        <x>162</x>
         <y>280</y>
       </position>
       <table>
@@ -94,7 +90,7 @@
             <primary-key>True</primary-key>
           </column>
           <column>
-            <name>username</name>
+            <name>pseudonym</name>
             <data-type>VARCHAR(255)</data-type>
             <required>False</required>
             <primary-key>False</primary-key>
@@ -144,6 +140,12 @@
           <column>
             <name>location</name>
             <data-type>VARCHAR(255)</data-type>
+            <required>False</required>
+            <primary-key>False</primary-key>
+          </column>
+          <column>
+            <name>day</name>
+            <data-type>DATE</data-type>
             <required>False</required>
             <primary-key>False</primary-key>
           </column>
@@ -267,7 +269,7 @@
           <connector>
             <position>
               <x>348.667</x>
-              <y>257.5</y>
+              <y>258.3</y>
             </position>
             <angle>0</angle>
             <hub owner="{b869f611-9ac6-4c96-8ee2-45ae655711e9}" />
@@ -275,7 +277,7 @@
           <connector>
             <position>
               <x>514</x>
-              <y>257.5</y>
+              <y>258.333</y>
             </position>
             <angle>180</angle>
             <hub owner="{45e54040-4ca0-4716-add0-e439928a608d}" />
@@ -300,7 +302,7 @@
           <connector>
             <position>
               <x>202.333</x>
-              <y>183.667</y>
+              <y>197.667</y>
             </position>
             <angle>270</angle>
             <hub owner="{de7f1107-e683-47aa-b265-c1eff6b997bf}" />
@@ -322,7 +324,7 @@
           <parent>Optional</parent>
         </modality>
         <columns>
-          <child>6</child>
+          <child>7</child>
           <parent>0</parent>
         </columns>
       </relationship>
@@ -373,7 +375,7 @@
           </connector>
           <connector>
             <position>
-              <x>239</x>
+              <x>243</x>
               <y>339.333</y>
             </position>
             <angle>0</angle>
@@ -406,10 +408,10 @@
           </connector>
           <connector>
             <position>
-              <x>514</x>
-              <y>272.75</y>
+              <x>557</x>
+              <y>274</y>
             </position>
-            <angle>180</angle>
+            <angle>270</angle>
             <hub owner="{45e54040-4ca0-4716-add0-e439928a608d}" />
           </connector>
         </connector-list>
@@ -432,7 +434,7 @@
           <connector>
             <position>
               <x>245.333</x>
-              <y>111.167</y>
+              <y>118.167</y>
             </position>
             <angle>0</angle>
             <hub owner="{de7f1107-e683-47aa-b265-c1eff6b997bf}" />
@@ -440,7 +442,7 @@
           <connector>
             <position>
               <x>514</x>
-              <y>242.25</y>
+              <y>242.667</y>
             </position>
             <angle>180</angle>
             <hub owner="{45e54040-4ca0-4716-add0-e439928a608d}" />
@@ -454,7 +456,7 @@
           <parent>Optional</parent>
         </modality>
         <columns>
-          <child>7</child>
+          <child>8</child>
           <parent>0</parent>
         </columns>
       </relationship>
@@ -465,14 +467,14 @@
           <connector>
             <position>
               <x>280.667</x>
-              <y>257.5</y>
+              <y>258.3</y>
             </position>
             <angle>180</angle>
             <hub owner="{b869f611-9ac6-4c96-8ee2-45ae655711e9}" />
           </connector>
           <connector>
             <position>
-              <x>239</x>
+              <x>243</x>
               <y>309.667</y>
             </position>
             <angle>0</angle>
