@@ -1,8 +1,16 @@
 function onClick(){
   let text = document.getElementById("nyItem").value;
+  let userID = document.getElementById("user").value;
+  let familyID = document.getElementById("family").value;
+
   if (!text.replace(/\s/g, '').length){
     document.getElementById("errorMessage").innerHTML = "Feltet er tomt";
     document.getElementById("nyItemForm").reset();
+    setTimeout(function(){
+      document.getElementById("errorMessage").innerHTML = "";
+***REMOVED***, 2000);
+
+
     return;
   }
   let xhttp = new XMLHttpRequest();
@@ -12,9 +20,10 @@ function onClick(){
 
   ***REMOVED***
 ***REMOVED***;
-  xhttp.open("GET", `addItem.php?t="${text}"`, true);
+  xhttp.open("GET", `addItem.php?t="${text}"&user=${userID}&family=${familyID}`, true);
   xhttp.send();
   document.getElementById("nyItemForm").reset();
+
   // addedFeedback(text);
 }
 function checkMark(id){
