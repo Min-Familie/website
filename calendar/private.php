@@ -1,6 +1,5 @@
 ***REMOVED***
-    $user_id = 1;
-    $pseudonym = "Beni_B";
+    $user_id = 2;
 
     require "../db/dbConnect.php";
 
@@ -13,7 +12,12 @@
 
     // legg inn event i db
     if (isset($_POST["action"]) && $_POST["action"] == "saveEvent") {
-        $family_id = 1; // fra form
+        // family_id
+        $sql = "SELECT id FROM families WHERE family_name = '".$_POST["sharedCalendar"]."';";
+        $result = $conn -> query($sql);
+        while($row = $result -> fetch_assoc()){
+            $family_id = $row["id"];
+    ***REMOVED***
         
         $startTime = $_POST["time"];
         $startHour = (int)substr($startTime, 0, 2);
@@ -151,14 +155,13 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css"  href="../css/day.css">
         <link rel="stylesheet" type="text/css"  href="../css/new.css">
-        <link rel="icon"       type="image/png" href="favicon.png">
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
-        <script src="https://unpkg.com/location-picker/dist/location-picker.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css"  href="../css/visuals.css">
+        <link rel="icon"       type="image/png" href="../visuals/logo.png">
     </head>
     <body>
-        <h1>Ny event</h1>
+        ***REMOVED*** include "../visuals/header.html";***REMOVED***
 
-        <aside id="map"></aside>
+        <section id="map"></section>
 
         <form action="private.php"  method="post"   id="eventForm"> 
             <input  type="hidden"    name="action"   value="saveEvent">
@@ -188,12 +191,15 @@
             <input  type="submit"    value="lagre">
         </form> 
             
-        ***REMOVED*** 
-            // privateCalendar = True;
-            include "day.php";
+        ***REMOVED***
+            include "day.php"; 
+            include "../visuals/footer.html";
        ***REMOVED***
-
-        <script type="text/javascript" src="map.js"></script>
+        </main>
+        
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
+        <script type="text/javascript" src="../js/map.js"></script>
+        <script type="text/javascript" src="../js/sidebar.js"></script>
     </body>
 </html>
 
