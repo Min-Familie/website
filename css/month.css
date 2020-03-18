@@ -2,6 +2,8 @@ table {
    border: 1px solid #999;
    border-collapse: collapse;
    font-family: Georgia, Times, serif;
+   width: 100%;
+   margin-bottom: 10px;
 }
 th {
    border: 1px solid #999;
