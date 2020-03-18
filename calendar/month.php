@@ -1,10 +1,4 @@
 <?php
-    date_default_timezone_set("Europe/Oslo");
-
-    // input måned
-    if (isset($_GET["month"])) {$inputMonth = $_GET["month"];}
-    else                       {$inputMonth = date("Y-m");}
-
     // denne måneden?
     $currentMonth = $inputMonth == date("Y-m");
     // tidligere måned?
@@ -59,9 +53,9 @@
     <body>
         <table>
             <caption> 
-                <a href="month.php"> i dag</a>
-                <a href="month.php?month=<?php echo $prevMonth; ?>"> <</a>
-                <a href="month.php?month=<?php echo $nextMonth; ?>"> ></a>
+                <a href="publicMonth.php?month=<?php echo $prevMonth; ?>"> <</a>
+                <a href="publicMonth.php"> i dag</a>
+                <a href="publicMonth.php?month=<?php echo $nextMonth; ?>"> ></a>
                 <?php echo $monthsText[$month] . " " . $year; ?> 
             </caption>
     
@@ -127,7 +121,6 @@
                             else if ($j == $day && $currentMonth) {
                                 echo "<td class=\"today\"> 
                                       <a href=\"public.php?day=$inputMonth"."-"."$j\">$j</a> 
-                                      <ul> <li></li><li></li><li></li><li></li> </ul>
                                       </td>";
                             }
                             else {

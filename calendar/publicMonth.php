@@ -5,50 +5,12 @@
 
     // tidssone
     date_default_timezone_set("Europe/Oslo");
-    
-    // input dag
-    if (isset($_GET["day"])) {$inputDay = $_GET["day"];}
-    else                     {$inputDay = date("Y-m-d");}
 
-    function getFamily($conn, $user_id) {
-        $family = [];
+    // input måned
+    if (isset($_GET["month"])) {$inputMonth = $_GET["month"];}
+    else                       {$inputMonth = date("Y-m");}
 
-        // navn på alle familiene som personen er med i
-        $sql = "SELECT DISTINCT f.family_name, f.id
-                FROM families f
-                JOIN memberships m 
-                ON f.id = m.family_id
-                WHERE m.family_id IN
-                (
-                    SELECT m1.family_id
-                    FROM memberships m1
-                    WHERE m1.user_id = $user_id
-                );";
-        $result = $conn -> query($sql);
-        while($row = $result -> fetch_assoc()){
-            array_push($family, $row["family_name"]);
-        }
-
-        // alle familiemedldmmer i alle familier som personen er med i
-        $sql = "SELECT DISTINCT u.pseudonym, u.id
-                FROM users u
-                JOIN memberships m 
-                ON u.id = m.user_id
-                WHERE m.family_id IN
-                (
-                    SELECT m1.family_id
-                    FROM memberships m1
-                    WHERE m1.user_id = $user_id
-                );";
-        $result = $conn -> query($sql);
-        while($row = $result -> fetch_assoc()){
-            array_push($family, $row["pseudonym"]);
-        }
-
-        return $family;
-    }
-    
-    function getEvents($conn, $user_id, $inputDay) {
+    function getEvents($conn, $user_id, $inputMonth) {
         $events = [];
 
         // private events fra personen
@@ -73,25 +35,24 @@
             array_push($events, $affair);
         }
 
-// public events til alle familiemedlemmer i alle familier personen er med i
-$sql = "SELECT * FROM calendarEvents c
-        JOIN users u -- for å få navn, og ikke bare id fra calendar-tabellen
-        ON c.user_id = u.id
-        WHERE c.user_id in
-            ( -- personene som er med i alle disse familiene
-            SELECT u.id
-            FROM users u
-            JOIN memberships m 
-            ON u.id = m.user_id
-            WHERE m.family_id IN
-            ( -- familiene personen er med i
-                SELECT m1.family_id
-                FROM memberships m1
-                WHERE m1.user_id = $user_id
-            )
-        )
-        AND NOT private -- filtrering
-        AND day = '$inputDay';";
+        // public events til alle familiemedlemmer i alle familier personen er med i
+        $sql = "SELECT * FROM calendarEvents c
+                JOIN users u
+                ON c.user_id = u.id
+                WHERE c.user_id in (
+                    SELECT u.id
+                    FROM users u
+                    JOIN memberships m 
+                    ON u.id = m.user_id
+                    WHERE m.family_id IN
+                    (
+                        SELECT m1.family_id
+                        FROM memberships m1
+                        WHERE m1.user_id = $user_id
+                    )
+                )
+                AND NOT private
+                AND day = '$inputDay';";
 
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
@@ -143,11 +104,8 @@ $sql = "SELECT * FROM calendarEvents c
         return $events;
     }   
 
-
-    // familiemedlemmer fra db
-    $family = getFamily($conn, $user_id);
     // events fra db
-    $events = getEvents($conn, $user_id, $inputDay);
+    //$events = getEvents($conn, $user_id, $inputMonth); AND SUBSTRING av day i db = $inputMonth
 ?>
 
 <!DOCTYPE html>
@@ -155,14 +113,14 @@ $sql = "SELECT * FROM calendarEvents c
     <head>
         <title>Kalender - Dag</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css"  href="../css/day.css">
+        <link rel="stylesheet" type="text/css"  href="../css/month.css">
         <link rel="stylesheet" type="text/css"  href="../css/visuals.css">
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
     </head>
     <body>
         <?php
             include "../visuals/header.html";
-            include "day.php"; 
+            include "month.php"; 
             include "../visuals/footer.html";
         ?>
         <script type="text/javascript" src="../js/sidebar.js"></script>
