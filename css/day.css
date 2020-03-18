@@ -42,12 +42,14 @@
 }
 
 
+
+
 .menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-ul {
+.event ul {
     padding: 0;
     list-style-type: none;
     display: flex;
@@ -87,7 +89,7 @@ table {
     border-spacing: 0;
     border-collapse: separate;
     table-layout: fixed;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 table thead tr th {
     background: #626E7E;
