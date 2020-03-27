@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100i,400&display=swap');
+#varer {
+  font-family: "Roboto";
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#varer td, #varer th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#varer tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+#varer tr:hover{
+    background-color: #ddd;
+}
+
+#varer th{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+#empty{
+    text-align: center;
+    font-size: 2rem;
+}
+tr.line_through td{
+    position:relative
+}
+tr.line_through td:before{
+  content: " ";
+  position: absolute;
+  left: 0; top: 50%; width: 100%;
+  border-bottom: 1px solid #000;
+}

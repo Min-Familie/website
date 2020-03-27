@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
     // settings
     $servername = "localhost:3307";
     $username = "root";
@@ -14,5 +14,5 @@
     // check
     if (!$conn) {
         die("Kobling mot database mislyktes!");
-***REMOVED***
+    }
 ?>

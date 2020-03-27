@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
     function mergeEvets($event1, $event2) {
         $title = $event1["title"] ." + ". $event2["title"];
         $location = $event1["location"] ." + ". $event2["location"];
@@ -17,7 +17,7 @@
             // neste klokkeslett
             $y2 ++;
             if ($y2==4) {$y1++; $y2=0;}
-    ***REMOVED***
+        }
         $event1End = $y1.".".$y2 * 15;
 
         // når slutter event2?
@@ -27,7 +27,7 @@
             // neste klokkeslett
             $y2 ++;
             if ($y2==4) {$y1++; $y2=0;}
-    ***REMOVED***
+        }
         $event2End = $y1.".".$y2 * 15;
 
         // hvis event1 begynner og event1 slutter sist
@@ -35,25 +35,25 @@
             $pieces = explode(".", $event1End);
             $duration = $pieces[0]*60 + $pieces[1];
             $duration -= $tid*60 + $tidmin;
-    ***REMOVED***
+        }
         // hvis event1 begynner og event2 slutter sist
         else if ($earliest && $event1End < $event2End)  {
             $pieces = explode(".", $event2End);
             $duration = $pieces[0]*60 + $pieces[1];
             $duration -= $tid*60 + $tidmin;
-    ***REMOVED***
+        }
         // hvis event2 begynner og event1 slutter sist
         else if (!$earliest && $event1End > $event2End) {
             $pieces = explode(".", $event1End);
             $duration = $pieces[0]*60 + $pieces[1];
             $duration -= $event2["startHour"]*60 + $event2["startMinute"];
-    ***REMOVED***
+        }
         // event2 begynner og event2 slutter sist
         else                                            {
             $pieces = explode(".", $event2End);
             $duration = $pieces[0]*60 + $pieces[1];
             $duration -= $event2["startHour"]*60 + $event2["startMinute"];
-    ***REMOVED***
+        }
 
         $affair = [
             "author"      => $author,
@@ -64,7 +64,7 @@
             "duration"    => $duration
         ];
         return $affair;
-***REMOVED***
+    }
 
     // for bruk i linkene
     $nextDay = date('Y-m-d', strtotime($inputDay." +1 day"));
@@ -103,24 +103,24 @@
 
                                 // begyn på ny, fordi arrayen $events er endret
                                 goto occupationTest; 
-                        ***REMOVED***
+                            }
 
                             // plass til event
                             else {
                                 array_push($occupied, [[$y1, $y2, $person], $affair]);
-                        ***REMOVED***
+                            }
 
                             // neste klokkeslett
                             $y2 ++;
                             if ($y2==4) {$y1++; $y2=0;}
-                    ***REMOVED***
+                        }
 
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
 
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+            }
+        }
+    }
     // kun koordinatene
     $occupied = array_map(function($i) {return $i[0];}, $occupied);
 ?>
@@ -133,37 +133,37 @@
     <thead>
         <tr>
             <th class="menu">
-                ***REMOVED***
+                <?php
                     if (basename($_SERVER['PHP_SELF']) == "private.php") {
-                       ***REMOVED***
-                        <a href="public.php?day=***REMOVED*** echo $inputDay;***REMOVED***"> -</a>
-                        <a href="private.php?day=***REMOVED*** echo $prevDay;***REMOVED***"> <</a>
+                        ?>
+                        <a href="public.php?day=<?php echo $inputDay; ?>"> -</a>
+                        <a href="private.php?day=<?php echo $prevDay; ?>"> <</a>
                         <a href="private.php"> i dag</a>
-                        <a href="private.php?day=***REMOVED*** echo $nextDay;***REMOVED***"> ></a>
-                        ***REMOVED***
+                        <a href="private.php?day=<?php echo $nextDay; ?>"> ></a>
+                        <?php
                         echo $inputDay;
-                ***REMOVED***
+                    }
                     else {
-                       ***REMOVED***
-                        <a href="private.php?day=***REMOVED*** echo $inputDay;***REMOVED***"> +</a>
-                        <a href="public.php?day=***REMOVED*** echo $prevDay;***REMOVED***"> <</a>
+                        ?>
+                        <a href="private.php?day=<?php echo $inputDay; ?>"> +</a>
+                        <a href="public.php?day=<?php echo $prevDay; ?>"> <</a>
                         <a href="public.php"> i dag</a>
-                        <a href="public.php?day=***REMOVED*** echo $nextDay;***REMOVED***"> ></a>
-                        ***REMOVED***
+                        <a href="public.php?day=<?php echo $nextDay; ?>"> ></a>
+                        <?php
                         echo $inputDay;
-                ***REMOVED***
-               ***REMOVED***
+                    }
+                ?>
             </th>
-            ***REMOVED***
+            <?php
                 foreach ($family as $person){
                     echo "<th>$person</th>";
-            ***REMOVED***
-           ***REMOVED***
+                }
+            ?>
         </tr>  
     </thead>
 
     <tbody>
-        ***REMOVED***
+        <?php
             for ($hrs=0; $hrs<=23; $hrs++) { // for hver time
                 echo "<tr>";
                 echo "<td class=\"hour\" rowspan=\"4\">".substr("0$hrs:00", -5)."</td>";
@@ -178,15 +178,15 @@
                             if ([$hrs, $qrt, $person] == $coord) {
                                 $empty = False;
                                 break; // stopper å lete videre
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
 
                         if ($empty) { // hvis det ikke er en event i ruta
                             echo "<td 
                                 class=\"clickable\" 
                                 onclick=\"location.href='private.php?day=$inputDay&hrs=$hrs&qrt=$qrt'\">
                             </td>";
-                    ***REMOVED***
+                        }
                         else { //ellers er det plass til en event
                             foreach ($events as $affair) { // for hver event
                                 // hvis ny event
@@ -207,16 +207,16 @@
                                         </td>
                                     ";
                                     break; // stopper å lete videre
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***
+                                }
+                            }
+                        }
                         
-                ***REMOVED***
+                    }
                     echo "</tr>";
 
-            ***REMOVED***
+                }
 
-        ***REMOVED***
-       ***REMOVED***
+            }
+        ?>
     </tbody>
 </table>

@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
     $user_id = 2;
 
     require "../db/dbConnect.php";
@@ -27,7 +27,7 @@
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($family, $row["family_name"]);
-    ***REMOVED***
+        }
 
         // alle familiemedldmmer i alle familier som personen er med i
         $sql = "SELECT DISTINCT u.pseudonym, u.id
@@ -43,10 +43,10 @@
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($family, $row["pseudonym"]);
-    ***REMOVED***
+        }
 
         return $family;
-***REMOVED***
+    }
     
     function getEvents($conn, $user_id, $inputDay) {
         $events = [];
@@ -71,7 +71,7 @@
                 "duration"    => $row["duration"]
             ];
             array_push($events, $affair);
-    ***REMOVED***
+        }
 
 // public events til alle familiemedlemmer i alle familier personen er med i
 $sql = "SELECT * FROM calendarEvents c
@@ -105,7 +105,7 @@ $sql = "SELECT * FROM calendarEvents c
                 "duration"    => $row["duration"]
             ];
             array_push($events, $affair);
-    ***REMOVED***
+        }
         
         // felles events til familiene peronen er med i
         $sql = "SELECT * FROM calendarEvents e
@@ -138,10 +138,10 @@ $sql = "SELECT * FROM calendarEvents c
                 "duration"    => $row["duration"]
             ];
             array_push($events, $affair);
-    ***REMOVED***
+        }
 
         return $events;
-***REMOVED***   
+    }   
 
 
     // familiemedlemmer fra db
@@ -160,14 +160,14 @@ $sql = "SELECT * FROM calendarEvents c
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
     </head>
     <body>
-        ***REMOVED***
+        <?php
             include "../visuals/header.html";
             include "day.php"; 
             include "../visuals/footer.html";
-       ***REMOVED***
+        ?>
         <script type="text/javascript" src="../js/sidebar.js"></script>
         </main>
     </body>
 </html>
 
-***REMOVED*** $conn -> close();***REMOVED***
+<?php $conn -> close(); ?>

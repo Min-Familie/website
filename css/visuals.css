@@ -45,9 +45,9 @@
 
 /*header*/
   header {
-      
+
     color: #FBFEF9;
-    margin: 0; 
+    margin: 0;
     height: 100px;
     font-weight: bold;
     font: 1em;
@@ -70,8 +70,8 @@ header img {
 header:last-child {
     float: right;
 }
-header p, header img, header .openbtn {
-    margin-right: 5em;
+img, .openbtn, header p {
+    margin-right: 10em;
 }
 
 
@@ -146,5 +146,5 @@ a, #main {
 @media (max-width: 1100px) {
     footer .author, footer .interactive {
         width: 100%;
-***REMOVED***
+    }
 }

@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
     include 'db.inc.php';
     $id = $_GET['id'];
 
@@ -6,7 +6,7 @@
 
     if ($con -> query($sql) === FALSE) {
       echo "Error: " . $sql . "<br>" . $con->error;
-***REMOVED***
+    }
 
 
-***REMOVED***
+ ?>

@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
     $user_id = 2;
 
     require "../db/dbConnect.php";
@@ -17,7 +17,7 @@
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             $family_id = $row["id"];
-    ***REMOVED***
+        }
         
         $startTime = $_POST["time"];
         $startHour = (int)substr($startTime, 0, 2);
@@ -37,22 +37,22 @@
             $sql = "INSERT INTO calendarEvents
                     (title, location, day, startHour, startMinute, duration, user_id, family_id, private)
                     VALUES ($content, $user_id, 0, TRUE);";
-    ***REMOVED***
+        }
         // hvis er eventen skal på felleskalenderen
         else if (isset($_POST["sharedCalendar"])) {
             $sql = "INSERT INTO calendarEvents
                     (title, location, day, startHour, startMinute, duration, user_id, family_id, private)
                     VALUES ($content, 0, $family_id, FALSE);";
-    ***REMOVED***
+        }
         // ellers er eventen public
         else {
             $sql = "INSERT INTO calendarEvents
                     (title, location, day, startHour, startMinute, duration, user_id, family_id, private)
                     VALUES ($content, $user_id, 0, FALSE);";
-    ***REMOVED***
+        }
 
         $result = $conn -> query($sql);
-***REMOVED***
+    }
 
 
 
@@ -62,7 +62,7 @@
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             $family = [$row["pseudonym"]];
-    ***REMOVED***
+        }
         
         // navn på alle familiene som personen er med i
         $sql = "SELECT DISTINCT f.family_name, f.id
@@ -78,10 +78,10 @@
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($family, $row["family_name"]);
-    ***REMOVED***
+        }
         
         return $family;
-***REMOVED***
+    }
     
 
 
@@ -105,7 +105,7 @@
                 "duration"    => $row["duration"]
             ];
             array_push($events, $affair);
-    ***REMOVED***
+        }
 
         // felles events til familiene peronen er med i
         $sql = "SELECT * FROM calendarEvents e
@@ -137,10 +137,10 @@
                 "duration"    => $row["duration"]
             ];
             array_push($events, $affair);
-    ***REMOVED***
+        }
 
         return $events;
-***REMOVED***
+    }
 
     // privat og felleskalendere
     $family = getFamilies($conn, $user_id);
@@ -159,7 +159,7 @@
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
     </head>
     <body>
-        ***REMOVED*** include "../visuals/header.html";***REMOVED***
+        <?php include "../visuals/header.html"; ?>
 
         <section id="map"></section>
 
@@ -170,8 +170,8 @@
             <input  type="text"      name="location" id="location">
 
             <label  for="day"> start</label>
-            <input  type="date"      name="day"  id="day" value="***REMOVED*** echo $inputDay***REMOVED***">
-            <input  type="time"      name="time" ***REMOVED*** if (isset($_GET["hrs"]) && isset($_GET["qrt"])) {echo "value=".substr("0".rtrim($_GET["hrs"], " ").":", -3).substr("0".$_GET["qrt"]*15, -2);}***REMOVED***>
+            <input  type="date"      name="day"  id="day" value="<?php echo $inputDay ?>">
+            <input  type="time"      name="time" <?php if (isset($_GET["hrs"]) && isset($_GET["qrt"])) {echo "value=".substr("0".rtrim($_GET["hrs"], " ").":", -3).substr("0".$_GET["qrt"]*15, -2);} ?>>
 
             <label  for="endTime"> slutt</label>
             <input  type="time"      name="endTime"  id="endTime">
@@ -181,20 +181,20 @@
 
             <select name="sharedCalendar" form="eventForm">
                 <option disabled selected>felleskalender</option>
-                ***REMOVED***
+                <?php
                     foreach (array_slice($family, 1) as $surename) {
                         echo "<option value=\"$surename\">$surename</option>";
-                ***REMOVED***
-               ***REMOVED***
+                    }
+                ?>
             </select>
 
             <input  type="submit"    value="lagre">
         </form> 
             
-        ***REMOVED***
+        <?php
             include "day.php"; 
             include "../visuals/footer.html";
-       ***REMOVED***
+        ?>
         </main>
         
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
@@ -203,4 +203,4 @@
     </body>
 </html>
 
-***REMOVED*** $conn -> close();***REMOVED***
+<?php $conn -> close(); ?>

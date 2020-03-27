@@ -3,36 +3,46 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/todo.css">
+    <link rel="stylesheet" href="../css/visuals.css">
     <title>Todo</title>
   </head>
   <body>
     <script src="../js/todo.js"></script>
+    <script src="../js/checkmark.js"></script>
+    <script src="../js/checkempty.js"></script>
+    <script src="../js/sidebar.js">
+
+    </script>
+    <?php include '../visuals/header.html'; ?>
     <main>
     <section class="leggInn">
         <h1>HUSKELISTE</h1>
         <!-- <section role="status" aria-live="polite">
 
         </section> -->
-        ***REMOVED***
+        <?php
         $userID = $_GET['user'];
         $familyID = $_GET['family'];
 
-       ***REMOVED***
+        ?>
         <form id="nyItemForm" onsubmit="return false">
           <input type="text" id="nyItem" placeholder="E.g. Støvsuge huset...">
-          <button type="button" id="nyButton" name="button" onclick="onClick();">Legg til</button>
-          <input type="hidden" id="user" value="***REMOVED*** echo $userID;***REMOVED***">
-          <input type="hidden" id="family" value="***REMOVED*** echo $familyID;***REMOVED***">
+          <button type="button" id="nyButton" name="button" onclick="if(checkEmpty()){onClick();}">Legg til</button>
+          <input type="hidden" id="user" value="<?php echo $userID; ?>">
+          <input type="hidden" id="family" value="<?php echo $familyID; ?>">
         </form>
         <p id="errorMessage"></p>
       </section>
       <section class="items">
       <ul>
-        ***REMOVED***
+        <?php
         include '../inc/showTodo.inc.php';
-       ***REMOVED***
+        ?>
       </ul>
       </section>
       </main>
+      <?php
+        include '../visuals/footer.html';
+       ?>
   </body>
 </html>

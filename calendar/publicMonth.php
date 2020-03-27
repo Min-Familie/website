@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
     $user_id = 2;
 
     require "../db/dbConnect.php";
@@ -33,7 +33,7 @@
                 "duration"    => $row["duration"]
             ];
             array_push($events, $affair);
-    ***REMOVED***
+        }
 
         // public events til alle familiemedlemmer i alle familier personen er med i
         $sql = "SELECT * FROM calendarEvents c
@@ -66,7 +66,7 @@
                 "duration"    => $row["duration"]
             ];
             array_push($events, $affair);
-    ***REMOVED***
+        }
         
         // felles events til familiene peronen er med i
         $sql = "SELECT * FROM calendarEvents e
@@ -99,10 +99,10 @@
                 "duration"    => $row["duration"]
             ];
             array_push($events, $affair);
-    ***REMOVED***
+        }
 
         return $events;
-***REMOVED***   
+    }   
 
     // events fra db
     //$events = getEvents($conn, $user_id, $inputMonth); AND SUBSTRING av day i db = $inputMonth
@@ -118,14 +118,14 @@
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
     </head>
     <body>
-        ***REMOVED***
+        <?php
             include "../visuals/header.html";
             include "month.php"; 
             include "../visuals/footer.html";
-       ***REMOVED***
+        ?>
         <script type="text/javascript" src="../js/sidebar.js"></script>
         </main>
     </body>
 </html>
 
-***REMOVED*** $conn -> close();***REMOVED***
+<?php $conn -> close(); ?>

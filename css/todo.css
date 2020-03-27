@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100i,400&display=swap');
+html{
+  height: 100%;
+}
+body{
+  font-family: 'Roboto';
+  height: 100%;
+  margin: 0;
+  background-color: #58A4B0;
+
+
+}
+h1{
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  font-weight: 1000;
+}
+main{
+  width: 30%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+
+}
+
+form{
+  background-color: white;
+  align-items: center;
+  display: flex;
+
+}
+.items{
+  background-color: white;
+  overflow: auto;
+  max-height: 50%;
+}
+label{
+  align-self: center;
+}
+
+ul{
+  margin: 0;
+  padding: 30px;
+  padding-left: 30px;
+  list-style: none;
+}
+li{
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  border-bottom: 2px solid lightblue;
+}
+input.checkbox{
+  width: 15px;
+  height: 15px;
+
+}
+label.text{
+  font-size: 140%;
+  margin-left: 5px;
+}
+.delButton{
+  background-color: red;
+  border: 0;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+}
+input#nyItem{
+  flex: 2;
+  padding: 20px;
+  /* height: 30px; */
+  outline: 0;
+  border: none;
+  font-size: 130%;
+  background: #fff;
+  color: #2f4f4f;
+}
+.wrapper{
+  align-self: center;
+}
+#nyButton{
+  font-size: 1.5em;
+  flex: 1;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  height: 100%;
+  padding: 20px;
+  background-color: #E5E5E5;
+}
+input[type="checkbox"]:checked + label.text{
+    text-decoration: line-through;
+}
+input[type="checkbox"] + label.text{
+    text-decoration: none;
+}
