@@ -1,13 +1,13 @@
 <?php
 
     include 'db.inc.php';
-    function delete($id, $con){
-        $sql = "DELETE FROM shopping WHERE id = $id";
+    function deleteShopping($id, $con){
+        $sql = "DELETE FROM shoppingItems WHERE id = $id";
         $result = $con -> query($sql);
     }
 
 
-    function show($con, $result)
+    function showShopping($con, $result)
     {
         while($row = $result -> fetch_assoc()){
             $id = $row['id'];
@@ -31,7 +31,7 @@
             {
                 require 'time.inc.php';
                 if($delete = timecheck($time)){
-                    delete($id, $con);
+                    deleteShopping($id, $con);
                 }
                 else{
                     $delete = false;
@@ -50,16 +50,22 @@
             }
         }
     }
-    function main($con, $family_id){
-        $sql = "SELECT id, time, title, amount, price, status FROM shopping WHERE family_id = $family_id";
+    function mainShopping($con, $family){
+        echo "<tr>
+                <th>Vare</th>
+                <th>Antall</th>
+                <th>Pris*</th>
+                <th>Kjøpt</th>
+            </tr>";
+        $sql = "SELECT id, time, title, amount, price, status FROM shoppingItems WHERE family_id = $family";
         $result = $con -> query($sql);
         if($result -> num_rows > 0){
-            show($con, $result);
+            showShopping($con, $result);
         }
         else{
             echo "<tr><td id=\"empty\" colspan=\"4\">Ingen varer er lagt til.</td></tr>";
         }
     }
-    main($con, $family_id);
+    mainShopping($con, $family);
 
  ?>

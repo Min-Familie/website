@@ -21,15 +21,15 @@
 
         </section> -->
         <?php
-        $userID = $_GET['user'];
-        $familyID = $_GET['family'];
+        $user = $_GET['user'];
+        $family = $_GET['family'];
 
         ?>
         <form id="nyItemForm" onsubmit="return false">
           <input type="text" id="nyItem" placeholder="E.g. Støvsuge huset...">
           <button type="button" id="nyButton" name="button" onclick="if(checkEmpty()){onClick();}">Legg til</button>
-          <input type="hidden" id="user" value="<?php echo $userID; ?>">
-          <input type="hidden" id="family" value="<?php echo $familyID; ?>">
+          <input type="hidden" id="user" value="<?php echo $user; ?>">
+          <input type="hidden" id="family" value="<?php echo $family; ?>">
         </form>
         <p id="errorMessage"></p>
       </section>

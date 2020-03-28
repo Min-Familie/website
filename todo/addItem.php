@@ -2,9 +2,9 @@
     include '../inc/db.inc.php';
     if(isset($_GET['t'])){
       $todo = $_GET['t'];
-      $familyID = $_GET['family'];
-      $userID = $_GET['user'];
-      $sql = "INSERT INTO todo(title, time, user_id, family_id) VALUES($todo, null, $userID, $familyID)";
+      $family = $_GET['family'];
+      $user = $_GET['user'];
+      $sql = "INSERT INTO todo(title, time, user_id, family_id) VALUES($todo, null, $user, $family)";
 
     }
     else if (isset($_GET['id']) && isset($_GET['s'])){

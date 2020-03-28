@@ -1,0 +1,36 @@
+@import url(day.css);
+@import url(month.css);
+@import url(new.css);
+@import url(shopping.css);
+@import url(todo.css);
+@import url(visuals.css);
+
+.calendar{
+    grid-area: calendar;
+}
+.todo{
+    grid-area: todo;
+}
+.shopping{
+    grid-area: shopping;
+}
+.news{
+    grid-area: news;
+}
+.weather{
+    grid-area: weather;
+}
+.family_members{
+    grid-area: family_members;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "calendar calendar todo shopping"
+    "calendar calendar todo shopping"
+    "news news weather weather"
+    "family_members family_members family_members family_members";
+}

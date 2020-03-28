@@ -30,6 +30,7 @@ form{
   background-color: white;
   align-items: center;
   display: flex;
+  margin-bottom: 10px;
 
 }
 .items{
@@ -68,6 +69,7 @@ label.text{
   font-size: 30px;
   cursor: pointer;
   color: white;
+  width: 10%;
 }
 input#nyItem{
   flex: 2;

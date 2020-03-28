@@ -6,14 +6,6 @@ function classStyle(cid, status, id){
     else{
         tag.classList.remove('line_through');
     }
-    // for(let i = 0; i < c.length; i++){
-    //     if(status == true){
-    //         c[i].style.textDecoration = "line-through";
-    //     }
-    //     else{
-    //         c[i].style.textDecoration = "none";
-    //     }
-    // }
 
 }
 function check(itemID, id, url, cid=null){

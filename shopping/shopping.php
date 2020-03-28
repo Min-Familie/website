@@ -35,14 +35,8 @@
     </section>
     <section class="shopping">
         <table id="varer">
-            <tr>
-                <th>Vare</th>
-                <th>Antall</th>
-                <th>Pris*</th>
-                <th>Kjøpt</th>
-            </tr>
             <?php
-            $family_id = $_GET['family'];
+            $family = $_GET['family'];
             include '../inc/showShopping.inc.php'; ?>
         </table>
     </section>

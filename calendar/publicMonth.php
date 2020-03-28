@@ -1,7 +1,7 @@
 <?php
     $user_id = 2;
 
-    require "../db/dbConnect.php";
+    require "../inc/db.inc.php";
 
     // tidssone
     date_default_timezone_set("Europe/Oslo");
@@ -10,7 +10,7 @@
     if (isset($_GET["month"])) {$inputMonth = $_GET["month"];}
     else                       {$inputMonth = date("Y-m");}
 
-    function getEvents($conn, $user_id, $inputMonth) { // slå alle sammen og order by day
+    function getEvents($con, $user_id, $inputMonth) { // slå alle sammen og order by day
         $events = [];
 
         // private events fra personen
@@ -20,8 +20,8 @@
                 WHERE user_id = $user_id
                 AND private
                 AND SUBSTRING(day, 1, 7) = '$inputMonth';";
-        
-        $result = $conn -> query($sql);
+
+        $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
                 "author"      => $row["pseudonym"],
@@ -29,7 +29,7 @@
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"], 
+                "startMinute" => $row["startMinute"],
                 "duration"    => $row["duration"],
                 "id"          => $row["id"],
                 "family_id"   => $row["family_id"]
@@ -44,7 +44,7 @@
                 WHERE c.user_id in (
                     SELECT u.id
                     FROM users u
-                    JOIN memberships m 
+                    JOIN memberships m
                     ON u.id = m.user_id
                     WHERE m.family_id IN
                     (
@@ -55,8 +55,8 @@
                 )
                 AND NOT private
                 AND SUBSTRING(day, 1, 7) = '$inputMonth';";
-        
-        $result = $conn -> query($sql);
+
+        $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
                 "author"      => $row["pseudonym"],
@@ -64,14 +64,14 @@
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"], 
+                "startMinute" => $row["startMinute"],
                 "duration"    => $row["duration"],
                 "id"          => $row["id"],
                 "family_id"   => $row["family_id"]
             ];
             array_push($events, $affair);
         }
-        
+
         // felles events til familiene peronen er med i
         $sql = "SELECT * FROM calendarEvents e
                 JOIN families f
@@ -80,7 +80,7 @@
                 (
                     SELECT f1.id
                     FROM families f1
-                    JOIN memberships m 
+                    JOIN memberships m
                     ON f1.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -91,7 +91,7 @@
                 )
                 AND SUBSTRING(day, 1, 7) = '$inputMonth';";
 
-        $result = $conn -> query($sql);
+        $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
                 "author"      => $row["family_name"],
@@ -99,7 +99,7 @@
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"], 
+                "startMinute" => $row["startMinute"],
                 "duration"    => $row["duration"],
                 "id"          => $row["id"],
                 "family_id"   => $row["family_id"]
@@ -108,10 +108,10 @@
         }
 
         return $events;
-    }   
+    }
 
     // events fra db
-    $events = getEvents($conn, $user_id, $inputMonth);
+    $events = getEvents($con, $user_id, $inputMonth);
 ?>
 
 <!DOCTYPE html>
@@ -126,7 +126,7 @@
     <body>
         <?php
             include "../visuals/header.html";
-            include "month.php"; 
+            include "month.php";
             include "../visuals/footer.html";
         ?>
         <script type="text/javascript" src="../js/sidebar.js"></script>
@@ -134,4 +134,4 @@
     </body>
 </html>
 
-<?php $conn -> close(); ?>
+<?php $con -> close(); ?>

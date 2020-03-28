@@ -1,12 +1,12 @@
 <?php
-    include '../inc/db.inc.php';
+    include 'db.inc.php';
     date_default_timezone_set("Europe/Oslo");
 
-    function delete($id, $con){
+    function deleteTodo($id, $con){
         $sql = "DELETE FROM todo WHERE id = $id";
         $result = $con -> query($sql);
     }
-    function show($result, $con){
+    function showTodo($result, $con){
       while($row = $result -> fetch_assoc()){
         $id = $row['id'];
         $text = $row['title'];
@@ -21,7 +21,7 @@
           $time = $row['time'];
           require 'time.inc.php';
           if($delete = timecheck($time)){
-            delete($id, $con);
+            deleteTodo($id, $con);
           }
           else{
             $delete = False;
@@ -42,23 +42,22 @@
         }
       }
     }
-    function main($con, $userID, $familyID){
+    function mainTodo($con, $user, $family){
       // Check if event is private or public for family
-      if($familyID == 0){
-        $sql = "SELECT * FROM todo WHERE user_id = $userID AND family_id = $familyID ORDER BY time DESC";
+      if($family == 0){
+        $sql = "SELECT * FROM todo WHERE user_id = $user AND family_id = $family ORDER BY time DESC";
       }
       else{
-        $sql = "SELECT * FROM todo WHERE family_id = $familyID ORDER BY time DESC";
+        $sql = "SELECT * FROM todo WHERE family_id = $family ORDER BY time DESC";
       }
 
       $result = $con -> query($sql);
       if ($result -> num_rows > 0){
-        show($result, $con);
+        showTodo($result, $con);
       }
       else{
         echo "Listen er visst tom. Du har enten gjort alt allerede, eller så er det fortsatt ting du kan legge til. ";
       }
     }
-
-    main($con, $userID, $familyID);
+    mainTodo($con, $user, $family);
  ?>
