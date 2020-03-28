@@ -1,5 +1,5 @@
 <?php
-    $user_id = 2;
+    $user_id = 1;
 
     require "../db/dbConnect.php";
 
@@ -57,15 +57,13 @@
 
 
     function getFamilies($conn, $user_id) {
+        $family = [];
         // brukernavnet er første kalender i arrayen
-        $sql = "SELECT pseudonym FROM users WHERE id = $user_id;";
-        $result = $conn -> query($sql);
-        while($row = $result -> fetch_assoc()){
-            $family = [$row["pseudonym"]];
-        }
-        
-        // navn på alle familiene som personen er med i
-        $sql = "SELECT DISTINCT f.family_name, f.id
+        $sql = "SELECT pseudonym, id FROM users WHERE id = $user_id
+
+                UNION
+                -- navn på alle familiene som personen er med i
+                SELECT DISTINCT f.family_name AS pseudonym, f.id
                 FROM families f
                 JOIN memberships m 
                 ON f.id = m.family_id
@@ -77,7 +75,7 @@
                 );";
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
-            array_push($family, $row["family_name"]);
+            array_push($family, $row["pseudonym"]);
         }
         
         return $family;
@@ -128,7 +126,7 @@
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
-                "author"      => $row["family_name"], // erstatt med navnet - må adde litt til queryen
+                "author"      => $row["family_name"], 
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
@@ -195,7 +193,7 @@
             include "day.php"; 
             include "../visuals/footer.html";
         ?>
-        </main>
+        </section>
         
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
         <script type="text/javascript" src="../js/map.js"></script>

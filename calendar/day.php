@@ -200,12 +200,12 @@
                                                 <li class=\"author\">"   .$affair["author"]."</li>
                                                 <li class=\"startTime\">".substr("0$hrs:", -3).substr("0".$affair["startMinute"], -2)."</li>
                                                 <li class=\"location\">
-                                                    <a href=\"https://www.google.com/maps/place/".$affair["location"]."\"</a>
-                                                </li>
+                                                    <a href=\"https://www.google.com/maps/place/".$affair["location"]."\" target=\"_blank\">kart</a>
+                                                </li> 
                                             </ul>
                                         
                                         </td>
-                                    ";
+                                    "; // kart slik som i google maps
                                     break; // stopper å lete videre
                                 }
                             }

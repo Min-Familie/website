@@ -10,7 +10,7 @@
     if (isset($_GET["month"])) {$inputMonth = $_GET["month"];}
     else                       {$inputMonth = date("Y-m");}
 
-    function getEvents($conn, $user_id, $inputMonth) {
+    function getEvents($conn, $user_id, $inputMonth) { // slå alle sammen og order by day
         $events = [];
 
         // private events fra personen
@@ -19,8 +19,8 @@
                 ON c.user_id = u.id
                 WHERE user_id = $user_id
                 AND private
-                AND day = '$inputDay';";
-
+                AND SUBSTRING(day, 1, 7) = '$inputMonth';";
+        
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
@@ -30,7 +30,9 @@
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
                 "startMinute" => $row["startMinute"], 
-                "duration"    => $row["duration"]
+                "duration"    => $row["duration"],
+                "id"          => $row["id"],
+                "family_id"   => $row["family_id"]
             ];
             array_push($events, $affair);
         }
@@ -52,8 +54,8 @@
                     )
                 )
                 AND NOT private
-                AND day = '$inputDay';";
-
+                AND SUBSTRING(day, 1, 7) = '$inputMonth';";
+        
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
@@ -63,7 +65,9 @@
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
                 "startMinute" => $row["startMinute"], 
-                "duration"    => $row["duration"]
+                "duration"    => $row["duration"],
+                "id"          => $row["id"],
+                "family_id"   => $row["family_id"]
             ];
             array_push($events, $affair);
         }
@@ -85,7 +89,7 @@
                         WHERE m1.user_id = $user_id
                     )
                 )
-                AND day = '$inputDay';";
+                AND SUBSTRING(day, 1, 7) = '$inputMonth';";
 
         $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
@@ -96,7 +100,9 @@
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
                 "startMinute" => $row["startMinute"], 
-                "duration"    => $row["duration"]
+                "duration"    => $row["duration"],
+                "id"          => $row["id"],
+                "family_id"   => $row["family_id"]
             ];
             array_push($events, $affair);
         }
@@ -105,7 +111,7 @@
     }   
 
     // events fra db
-    //$events = getEvents($conn, $user_id, $inputMonth); AND SUBSTRING av day i db = $inputMonth
+    $events = getEvents($conn, $user_id, $inputMonth);
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +130,7 @@
             include "../visuals/footer.html";
         ?>
         <script type="text/javascript" src="../js/sidebar.js"></script>
-        </main>
+        </section>
     </body>
 </html>
 
