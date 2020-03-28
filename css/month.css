@@ -1,35 +1,57 @@
+/* kalender*/
 table {
-   border: 1px solid #999;
-   border-collapse: collapse;
-   font-family: Georgia, Times, serif;
-   width: 100%;
-   margin-bottom: 10px;
+    border: 1px solid #999;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
 }
 th {
-   border: 1px solid #999;
-   font-size: 70%;
+    border: 1px solid #999;
+    font-size: 70%;
 }
 td {
-   border: 1px solid #999;
-   height: 5em;
-   width:5em;
-   padding: 5px;
-   vertical-align: top;
+    border: 1px solid #999;
+    height: 5em;
+    width:5em;
+    padding: 5px;
+    vertical-align: top;
 }
 caption {
-   font-size: 300%;
-   font-style: italic;
+    font-size: 300%;
+    font-style: italic;
 }
 .future, .past, .today {
-   text-align: right;
+    text-align: right;
 }
 .past {
     background-color: beige;
 }
 .today {
-   background-color: bisque;
+    background-color: bisque;
 }
 a {
     text-decoration: none;
     color: black;
+}
+
+/* events*/
+ul {
+    list-style: none;
+}
+.event {
+    display:block;
+    box-sizing: border-box;
+
+    background-color: #4BA3C2;
+    padding: 0.2em;
+    margin: 0.2em;
+    /*border-radius: 5px;*/
+    color: white;
+    text-align: left;
+    transition: 0.2s;
+
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
+}
+.event:hover {
+    background-color: black;
 }

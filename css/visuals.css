@@ -45,9 +45,9 @@
 
 /*header*/
   header {
-
+      
     color: #FBFEF9;
-    margin: 0;
+    margin: 0; 
     height: 100px;
     font-weight: bold;
     font: 1em;
