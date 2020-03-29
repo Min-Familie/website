@@ -1,31 +1,34 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
 * {
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
 }
+
 /*sidebar*/
 .sidebar {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
     top: 0;
     left: 0;
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
-  }
-  .sidebar a {
+}
+.sidebar a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
     transition: 0.3s;
-  }
-  .sidebar a:hover {
+}
+.sidebar a:hover {
     color: #f1f1f1;
-  }
-  .openbtn {
+}
+.openbtn {
     font-size: 20px;
     cursor: pointer;
     background-color: #111;
@@ -33,32 +36,20 @@
     padding: 10px 15px;
     height: 100%;
     border: none;
-  }
-  .openbtn:hover {
+}
+.openbtn:hover {
     background-color: #444;
-  }
-  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-    .sidebar {padding-top: 15px;}
-    .sidebar a {font-size: 18px;}
-  }
+}
 
 /*header*/
-  header {
-      
+header {
     color: #FBFEF9;
-    margin: 0; 
-    height: 100px;
     font-weight: bold;
-    font: 1em;
-/*
-    top: 0;
-    position: -webkit-sticky;
-    position: sticky;
-    z-index: 1;
-*/
+
+    height: 100px;
     list-style: none;
 	background-image: radial-gradient(circle farthest-side at top right, transparent, #FBFEF9), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #175676);
+    
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -77,21 +68,28 @@ img, .openbtn, header p {
 
 
 
-
-
-
+/*footer ned til bunnen*/
+article {
+    min-height: 100%;
+    margin: 0 auto -200px;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+}
 
 /*footer*/
 footer ul {
     list-style: none;
 }
-
 footer {
+    margin-top: 100px;
+    position: absolute;
     text-align: center;
     font-weight: bold;
     width: 100%;
     display: inline-block;
-    background-color:#474350;
+    background-color: #474350;
 }
 footer .author {
     width: 40%;
@@ -102,11 +100,11 @@ footer .interactive {
     float: left;
 }
 
-.author, .interactive a {
+footer .author, .interactive a {
     color: #FBFEF9;
     line-height: 100px;
 }
-.author {
+footer .author {
     letter-spacing: 1px;
 }
 
@@ -126,7 +124,7 @@ a, #main {
     transition: margin-left 0.5s;
 }
 
-.top, .start, .feedback, .author p{
+.top, .start, .feedback, footer .author p{
     font-size: 1em;
 }
 
