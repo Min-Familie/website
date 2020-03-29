@@ -1,13 +1,13 @@
 <?php
     $user_id = 1;
 
-    require "../db/dbConnect.php";
+    require "../inc/db.inc.php";
 
     // slett event
     if (isset($_POST["delete"])) {
         $sql = "DELETE FROM calendarEvents
                 WHERE id = ".$_POST["id"].";";
-        $result = $conn -> query($sql);
+        $result = $con -> query($sql);
         header("Location: publicMonth.php");
     }
 
@@ -26,7 +26,7 @@
         $title = $_POST["title"];
         $location = $_POST["location"];
         $day = $_POST["day"];
-        
+
         $sql = "UPDATE calendarEvents
                 SET title = '$title',
                     location = '$location',
@@ -35,9 +35,9 @@
                     startMinute = $startMinute,
                     duration = $duration
                 WHERE id = ".$_POST["id"].";";
-        $result = $conn -> query($sql);
+        $result = $con -> query($sql);
     }
-    
+
     // hvis ingen event er valgt
     if (!isset($_GET["event_id"]) || !isset($_GET["event_family_id"])) {
         header("Location: publicMonth.php");
@@ -47,15 +47,15 @@
     $event_family_id = $_GET["event_family_id"];
 
 
-    // hvis fellesevent: if familie_id != 0 
+    // hvis fellesevent: if familie_id != 0
     if ($event_family_id) {
-        $sql = "SELECT * FROM calendarEvents 
-                WHERE id = $event_id 
+        $sql = "SELECT * FROM calendarEvents
+                WHERE id = $event_id
                 AND family_id IN
                 (
                     SELECT f.id
                     FROM families f
-                    JOIN memberships m 
+                    JOIN memberships m
                     ON f.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -68,19 +68,19 @@
     }
     // ellers privat event
     else {
-        $sql = "SELECT * FROM calendarEvents 
-                WHERE id = $event_id 
+        $sql = "SELECT * FROM calendarEvents
+                WHERE id = $event_id
                 AND user_id = $user_id;";
     }
 
-    $result = $conn -> query($sql);
+    $result = $con -> query($sql);
     while($row = $result -> fetch_assoc()){
         $event = [
             "title"       => $row["title"],
             "location"    => $row["location"],
             "day"         => $row["day"],
             "startHour"   => $row["startHour"],
-            "startMinute" => $row["startMinute"], 
+            "startMinute" => $row["startMinute"],
             "duration"    => $row["duration"]
         ];
     }
@@ -114,7 +114,7 @@
                 // kart
 
                 // rediger/slett
-                echo   "<form action=\"singleEvent.php?event_id=$event_id&event_family_id=$event_family_id\"  method=\"post\"   id=\"eventForm\"> 
+                echo   "<form action=\"singleEvent.php?event_id=$event_id&event_family_id=$event_family_id\"  method=\"post\"   id=\"eventForm\">
                             <input  type=\"hidden\"    name=\"action\"   value=\"updateEvent\">
                             <input  type=\"hidden\"     name=\"id\" value=$event_id>
 
@@ -146,4 +146,4 @@
     </body>
 </html>
 
-<?php $conn -> close(); ?>
+<?php $con -> close(); ?>

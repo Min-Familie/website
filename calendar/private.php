@@ -1,6 +1,6 @@
 <?php
     $user_id = 1;
-    require "../db/dbConnect.php";
+    require "../inc/db.inc.php";
 
     // tidssone
     date_default_timezone_set("Europe/Oslo");
@@ -46,12 +46,12 @@
                     VALUES ($content, 0, ".$_POST["selectCalendar"].", FALSE);";
         }
 
-        $result = $conn -> query($sql);
+        $result = $con -> query($sql);
     }
 
 
 
-    function getFamilies($conn, $user_id) {
+    function getFamilies($con, $user_id) {
         $family = [];
         // brukernavnet er første kalender i arrayen
         $sql = "SELECT pseudonym, id FROM users WHERE id = $user_id
@@ -60,7 +60,7 @@
                 -- navn på alle familiene som personen er med i
                 SELECT DISTINCT f.family_name AS pseudonym, f.id
                 FROM families f
-                JOIN memberships m 
+                JOIN memberships m
                 ON f.id = m.family_id
                 WHERE m.family_id IN
                 (
@@ -68,17 +68,17 @@
                     FROM memberships m1
                     WHERE m1.user_id = $user_id
                 );";
-        $result = $conn -> query($sql);
+        $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($family, [$row["pseudonym"], $row["id"]]); // [$row["pseudonym"], $row["id"]]
         }
-        
-        return $family; 
+
+        return $family;
     }
-    
 
 
-    function getEvents($conn, $user_id, $inputDay) {
+
+    function getEvents($con, $user_id, $inputDay) {
         $events = [];
         // events fra personen
         $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, pseudonym
@@ -87,7 +87,7 @@
                 ON c.user_id = u.id
                 WHERE user_id = $user_id
                 AND day = '$inputDay'
-                
+
 
                 UNION
                 -- felles events til familiene peronen er med i
@@ -99,7 +99,7 @@
                 (
                     SELECT f1.id
                     FROM families f1
-                    JOIN memberships m 
+                    JOIN memberships m
                     ON f1.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -110,15 +110,15 @@
                 )
                 AND day = '$inputDay';";
 
-        $result = $conn -> query($sql);
+        $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
-                "author"      => $row["pseudonym"], 
+                "author"      => $row["pseudonym"],
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"], 
+                "startMinute" => $row["startMinute"],
                 "duration"    => $row["duration"],
                 "id"          => $row["id"],
                 "family_id"   => $row["family_id"]
@@ -129,8 +129,8 @@
     }
 
     // privat og felleskalendere
-    $family = getFamilies($conn, $user_id);
-    $events = getEvents($conn, $user_id, $inputDay);
+    $family = getFamilies($con, $user_id);
+    $events = getEvents($con, $user_id, $inputDay);
 ?>
 
 
@@ -150,7 +150,7 @@
 
         <section id="map"></section>
 
-        <form action="private.php?day=<?php echo $inputDay;?>"  method="post"   id="eventForm"> 
+        <form action="private.php?day=<?php echo $inputDay;?>"  method="post"   id="eventForm">
             <input  type="hidden"    name="action"   value="saveEvent">
             <input  type="text"      name="title"    placeholder="tittel">
 
@@ -175,21 +175,21 @@
             </select>
 
             <input  type="submit"    value="lagre">
-        </form> 
-            
+        </form>
+
         <?php
             // kun navenene
             $family = array_map(function($i) {return $i[0];}, $family);
-            include "day.php"; 
+            include "day.php";
             echo "</article>";
             include "../visuals/footer.html";
         ?>
         </section>
-        
+
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
         <script type="text/javascript" src="../js/map.js"></script>
         <script type="text/javascript" src="../js/sidebar.js"></script>
     </body>
 </html>
 
-<?php $conn -> close(); ?>
+<?php $con -> close(); ?>

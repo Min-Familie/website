@@ -27,6 +27,10 @@
         ?>
         <form id="nyItemForm" onsubmit="return false">
           <input type="text" id="nyItem" placeholder="E.g. Støvsuge huset...">
+          <select class="permission">
+              <option value="private">Privat</option>
+              <option value="public">Familie</option>
+          </select>
           <button type="button" id="nyButton" name="button" onclick="if(checkEmpty()){onClick();}">Legg til</button>
           <input type="hidden" id="user" value="<?php echo $user; ?>">
           <input type="hidden" id="family" value="<?php echo $family; ?>">
