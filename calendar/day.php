@@ -3,6 +3,8 @@
         $title = $event1["title"] ." + ". $event2["title"];
         $location = $event1["location"] ." + ". $event2["location"];
         $author = $event1["author"];
+        $id = $event1["id"];
+        $family_id = $event1["family_id"];
 
         if ($event1["startHour"] < $event2["startHour"]) {$tid = $event1["startHour"];}
         else                                             {$tid = $event2["startHour"];}
@@ -61,7 +63,9 @@
             "location"    => $location,
             "startHour"   => $tid,
             "startMinute" => $tidmin,
-            "duration"    => $duration
+            "duration"    => $duration,
+            "id"          => $id,
+            "family_id"   => $family_id
         ];
         return $affair;
     }
@@ -182,30 +186,33 @@
                         }
 
                         if ($empty) { // hvis det ikke er en event i ruta
-                            echo "<td 
-                                class=\"clickable\" 
-                                onclick=\"location.href='private.php?day=$inputDay&hrs=$hrs&qrt=$qrt'\">
-                            </td>";
+                            echo "<td onclick=\"location.href='private.php?day=$inputDay&hrs=$hrs&qrt=$qrt'\"> </td>";
                         }
                         else { //ellers er det plass til en event
                             foreach ($events as $affair) { // for hver event
-                                // hvis ny event
+                                // hvis ny event 
                                 $now = $hrs==$affair["startHour"] && $qrt==intdiv($affair["startMinute"], 15);
                                 if ($affair["author"]==$person && $now) {
-                                    echo
-                                        "<td class=\"event\" rowspan=\"".intdiv($affair["duration"], 15)."\"> 
 
+                                    $time0 = substr("0$hrs:", -3).substr("0".$affair["startMinute"], -2);
+                                    $endH = $hrs + intdiv($affair["duration"]+$affair["startMinute"], 60);
+                                    $endM = $hrs+$affair["duration"] - intdiv($affair["duration"]+$affair["startMinute"], 60)*60;
+                                    $timeEnd = substr("0$endH:", -3).substr("0$endM", -2);
+
+                                    echo "<td class=\"event\" rowspan=\"".intdiv($affair["duration"], 15)."\"
+                                    onclick=\"location.href='singleEvent.php?event_id=".$affair["id"]."&event_family_id=".$affair["family_id"]."'\"> 
                                             <ul>
-                                                <li class=\"title\">"    .$affair["title"]."</li>
-                                                <li class=\"author\">"   .$affair["author"]."</li>
-                                                <li class=\"startTime\">".substr("0$hrs:", -3).substr("0".$affair["startMinute"], -2)."</li>
-                                                <li class=\"location\">
-                                                    <a href=\"https://www.google.com/maps/place/".$affair["location"]."\" target=\"_blank\">kart</a>
-                                                </li> 
-                                            </ul>
-                                        
+                                                <li class=\"title\">".$affair["title"]."</li>
+                                                <li>$time0 - $timeEnd</li>";
+
+                                    if ($affair["duration"]>15) {
+                                        echo   "<li><a href=\"https://www.google.com/maps/place/".$affair["location"]."\" target=\"_blank\">kart</a></li>"; 
+                                    }
+                                    
+                                    echo       "</ul>
                                         </td>
-                                    "; // kart slik som i google maps
+                                    ";
+
                                     break; // stopper å lete videre
                                 }
                             }

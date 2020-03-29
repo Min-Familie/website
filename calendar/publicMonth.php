@@ -1,7 +1,7 @@
 <?php
-    $user_id = 2;
+    $user_id = 1;
 
-    require "../inc/db.inc.php";
+    require "../db/dbConnect.php";
 
     // tidssone
     date_default_timezone_set("Europe/Oslo");
@@ -9,42 +9,39 @@
     // input måned
     if (isset($_GET["month"])) {$inputMonth = $_GET["month"];}
     else                       {$inputMonth = date("Y-m");}
+    // i forhold til inputMonth
+    $month = date("m", strtotime($inputMonth));
+    $year = date("Y", strtotime($inputMonth));
+    $yearMonth = date("Y-m", strtotime($inputMonth));
+    $nextMonth = date("Y-m", strtotime($inputMonth." +1 month"));
+    $prevMonth = date("Y-m", strtotime($inputMonth." -1 month"));
 
-    function getEvents($con, $user_id, $inputMonth) { // slå alle sammen og order by day
+    function getEvents($conn, $user_id, $inputMonth, $prevMonth, $nextMonth) { // slå alle sammen og order by day
         $events = [];
 
         // private events fra personen
-        $sql = "SELECT * FROM calendarEvents c
+        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, pseudonym 
+                FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
                 WHERE user_id = $user_id
                 AND private
-                AND SUBSTRING(day, 1, 7) = '$inputMonth';";
+                AND SUBSTRING(day, 1, 7) = '$inputMonth'
+                OR  SUBSTRING(day, 1, 7) = '$prevMonth'
+                OR  SUBSTRING(day, 1, 7) = '$nextMonth'
 
-        $result = $con -> query($sql);
-        while($row = $result -> fetch_assoc()){
-            $affair = [
-                "author"      => $row["pseudonym"],
-                "title"       => $row["title"],
-                "location"    => $row["location"],
-                "day"         => $row["day"],
-                "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"],
-                "duration"    => $row["duration"],
-                "id"          => $row["id"],
-                "family_id"   => $row["family_id"]
-            ];
-            array_push($events, $affair);
-        }
 
-        // public events til alle familiemedlemmer i alle familier personen er med i
-        $sql = "SELECT * FROM calendarEvents c
+                UNION
+                -- public events til alle familiemedlemmer i alle familier personen er med i
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, pseudonym
+                FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
-                WHERE c.user_id in (
+                WHERE c.user_id in 
+                (
                     SELECT u.id
                     FROM users u
-                    JOIN memberships m
+                    JOIN memberships m 
                     ON u.id = m.user_id
                     WHERE m.family_id IN
                     (
@@ -54,33 +51,22 @@
                     )
                 )
                 AND NOT private
-                AND SUBSTRING(day, 1, 7) = '$inputMonth';";
+                AND SUBSTRING(day, 1, 7) = '$inputMonth'
+                OR  SUBSTRING(day, 1, 7) = '$prevMonth'
+                OR  SUBSTRING(day, 1, 7) = '$nextMonth'
 
-        $result = $con -> query($sql);
-        while($row = $result -> fetch_assoc()){
-            $affair = [
-                "author"      => $row["pseudonym"],
-                "title"       => $row["title"],
-                "location"    => $row["location"],
-                "day"         => $row["day"],
-                "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"],
-                "duration"    => $row["duration"],
-                "id"          => $row["id"],
-                "family_id"   => $row["family_id"]
-            ];
-            array_push($events, $affair);
-        }
 
-        // felles events til familiene peronen er med i
-        $sql = "SELECT * FROM calendarEvents e
+                UNION
+                -- felles events til familiene peronen er med i
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS pseudonym
+                FROM calendarEvents c
                 JOIN families f
-                ON e.family_id = f.id
+                ON c.family_id = f.id
                 WHERE family_id IN
                 (
                     SELECT f1.id
                     FROM families f1
-                    JOIN memberships m
+                    JOIN memberships m 
                     ON f1.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -89,29 +75,32 @@
                         WHERE m1.user_id = $user_id
                     )
                 )
-                AND SUBSTRING(day, 1, 7) = '$inputMonth';";
-
-        $result = $con -> query($sql);
+                AND SUBSTRING(day, 1, 7) = '$inputMonth'
+                OR  SUBSTRING(day, 1, 7) = '$prevMonth'
+                OR  SUBSTRING(day, 1, 7) = '$nextMonth'
+                
+                ORDER BY day, startHour, startMinute;";
+        
+        $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
-                "author"      => $row["family_name"],
+                "author"      => $row["pseudonym"],
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"],
+                "startMinute" => $row["startMinute"], 
                 "duration"    => $row["duration"],
                 "id"          => $row["id"],
                 "family_id"   => $row["family_id"]
             ];
             array_push($events, $affair);
         }
-
         return $events;
-    }
+    }   
 
     // events fra db
-    $events = getEvents($con, $user_id, $inputMonth);
+    $events = getEvents($conn, $user_id, $inputMonth, $prevMonth, $nextMonth);
 ?>
 
 <!DOCTYPE html>
@@ -125,13 +114,15 @@
     </head>
     <body>
         <?php
+            echo "<article>";
             include "../visuals/header.html";
-            include "month.php";
+            include "month.php"; 
+            echo "</article>";
             include "../visuals/footer.html";
         ?>
-        <script type="text/javascript" src="../js/sidebar.js"></script>
         </section>
+        <script type="text/javascript" src="../js/sidebar.js"></script>
     </body>
 </html>
 
-<?php $con -> close(); ?>
+<?php $conn -> close(); ?>
