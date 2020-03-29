@@ -1,25 +1,17 @@
 <?php
     function displayEvent($events, $date) {
         echo "<ul>";
-        foreach($events as $affair) {
+        foreach($events as $key => $affair) {
             if($affair["day"] == $date) {
-                // hvis familie-event
-                echo "<li><a class=\"event\" href='singleEvent.php?event_id=".$affair["id"]."&event_family_id=".$affair["family_id"]."' >".substr("0".$affair["startHour"], -2).":".substr("0".$affair["startMinute"], -2)." ".$affair["title"]."</a></li>";
                 echo "<li><a class=\"event\" href='singleEvent.php?event_id=".$affair["id"]."&event_family_id=".$affair["family_id"]."' >".substr("0".$affair["startHour"], -2).":".substr("0".$affair["startMinute"], -2)." ".$affair["title"]."</a></li>";
             }
+            unset($events[$key]);
         }
         echo "</ul>";
     }
 
     // tiden nå
     $now = date("Y-m-d");
-
-    // i forhold til inputMonth
-    $month = date("m", strtotime($inputMonth));
-    $year = date("Y", strtotime($inputMonth));
-    $yearMonth = date("Y-m", strtotime($inputMonth));
-    $nextMonth = date("Y-m", strtotime($inputMonth." +1 month"));
-    $prevMonth = date("Y-m", strtotime($inputMonth." -1 month"));
 
     // antall dager i denne og den forrige måneden
     $nDays     = date('t', strtotime($yearMonth));

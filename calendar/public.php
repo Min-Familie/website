@@ -1,22 +1,22 @@
 <?php
-    $user_id = 1;
+    $user_id = 2;
 
-    require "../inc/db.inc.php";
+    require "../db/dbConnect.php";
 
     // tidssone
     date_default_timezone_set("Europe/Oslo");
-
+    
     // input dag
     if (isset($_GET["day"])) {$inputDay = $_GET["day"];}
     else                     {$inputDay = date("Y-m-d");}
 
-    function getFamily($con, $user_id) {
+    function getFamily($conn, $user_id) {
         $family = [];
 
         // navn på alle familiene som personen er med i
         $sql = "SELECT DISTINCT f.family_name, f.id
                 FROM families f
-                JOIN memberships m
+                JOIN memberships m 
                 ON f.id = m.family_id
                 WHERE m.family_id IN
                 (
@@ -24,14 +24,14 @@
                     FROM memberships m1
                     WHERE m1.user_id = $user_id
                 )
+                
 
-
-
+                
                 UNION
                 -- alle familiemedldmmer i alle familier som personen er med i
                 SELECT DISTINCT u.pseudonym, u.id
                 FROM users u
-                JOIN memberships m
+                JOIN memberships m 
                 ON u.id = m.user_id
                 WHERE m.family_id IN
                 (
@@ -39,19 +39,20 @@
                     FROM memberships m1
                     WHERE m1.user_id = $user_id
                 );";
-
-        $result = $con -> query($sql);
+                
+        $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($family, $row["family_name"]);
         }
         return $family;
     }
-
-    function getEvents($con, $user_id, $inputDay) {
+    
+    function getEvents($conn, $user_id, $inputDay) {
         $events = [];
 
         // private events fra personen
-        $sql = "SELECT * FROM calendarEvents c
+        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, pseudonym
+                FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
                 WHERE user_id = $user_id
@@ -62,14 +63,15 @@
 
                 UNION
                 -- public events til alle familiemedlemmer i alle familier personen er med i
-                SELECT * FROM calendarEvents c
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, pseudonym
+                FROM calendarEvents c
                 JOIN users u -- for å få navn, og ikke bare id fra calendar-tabellen
                 ON c.user_id = u.id
                 WHERE c.user_id in
                     ( -- personene som er med i alle disse familiene
                     SELECT u.id
                     FROM users u
-                    JOIN memberships m
+                    JOIN memberships m 
                     ON u.id = m.user_id
                     WHERE m.family_id IN
                     ( -- familiene personen er med i
@@ -79,31 +81,21 @@
                     )
                 )
                 AND NOT private -- filtrering
-                AND day = '$inputDay';";
+                AND day = '$inputDay'
 
-        $result = $con -> query($sql);
-        while($row = $result -> fetch_assoc()){
-            $affair = [
-                "author"      => $row["pseudonym"],
-                "title"       => $row["title"],
-                "location"    => $row["location"],
-                "day"         => $row["day"],
-                "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"],
-                "duration"    => $row["duration"]
-            ];
-            array_push($events, $affair);
-        }
 
-        // felles events til familiene peronen er med i
-        $sql = "SELECT * FROM calendarEvents e -- *, f.family_name AS pseudonym
+
+                UNION
+                -- felles events til familiene peronen er med i
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS pseudonym
+                FROM calendarEvents c
                 JOIN families f
-                ON e.family_id = f.id
+                ON c.family_id = f.id
                 WHERE family_id IN
                 (
                     SELECT f1.id
                     FROM families f1
-                    JOIN memberships m
+                    JOIN memberships m 
                     ON f1.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -113,29 +105,30 @@
                     )
                 )
                 AND day = '$inputDay';";
-
-        $result = $con -> query($sql);
+        
+        $result = $conn -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
-                "author"      => $row["family_name"],
+                "author"      => $row["pseudonym"],
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"],
-                "duration"    => $row["duration"]
+                "startMinute" => $row["startMinute"], 
+                "duration"    => $row["duration"],
+                "id"          => $row["id"],
+                "family_id"   => $row["family_id"]
             ];
             array_push($events, $affair);
         }
-
         return $events;
-    }
+    }   
 
 
     // familiemedlemmer fra db
-    $family = getFamily($con, $user_id);
+    $family = getFamily($conn, $user_id);
     // events fra db
-    $events = getEvents($con, $user_id, $inputDay);
+    $events = getEvents($conn, $user_id, $inputDay);
 ?>
 
 <!DOCTYPE html>
@@ -149,8 +142,10 @@
     </head>
     <body>
         <?php
+            echo "<article>";
             include "../visuals/header.html";
-            include "day.php";
+            include "day.php"; 
+            echo "</article>";
             include "../visuals/footer.html";
         ?>
         <script type="text/javascript" src="../js/sidebar.js"></script>
@@ -158,4 +153,4 @@
     </body>
 </html>
 
-<?php $con -> close(); ?>
+<?php $conn -> close(); ?>
