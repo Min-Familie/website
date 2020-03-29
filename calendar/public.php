@@ -1,22 +1,21 @@
 <?php
     $user_id = 2;
-
     require "../inc/db.inc.php";
 
     // tidssone
     date_default_timezone_set("Europe/Oslo");
-
+    
     // input dag
     if (isset($_GET["day"])) {$inputDay = $_GET["day"];}
     else                     {$inputDay = date("Y-m-d");}
 
-    function getFamily($conn, $user_id) {
+    function getFamily($con, $user_id) {
         $family = [];
 
         // navn på alle familiene som personen er med i
         $sql = "SELECT DISTINCT f.family_name, f.id
                 FROM families f
-                JOIN memberships m
+                JOIN memberships m 
                 ON f.id = m.family_id
                 WHERE m.family_id IN
                 (
@@ -24,14 +23,14 @@
                     FROM memberships m1
                     WHERE m1.user_id = $user_id
                 )
+                
 
-
-
+                
                 UNION
-                -- alle familiemedldmmer i alle familier som personen er med i
-                SELECT DISTINCT u.pseudonym, u.id
+                /*alle familiemedldmmer i alle familier som personen er med i*/
+                SELECT DISTINCT u.username, u.id
                 FROM users u
-                JOIN memberships m
+                JOIN memberships m 
                 ON u.id = m.user_id
                 WHERE m.family_id IN
                 (
@@ -39,19 +38,19 @@
                     FROM memberships m1
                     WHERE m1.user_id = $user_id
                 );";
-
-        $result = $conn -> query($sql);
+                
+        $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($family, $row["family_name"]);
         }
         return $family;
     }
-
-    function getEvents($conn, $user_id, $inputDay) {
+    
+    function getEvents($con, $user_id, $inputDay) {
         $events = [];
 
         // private events fra personen
-        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, pseudonym
+        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, username
                 FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
@@ -62,32 +61,32 @@
 
 
                 UNION
-                -- public events til alle familiemedlemmer i alle familier personen er med i
-                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, pseudonym
+                /*public events til alle familiemedlemmer i alle familier personen er med i*/
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, username
                 FROM calendarEvents c
-                JOIN users u -- for å få navn, og ikke bare id fra calendar-tabellen
+                JOIN users u /*for å få navn, og ikke bare id fra calendar-tabellen*/
                 ON c.user_id = u.id
                 WHERE c.user_id in
-                    ( -- personene som er med i alle disse familiene
+                    ( /*personene som er med i alle disse familiene*/
                     SELECT u.id
                     FROM users u
-                    JOIN memberships m
+                    JOIN memberships m 
                     ON u.id = m.user_id
                     WHERE m.family_id IN
-                    ( -- familiene personen er med i
+                    ( /*familiene personen er med i*/
                         SELECT m1.family_id
                         FROM memberships m1
                         WHERE m1.user_id = $user_id
                     )
                 )
-                AND NOT private -- filtrering
+                AND NOT private /*filtrering*/
                 AND day = '$inputDay'
 
 
 
                 UNION
-                -- felles events til familiene peronen er med i
-                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS pseudonym
+                /*felles events til familiene peronen er med i*/
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS username
                 FROM calendarEvents c
                 JOIN families f
                 ON c.family_id = f.id
@@ -95,7 +94,7 @@
                 (
                     SELECT f1.id
                     FROM families f1
-                    JOIN memberships m
+                    JOIN memberships m 
                     ON f1.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -105,16 +104,16 @@
                     )
                 )
                 AND day = '$inputDay';";
-
-        $result = $conn -> query($sql);
+        
+        $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
-                "author"      => $row["pseudonym"],
+                "author"      => $row["username"],
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"],
+                "startMinute" => $row["startMinute"], 
                 "duration"    => $row["duration"],
                 "id"          => $row["id"],
                 "family_id"   => $row["family_id"]
@@ -122,13 +121,13 @@
             array_push($events, $affair);
         }
         return $events;
-    }
+    }   
 
 
     // familiemedlemmer fra db
-    $family = getFamily($conn, $user_id);
+    $family = getFamily($con, $user_id);
     // events fra db
-    $events = getEvents($conn, $user_id, $inputDay);
+    $events = getEvents($con, $user_id, $inputDay);
 ?>
 
 <!DOCTYPE html>
@@ -144,7 +143,7 @@
         <?php
             echo "<article>";
             include "../visuals/header.html";
-            include "day.php";
+            require "../inc/day.inc.php"; 
             echo "</article>";
             include "../visuals/footer.html";
         ?>
@@ -153,4 +152,4 @@
     </body>
 </html>
 
-<?php $conn -> close(); ?>
+<?php $con -> close(); ?>

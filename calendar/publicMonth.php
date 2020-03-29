@@ -1,7 +1,7 @@
 <?php
     $user_id = 1;
-
     require "../inc/db.inc.php";
+
     // tidssone
     date_default_timezone_set("Europe/Oslo");
 
@@ -19,7 +19,7 @@
         $events = [];
 
         // private events fra personen
-        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, pseudonym
+        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, username 
                 FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
@@ -31,16 +31,16 @@
 
 
                 UNION
-                -- public events til alle familiemedlemmer i alle familier personen er med i
-                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, pseudonym
+                /*public events til alle familiemedlemmer i alle familier personen er med i*/
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, username
                 FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
-                WHERE c.user_id in
+                WHERE c.user_id in 
                 (
                     SELECT u.id
                     FROM users u
-                    JOIN memberships m
+                    JOIN memberships m 
                     ON u.id = m.user_id
                     WHERE m.family_id IN
                     (
@@ -56,8 +56,8 @@
 
 
                 UNION
-                -- felles events til familiene peronen er med i
-                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS pseudonym
+                /*felles events til familiene peronen er med i*/
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS username
                 FROM calendarEvents c
                 JOIN families f
                 ON c.family_id = f.id
@@ -65,7 +65,7 @@
                 (
                     SELECT f1.id
                     FROM families f1
-                    JOIN memberships m
+                    JOIN memberships m 
                     ON f1.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -77,18 +77,18 @@
                 AND SUBSTRING(day, 1, 7) = '$inputMonth'
                 OR  SUBSTRING(day, 1, 7) = '$prevMonth'
                 OR  SUBSTRING(day, 1, 7) = '$nextMonth'
-
+                
                 ORDER BY day, startHour, startMinute;";
-
+        
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
-                "author"      => $row["pseudonym"],
+                "author"      => $row["username"],
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"],
+                "startMinute" => $row["startMinute"], 
                 "duration"    => $row["duration"],
                 "id"          => $row["id"],
                 "family_id"   => $row["family_id"]
@@ -96,7 +96,7 @@
             array_push($events, $affair);
         }
         return $events;
-    }
+    }   
 
     // events fra db
     $events = getEvents($con, $user_id, $inputMonth, $prevMonth, $nextMonth);
@@ -115,7 +115,7 @@
         <?php
             echo "<article>";
             include "../visuals/header.html";
-            include "month.php";
+            require "../inc/month.inc.php"; 
             echo "</article>";
             include "../visuals/footer.html";
         ?>

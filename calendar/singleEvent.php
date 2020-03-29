@@ -1,6 +1,5 @@
 <?php
     $user_id = 1;
-
     require "../inc/db.inc.php";
 
     // slett event
@@ -26,7 +25,7 @@
         $title = $_POST["title"];
         $location = $_POST["location"];
         $day = $_POST["day"];
-
+        
         $sql = "UPDATE calendarEvents
                 SET title = '$title',
                     location = '$location',
@@ -37,7 +36,7 @@
                 WHERE id = ".$_POST["id"].";";
         $result = $con -> query($sql);
     }
-
+    
     // hvis ingen event er valgt
     if (!isset($_GET["event_id"]) || !isset($_GET["event_family_id"])) {
         header("Location: publicMonth.php");
@@ -47,15 +46,15 @@
     $event_family_id = $_GET["event_family_id"];
 
 
-    // hvis fellesevent: if familie_id != 0
+    // hvis fellesevent: if familie_id != 0 
     if ($event_family_id) {
-        $sql = "SELECT * FROM calendarEvents
-                WHERE id = $event_id
+        $sql = "SELECT * FROM calendarEvents 
+                WHERE id = $event_id 
                 AND family_id IN
                 (
                     SELECT f.id
                     FROM families f
-                    JOIN memberships m
+                    JOIN memberships m 
                     ON f.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -68,8 +67,8 @@
     }
     // ellers privat event
     else {
-        $sql = "SELECT * FROM calendarEvents
-                WHERE id = $event_id
+        $sql = "SELECT * FROM calendarEvents 
+                WHERE id = $event_id 
                 AND user_id = $user_id;";
     }
 
@@ -80,7 +79,7 @@
             "location"    => $row["location"],
             "day"         => $row["day"],
             "startHour"   => $row["startHour"],
-            "startMinute" => $row["startMinute"],
+            "startMinute" => $row["startMinute"], 
             "duration"    => $row["duration"]
         ];
     }
@@ -107,14 +106,16 @@
                 $endTime = substr("0$endH:", -3).substr("0$endM", -2);
 
                 // info
-                echo "<h1>".$event["title"]."</h1>";
+                echo "<head>";
+                echo "<h2>".$event["title"]."</h1>";
                 echo "<h2>".$event["day"]."</h2>";
                 echo "<h2>$time0 - $endTime</h2>";
+                echo "</head>";
 
                 // kart
 
                 // rediger/slett
-                echo   "<form action=\"singleEvent.php?event_id=$event_id&event_family_id=$event_family_id\"  method=\"post\"   id=\"eventForm\">
+                echo   "<form action=\"singleEvent.php?event_id=$event_id&event_family_id=$event_family_id\"  method=\"post\"   id=\"eventForm\"> 
                             <input  type=\"hidden\"    name=\"action\"   value=\"updateEvent\">
                             <input  type=\"hidden\"     name=\"id\" value=$event_id>
 
