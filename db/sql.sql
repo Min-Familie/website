@@ -23,11 +23,11 @@ CREATE TABLE memberships (
 
 CREATE TABLE todo (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255),
-    status BOOLEAN,
-    family_id INT,
-    user_id INT,
-    time DATETIME
+    title VARCHAR(255) NOT NULL,
+    status TINYINT(4) DEFAULT 0,
+    family_id INT NOT NULL,
+    user_id INT NOT NULL,
+    time DATETIME DEFAULT NULL
 );
 
 CREATE TABLE calendarEvents (
@@ -45,8 +45,10 @@ CREATE TABLE calendarEvents (
 
 CREATE TABLE shoppingItems (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255),
-    status BOOLEAN,
-    family_id INT,
-    time DATETIME
+    title VARCHAR(255) NOT NULL,
+    status INT NOT NULL,
+    family_id INT NOT NULL,
+    price FLOAT DEFAULT NULL,
+    amount INT NOT NULL,
+    time DATETIME DEFAULT NULL
 );
