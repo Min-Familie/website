@@ -45,7 +45,7 @@
     function mainTodo($con, $user, $family){
       // Check if event is private or public for family
       if($family == 0){
-        $sql = "SELECT * FROM todo WHERE user_id = $user AND family_id = $family ORDER BY time DESC";
+        $sql = "SELECT * FROM todo WHERE user_id = $user ORDER BY time DESC";
       }
       else{
         $sql = "SELECT * FROM todo WHERE family_id = $family ORDER BY time DESC";

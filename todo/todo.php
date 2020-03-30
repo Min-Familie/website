@@ -1,6 +1,6 @@
 <?php
     include '../inc/db.inc.php';
-    
+
     $user = $_GET['user'];
     $family = $_GET['family'];
 
@@ -9,7 +9,7 @@
 
         // navn på alle familiene+id som personen er med i
         $sql = "SELECT DISTINCT
-                IF($family=f.id, 'denne familien', f.family_name) AS family_name, f.id
+                IF($family=f.id, 'Denne familien', f.family_name) AS family_name, f.id
                 FROM families f
                 JOIN memberships m
                 ON f.id = m.family_id
@@ -19,7 +19,7 @@
                     FROM memberships m1
                     WHERE m1.user_id = $user
                 );";
-        
+
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($families, [$row["family_name"], $row["id"]]);
@@ -30,16 +30,6 @@
 
     $families = getFamilies($con, $user, $family);
 ?>
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
@@ -64,11 +54,12 @@
 
             <form id="nyItemForm" onsubmit="return false">
                 <input type="text" id="nyItem" placeholder="E.g. Støvsuge huset...">
-                <select class="permission">
-                    <option value="private">Privat</option>
+                <select id="permission">
+                    <option value=0>Privat</option>
                     <?php
-                        foreach ($families as $surename) { //surename=[navn, id]
-                            echo "<option value=\"$surename[1]\">$surename[0]</option>";
+                        foreach ($families as $surname) { //surname=[navn, id]
+
+                            echo "<option value=\"$surname[1]\">$surname[0]</option>";
                         }
                     ?>
                 </select>
@@ -88,4 +79,3 @@
 </html>
 
 <?php $con->close(); ?>
-

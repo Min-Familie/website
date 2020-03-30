@@ -1,7 +1,7 @@
 function onClick(){
   let text = document.getElementById("nyItem").value;
   let userID = document.getElementById("user").value;
-  let familyID = document.getElementById("family").value;
+  let familyID = document.getElementById("permission").value;
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
