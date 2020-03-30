@@ -89,16 +89,22 @@
 <html>
     <head>
         <title>Kalender - Dag</title>
+        <link rel="icon"       type="image/png" href="../visuals/logo.png">
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css"  href="../css/new.css">
         <link rel="stylesheet" type="text/css"  href="../css/visuals.css">
-        <link rel="icon"       type="image/png" href="../visuals/logo.png">
+        <style>
+            form input, form label {margin: 10px;}
+            form, head{
+                flex-direction: column;
+                align-items: stretch;
+            }
+        </style>
     </head>
     <body>
         <section>
         <?php
             include "../visuals/header.html";
-            echo "<section id=\"map\"></section>";
 
             if (isset($event)) {
                 $time0 = substr("0".$event["startHour"], -2).":".substr("0".$event["startMinute"], -2);
@@ -106,14 +112,8 @@
                 $endM = $event["startHour"]+$event["duration"] - intdiv($event["duration"]+$event["startMinute"], 60)*60;
                 $endTime = substr("0$endH:", -3).substr("0$endM", -2);
 
-                // info
-                echo "<head>";
-                echo "<h2>".$event["title"]."</h1>";
-                echo "<h2>".$event["day"]."</h2>";
-                echo "<h2>$time0 - $endTime</h2>";
-                echo "</head>";
-
                 // kart
+                echo "<section id=\"map\"></section>";
 
                 // rediger/slett
                 echo   "<form action=\"singleEvent.php?event_id=$event_id&event_family_id=$event_family_id\"  method=\"post\"   id=\"eventForm\">

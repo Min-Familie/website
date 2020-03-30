@@ -1,5 +1,5 @@
 <?php
-    $user_id = 5;
+    $user_id = 1;
     require "../inc/db.inc.php";
 
     // tidssone
@@ -185,11 +185,12 @@
             include "../visuals/footer.html";
         ?>
         </section>
-
+        
+        <script type="text/javascript" src="../js/sidebar.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
         <script type="text/javascript" src="../js/map.js"></script>
+        
         <script type="text/javascript">
-
            var mapOptions = {
                zoom: 14,
                center: {lat: <?php echo 59; ?>, lng: <?php echo 40; ?>},
@@ -199,7 +200,6 @@
            };
            navigator.geolocation.getCurrentPosition(success, error, options);
         </script>
-        <script type="text/javascript" src="../js/sidebar.js"></script>
     </body>
 </html>
 
