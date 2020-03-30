@@ -1,5 +1,5 @@
 <?php
-    $user_id = 5;
+    $user_id = 1;
     require "../inc/db.inc.php";
 
     // slett event
@@ -142,14 +142,17 @@
             echo "</section>";
             include "../visuals/footer.html";
         ?>
+
+
+
+
+        <script type="text/javascript" src="../js/sidebar.js"></script>
+        
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
         <script type="text/javascript" src="../js/map.js"></script>
+        
         <script type="text/javascript">
-        <?php
-
-            $crd = explode(",", $event['location']);
-
-         ?>
+        <?php $crd = explode(",", $event['location']); ?>
         var mapOptions = {
             zoom: 14,
             center: {lat: <?php echo $crd[0]; ?>, lng: <?php echo $crd[1]; ?>},
@@ -164,10 +167,7 @@
             }
         };
         success(pos);
-
         </script>
-        <script type="text/javascript" src="../js/sidebar.js"></script>
-
     </body>
 </html>
 
