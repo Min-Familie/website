@@ -4,7 +4,7 @@
 
     // tidssone
     date_default_timezone_set("Europe/Oslo");
-    
+
     // input dag
     if (isset($_GET["day"])) {$inputDay = $_GET["day"];}
     else                     {$inputDay = date("Y-m-d");}
@@ -15,7 +15,7 @@
         // navn på alle familiene som personen er med i
         $sql = "SELECT DISTINCT f.family_name, f.id
                 FROM families f
-                JOIN memberships m 
+                JOIN memberships m
                 ON f.id = m.family_id
                 WHERE m.family_id IN
                 (
@@ -23,14 +23,14 @@
                     FROM memberships m1
                     WHERE m1.user_id = $user_id
                 )
-                
 
-                
+
+
                 UNION
                 /*alle familiemedldmmer i alle familier som personen er med i*/
                 SELECT DISTINCT u.username, u.id
                 FROM users u
-                JOIN memberships m 
+                JOIN memberships m
                 ON u.id = m.user_id
                 WHERE m.family_id IN
                 (
@@ -38,14 +38,14 @@
                     FROM memberships m1
                     WHERE m1.user_id = $user_id
                 );";
-                
+
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($family, $row["family_name"]);
         }
         return $family;
     }
-    
+
     function getEvents($con, $user_id, $inputDay) {
         $events = [];
 
@@ -70,7 +70,7 @@
                     ( /*personene som er med i alle disse familiene*/
                     SELECT u.id
                     FROM users u
-                    JOIN memberships m 
+                    JOIN memberships m
                     ON u.id = m.user_id
                     WHERE m.family_id IN
                     ( /*familiene personen er med i*/
@@ -94,7 +94,7 @@
                 (
                     SELECT f1.id
                     FROM families f1
-                    JOIN memberships m 
+                    JOIN memberships m
                     ON f1.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -104,7 +104,7 @@
                     )
                 )
                 AND day = '$inputDay';";
-        
+
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
@@ -113,7 +113,7 @@
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"], 
+                "startMinute" => $row["startMinute"],
                 "duration"    => $row["duration"],
                 "id"          => $row["id"],
                 "family_id"   => $row["family_id"]
@@ -121,7 +121,7 @@
             array_push($events, $affair);
         }
         return $events;
-    }   
+    }
 
 
     // familiemedlemmer fra db
@@ -143,7 +143,7 @@
         <?php
             echo "<article>";
             include "../visuals/header.html";
-            require "../inc/day.inc.php"; 
+            require "../inc/day.inc.php";
             echo "</article>";
             include "../visuals/footer.html";
         ?>

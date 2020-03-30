@@ -1,11 +1,4 @@
 var input = document.getElementById("location");
-var mapOptions = {
-    zoom: 14,
-    center: {lat: 59.95303107865032, lng: 10.910321279245338},
-    zoomControl: true,
-    mapTypeControl: true,
-    scaleControl: true
-}
 
 let options = {
     enableHighAccuracy: true,
@@ -46,5 +39,3 @@ function error(err){
         changeMarkerPosition(marker, event.latLng);
     });
 }
-
-navigator.geolocation.getCurrentPosition(success, error, options);

@@ -1,5 +1,5 @@
 <?php
-    $user_id = 1;
+    $user_id = 5;
     require "../inc/db.inc.php";
 
     // slett event
@@ -25,7 +25,7 @@
         $title = $_POST["title"];
         $location = $_POST["location"];
         $day = $_POST["day"];
-        
+
         $sql = "UPDATE calendarEvents
                 SET title = '$title',
                     location = '$location',
@@ -36,7 +36,7 @@
                 WHERE id = ".$_POST["id"].";";
         $result = $con -> query($sql);
     }
-    
+
     // hvis ingen event er valgt
     if (!isset($_GET["event_id"]) || !isset($_GET["event_family_id"])) {
         header("Location: publicMonth.php");
@@ -46,15 +46,15 @@
     $event_family_id = $_GET["event_family_id"];
 
 
-    // hvis fellesevent: if familie_id != 0 
+    // hvis fellesevent: if familie_id != 0
     if ($event_family_id) {
-        $sql = "SELECT * FROM calendarEvents 
-                WHERE id = $event_id 
+        $sql = "SELECT * FROM calendarEvents
+                WHERE id = $event_id
                 AND family_id IN
                 (
                     SELECT f.id
                     FROM families f
-                    JOIN memberships m 
+                    JOIN memberships m
                     ON f.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -67,8 +67,8 @@
     }
     // ellers privat event
     else {
-        $sql = "SELECT * FROM calendarEvents 
-                WHERE id = $event_id 
+        $sql = "SELECT * FROM calendarEvents
+                WHERE id = $event_id
                 AND user_id = $user_id;";
     }
 
@@ -79,7 +79,7 @@
             "location"    => $row["location"],
             "day"         => $row["day"],
             "startHour"   => $row["startHour"],
-            "startMinute" => $row["startMinute"], 
+            "startMinute" => $row["startMinute"],
             "duration"    => $row["duration"]
         ];
     }
@@ -98,6 +98,7 @@
         <section>
         <?php
             include "../visuals/header.html";
+            echo "<section id=\"map\"></section>";
 
             if (isset($event)) {
                 $time0 = substr("0".$event["startHour"], -2).":".substr("0".$event["startMinute"], -2);
@@ -115,7 +116,7 @@
                 // kart
 
                 // rediger/slett
-                echo   "<form action=\"singleEvent.php?event_id=$event_id&event_family_id=$event_family_id\"  method=\"post\"   id=\"eventForm\"> 
+                echo   "<form action=\"singleEvent.php?event_id=$event_id&event_family_id=$event_family_id\"  method=\"post\"   id=\"eventForm\">
                             <input  type=\"hidden\"    name=\"action\"   value=\"updateEvent\">
                             <input  type=\"hidden\"     name=\"id\" value=$event_id>
 
@@ -138,12 +139,35 @@
             else {
                 echo "<p>Du har ikke tilgang til å redigere denne eventen.</p>";
             }
-
             echo "</section>";
             include "../visuals/footer.html";
         ?>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
+        <script type="text/javascript" src="../js/map.js"></script>
+        <script type="text/javascript">
+        <?php
 
+            $crd = explode(",", $event['location']);
+
+         ?>
+        var mapOptions = {
+            zoom: 14,
+            center: {lat: <?php echo $crd[0]; ?>, lng: <?php echo $crd[1]; ?>},
+            zoomControl: true,
+            mapTypeControl: true,
+            scaleControl: true
+        };
+        var pos = {
+            coords: {
+                latitude: mapOptions.center.lat,
+                longitude: mapOptions.center.lng
+            }
+        };
+        success(pos);
+
+        </script>
         <script type="text/javascript" src="../js/sidebar.js"></script>
+
     </body>
 </html>
 

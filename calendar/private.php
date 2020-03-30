@@ -1,5 +1,5 @@
 <?php
-    $user_id = 1;
+    $user_id = 5;
     require "../inc/db.inc.php";
 
     // tidssone
@@ -60,7 +60,7 @@
                 /* navn på alle familiene som personen er med i*/
                 SELECT DISTINCT f.family_name AS username, f.id
                 FROM families f
-                JOIN memberships m 
+                JOIN memberships m
                 ON f.id = m.family_id
                 WHERE m.family_id IN
                 (
@@ -70,12 +70,12 @@
                 );";
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
-            array_push($family, [$row["username"], $row["id"]]); 
+            array_push($family, [$row["username"], $row["id"]]);
         }
-        
-        return $family; 
+
+        return $family;
     }
-    
+
 
 
     function getEvents($con, $user_id, $inputDay) {
@@ -87,7 +87,7 @@
                 ON c.user_id = u.id
                 WHERE user_id = $user_id
                 AND day = '$inputDay'
-                
+
 
                 UNION
                 /*felles events til familiene peronen er med i*/
@@ -99,7 +99,7 @@
                 (
                     SELECT f1.id
                     FROM families f1
-                    JOIN memberships m 
+                    JOIN memberships m
                     ON f1.id = m.family_id
                     WHERE m.family_id IN
                     (
@@ -113,12 +113,12 @@
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
-                "author"      => $row["username"], 
+                "author"      => $row["username"],
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
                 "startHour"   => $row["startHour"],
-                "startMinute" => $row["startMinute"], 
+                "startMinute" => $row["startMinute"],
                 "duration"    => $row["duration"],
                 "id"          => $row["id"],
                 "family_id"   => $row["family_id"]
@@ -150,7 +150,7 @@
 
         <section id="map"></section>
 
-        <form action="private.php?day=<?php echo $inputDay;?>"  method="post"   id="eventForm"> 
+        <form action="private.php?day=<?php echo $inputDay;?>"  method="post"   id="eventForm">
             <input  type="hidden"    name="action"   value="saveEvent">
             <input  type="text"      name="title"    placeholder="tittel">
 
@@ -175,19 +175,30 @@
             </select>
 
             <input  type="submit"    value="lagre">
-        </form> 
-            
+        </form>
+
         <?php
             // kun navenene
             $family = array_map(function($i) {return $i[0];}, $family);
-            require "../inc/day.inc.php"; 
+            require "../inc/day.inc.php";
             echo "</article>";
             include "../visuals/footer.html";
         ?>
         </section>
-        
+
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
         <script type="text/javascript" src="../js/map.js"></script>
+        <script type="text/javascript">
+
+           var mapOptions = {
+               zoom: 14,
+               center: {lat: <?php echo 59; ?>, lng: <?php echo 40; ?>},
+               zoomControl: true,
+               mapTypeControl: true,
+               scaleControl: true
+           };
+           navigator.geolocation.getCurrentPosition(success, error, options);
+        </script>
         <script type="text/javascript" src="../js/sidebar.js"></script>
     </body>
 </html>
