@@ -1,0 +1,91 @@
+/* kalender */
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+    margin-bottom: 100px;
+    table-layout: fixed;
+}
+table thead tr th {
+    background: #626E7E;
+    color: #d1d5db;
+    padding: 0.5em;
+}
+table tbody tr {
+    background: #d1d5db;
+}
+table tbody tr:nth-child(odd) {
+    background: #c8cdd4;
+}
+table tbody tr td {
+    text-align: center;
+    vertical-align: middle;
+    border-left: 1px solid #626E7E;
+    position: relative;
+    height: 32px;
+    cursor: pointer;
+}
+table tbody tr td.hour {
+    font-size: 2em;
+    padding: 0;
+    color: #626E7E;
+    background: #fff;
+    border-bottom: 1px solid #626E7E;
+    border-collapse: separate;
+    min-width: 100px;
+    cursor: default;
+}
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+table {
+    overflow-y: auto; 
+}
+table thead th { 
+    position: sticky; 
+    top: 0; 
+    z-index: 1;
+}
+a {
+    text-decoration: none;
+    color: #d1d5db;
+}
+
+
+
+
+
+
+
+/*events*/
+.event {
+    text-align: left;
+    transition: 0.2s;
+    vertical-align: top;
+    background-color: #4BA3C2;
+    color: #f1f1f1;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+}
+.event:hover {
+    background-color: black;
+}
+.event ul {
+    list-style-type: none;
+}
+.event ul li {
+    height: 1em;
+}
+.title {
+    font-weight: bold;
+}
+.event a:hover {
+    border-bottom: 1px solid;
+}

@@ -1,0 +1,42 @@
+#map {
+    width: 100%;
+    height: 300px;
+}
+form, head {  
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+    align-items: center;
+}
+form label {
+    margin: 5px 10px 5px 0;
+}
+form input, select{
+    vertical-align: middle;
+    margin: 5px 10px 5px 0;
+    padding: 10px;
+    background-color: #FBFEF9;
+    border: 1px solid lightgray;
+}
+form input[type=submit] {
+    padding: 10px 20px;
+    background-color: #1C5D99;
+    border: 1px solid lightgray;
+    color: #FBFEF9;
+    cursor: pointer;
+}
+form input[type=submit]:hover {
+    background-color: black;
+}
+
+@media (max-width: 800px) {
+    form input, form label {
+        margin: 10px;
+    }
+
+    form, head{
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
