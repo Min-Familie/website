@@ -1,9 +1,9 @@
-@import url(day.css);
-@import url(month.css);
-@import url(new.css);
+@import url(visuals.css);
+@import url(calendarDay.css);
+@import url(calendarMonth.css);
+@import url(calendarSingleEvent.css);
 @import url(shopping.css);
 @import url(todo.css);
-@import url(visuals.css);
 
 .calendar {
     grid-area: calendar;
