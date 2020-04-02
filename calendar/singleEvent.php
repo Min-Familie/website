@@ -94,8 +94,8 @@
         <link rel="stylesheet" type="text/css"  href="../css/calendarSingleEvent.css">
         <link rel="stylesheet" type="text/css"  href="../css/visuals.css">
         <style>
-            form input, form label {margin: 10px;}
-            form, head{
+            #eventForm input, #eventForm label {margin: 10px;}
+            #eventForm, head {
                 flex-direction: column;
                 align-items: stretch;
             }
