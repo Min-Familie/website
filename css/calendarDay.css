@@ -1,56 +1,56 @@
 /* kalender */
-table {
+#calendarDay {
     width: 100%;
     margin-bottom: 10px;
     border-spacing: 0;
     border-collapse: separate;
     table-layout: fixed;
 }
-table thead tr th {
-    background: #626E7E;
-    color: #d1d5db;
+#calendarDay thead tr th {
+    background: #474350;
+    color: #FBFEF9;
     padding: 0.5em;
 }
-table tbody tr {
-    background: #d1d5db;
+#calendarDay tbody tr {
+    background: #8BBFB8;
 }
-table tbody tr:nth-child(odd) {
-    background: #c8cdd4;
+#calendarDay tbody tr:nth-child(odd) {
+    background: #C6F4E9;
 }
-table tbody tr td {
+#calendarDay tbody tr td {
     text-align: center;
     vertical-align: middle;
-    border-left: 1px solid #626E7E;
+    border-left: 1px solid #424A4F;
     position: relative;
     height: 32px;
     cursor: pointer;
 }
-table tbody tr td.hour {
+#calendarDay tbody tr td.hour {
     font-size: 2em;
     padding: 0;
-    color: #626E7E;
-    background: #fff;
-    border-bottom: 1px solid #626E7E;
+    color: #424A4F;
+    background: #FBFEF9;
+    border-bottom: 1px solid #424A4F;
     border-collapse: separate;
     min-width: 100px;
     cursor: default;
 }
-.menu {
+#calendarDay #calendarNav {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-table {
+#calendarDay {
     overflow-y: auto; 
 }
-table thead th { 
+#calendarDay thead th { 
     position: sticky; 
     top: 0; 
     z-index: 1;
 }
-a {
+#calendarDay a {
     text-decoration: none;
-    color: #d1d5db;
+    color: #FBFEF9;
 }
 
 
@@ -60,7 +60,7 @@ a {
 
 
 /*events*/
-.event {
+#calendarDay .event {
     text-align: left;
     transition: 0.2s;
     vertical-align: top;
@@ -74,18 +74,18 @@ a {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
     transition: 0.2s;
 }
-.event:hover {
+#calendarDay .event:hover {
     background-color: black;
 }
-.event ul {
+#calendarDay .event ul {
     list-style-type: none;
 }
-.event ul li {
+#calendarDay .event ul li {
     height: 1em;
 }
-.title {
+#calendarDay .title {
     font-weight: bold;
 }
-.event a:hover {
+#calendarDay .event a:hover {
     border-bottom: 1px solid;
 }
