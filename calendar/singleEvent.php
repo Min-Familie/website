@@ -102,9 +102,9 @@
         </style>
     </head>
     <body>
-        <section>
         <?php
             include "../visuals/header.html";
+            echo "<main>";
 
             if (isset($event)) {
                 $time0 = substr("0".$event["startHour"], -2).":".substr("0".$event["startMinute"], -2);
@@ -139,7 +139,7 @@
             else {
                 echo "<p>Du har ikke tilgang til å redigere denne eventen.</p>";
             }
-            echo "</section>";
+            echo "</main>";
             include "../visuals/footer.html";
         ?>
 

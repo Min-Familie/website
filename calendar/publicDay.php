@@ -141,10 +141,10 @@
     </head>
     <body>
         <?php
-            echo "<article>";
             include "../visuals/header.html";
-            require "../inc/calendarDay.inc.php"; 
-            echo "</article>";
+            echo "<main>";
+            require "../inc/calendarDay.inc.php";
+            echo "</main>";
             include "../visuals/footer.html";
         ?>
         <script type="text/javascript" src="../js/sidebar.js"></script>

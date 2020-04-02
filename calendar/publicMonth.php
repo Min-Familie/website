@@ -113,13 +113,14 @@
     </head>
     <body>
         <?php
-            echo "<article>";
             include "../visuals/header.html";
+            echo "<main>";
             require "../inc/calendarMonth.inc.php"; 
-            echo "</article>";
+            echo "</main>";
             include "../visuals/footer.html";
         ?>
         </section>
+
         <script type="text/javascript" src="../js/sidebar.js"></script>
     </body>
 </html>

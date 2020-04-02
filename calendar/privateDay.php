@@ -145,8 +145,8 @@
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
     </head>
     <body>
-        <article>
         <?php include "../visuals/header.html"; ?>
+        <main>
 
         <section id="map"></section>
 
@@ -181,7 +181,8 @@
             // kun navenene
             $family = array_map(function($i) {return $i[0];}, $family);
             require "../inc/calendarDay.inc.php";
-            echo "</article>";
+
+            echo "</main>";
             include "../visuals/footer.html";
         ?>
         </section>
@@ -191,14 +192,14 @@
         <script type="text/javascript" src="../js/map.js"></script>
         
         <script type="text/javascript">
-           var mapOptions = {
-               zoom: 14,
-               center: {lat: <?php echo 59; ?>, lng: <?php echo 40; ?>},
-               zoomControl: true,
-               mapTypeControl: true,
-               scaleControl: true
-           };
-           navigator.geolocation.getCurrentPosition(success, error, options);
+            var mapOptions = {
+                zoom: 14,
+                center: {lat: <?php echo 59; ?>, lng: <?php echo 40; ?>},
+                zoomControl: true,
+                mapTypeControl: true,
+                scaleControl: true
+            };
+            navigator.geolocation.getCurrentPosition(success, error, options);
         </script>
     </body>
 </html>
