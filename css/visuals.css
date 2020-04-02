@@ -51,20 +51,14 @@ header {
 	background-image: radial-gradient(circle farthest-side at top right, transparent, #FBFEF9), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #175676);
     
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+    padding-right: 15px;
 }
 header img {
     width: auto;
     height: 70px;
 }
-header:last-child {
-    float: right;
-}
-img, .openbtn, header p {
-    margin-right: 10em;
-}
-
 
 
 /*footer ned til bunnen*/
@@ -130,5 +124,9 @@ a, #main {
 @media (max-width: 1100px) {
     footer .author, footer .interactive {
         width: 100%;
+    }
+    /*footer ned til bunnen*/
+    main {
+        min-height: calc(100vh - 100px - 200px);
     }
 }

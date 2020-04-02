@@ -37,18 +37,19 @@ label{
     align-self: center;
 }
 
-ul{
+.entries {
     margin: 0;
     padding: 30px;
     padding-left: 30px;
     list-style: none;
 }
-li{
+.todoEntry {
     display: flex;
     padding: 10px;
     justify-content: space-between;
     border-bottom: 2px solid lightblue;
 }
+
 input.checkbox{
     width: 15px;
     height: 15px;
