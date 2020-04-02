@@ -69,7 +69,7 @@
             <p id="errorMessage"></p>
         </section>
         <section class="items">
-        <ul>
+        <ul id="entries">
             <?php include '../inc/showTodo.inc.php'; ?>
         </ul>
         </section>

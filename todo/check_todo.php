@@ -8,5 +8,4 @@
     else{               $sql = "UPDATE todo SET time = null, status = $status WHERE id = $id";}
 
     $con -> query($sql);
-
  ?>
