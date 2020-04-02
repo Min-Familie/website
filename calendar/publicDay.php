@@ -135,7 +135,7 @@
     <head>
         <title>Kalender - Dag</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css"  href="../css/day.css">
+        <link rel="stylesheet" type="text/css"  href="../css/calendarDay.css">
         <link rel="stylesheet" type="text/css"  href="../css/visuals.css">
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
     </head>
@@ -143,7 +143,7 @@
         <?php
             echo "<article>";
             include "../visuals/header.html";
-            require "../inc/day.inc.php"; 
+            require "../inc/calendarDay.inc.php"; 
             echo "</article>";
             include "../visuals/footer.html";
         ?>

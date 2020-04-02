@@ -91,7 +91,7 @@
         <title>Kalender - Dag</title>
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css"  href="../css/new.css">
+        <link rel="stylesheet" type="text/css"  href="../css/calendarSingleEvent.css">
         <link rel="stylesheet" type="text/css"  href="../css/visuals.css">
         <style>
             form input, form label {margin: 10px;}

@@ -70,21 +70,21 @@
                     // hvis datoen er i dag
                     if ($date == $now) {
                         echo "<td class=\"today\">   
-                              <a href=\"public.php?day=$date\">$weekday</a>";
+                              <a href=\"publicDay.php?day=$date\">$weekday</a>";
                         displayEvent($events, $date);
                         echo "</td>";
                     }
                     // ellers hvis datoen er fra fortiden
                     else if ($date < $now) {
                         echo "<td class=\"past\">   
-                              <a href=\"public.php?day=$date\">$weekday</a>";
+                              <a href=\"publicDay.php?day=$date\">$weekday</a>";
                         displayEvent($events, $date);
                         echo "</td>";
                     }
                     // ellers så er datoen fra fremtiden
                     else {
                         echo "<td class=\"future\"> 
-                              <a href=\"public.php?day=$date\">$weekday</a>";
+                              <a href=\"publicDay.php?day=$date\">$weekday</a>";
                         displayEvent($events, $date);
                         echo "</td>";
                     }
@@ -95,19 +95,19 @@
                     $date = $inputMonth."-".substr("0".(string)$i, -2);
                     if ($date == $now) {
                         echo "<td class=\"today\"> 
-                              <a href=\"public.php?day=$date\">$i</a>";
+                              <a href=\"publicDay.php?day=$date\">$i</a>";
                         displayEvent($events, $date);
                         echo "</td>";
                     }
                     else if ($date < $now) {
                         echo "<td class=\"past\">   
-                              <a href=\"public.php?day=$date\">$i</a>";
+                              <a href=\"publicDay.php?day=$date\">$i</a>";
                         displayEvent($events, $date);
                         echo "</td>";
                     }
                     else {
                         echo "<td class=\"future\"> 
-                              <a href=\"public.php?day=$date\">$i</a> ";
+                              <a href=\"publicDay.php?day=$date\">$i</a> ";
                         displayEvent($events, $date);
                         echo "</td>";
                     }
@@ -122,19 +122,19 @@
                     $date = $inputMonth."-".substr("0".(string)$j, -2);
                     if ($date == $now) {
                         echo "<td class=\"today\"> 
-                              <a href=\"public.php?day=$date\">$j</a>";
+                              <a href=\"publicDay.php?day=$date\">$j</a>";
                         displayEvent($events, $date);
                         echo "</td>";
                     }
                     else if ($date < $now) { 
                         echo "<td class=\"past\">   
-                              <a href=\"public.php?day=$date\">$j</a>";
+                              <a href=\"publicDay.php?day=$date\">$j</a>";
                         displayEvent($events, $date);
                         echo "</td>";
                     }
                     else {
                         echo "<td class=\"future\"> 
-                              <a href=\"public.php?day=$date\">$j</a>";
+                              <a href=\"publicDay.php?day=$date\">$j</a>";
                         displayEvent($events, $date);
                         echo "</td>";
                         }               
@@ -152,19 +152,19 @@
                         $date = $nextMonth."-".substr("0".(string)$i, -2);
                         if ($date == $now) { 
                             echo "<td class=\"today\"> 
-                                  <a href=\"public.php?day=$date\">$i</a>";
+                                  <a href=\"publicDay.php?day=$date\">$i</a>";
                             displayEvent($events, $date);
                             echo "</td>";
                         }
                         else if ($date < $now) { 
                             echo "<td class=\"past\">   
-                                  <a href=\"public.php?day=$date\">$i</a>";
+                                  <a href=\"publicDay.php?day=$date\">$i</a>";
                             displayEvent($events, $date);
                             echo "</td>";
                         }
                         else {
                             echo "<td class=\"future\"> 
-                                  <a href=\"public.php?day=$date\">$i</a>";
+                                  <a href=\"publicDay.php?day=$date\">$i</a>";
                             displayEvent($events, $date);
                             echo "</td>";
                         }

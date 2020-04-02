@@ -31,8 +31,8 @@ form input[type=submit]:hover {
 }
 
 @media (max-width: 800px) {
-    form input {
-        margin: 10px 0;
+    form input, form label {
+        margin: 10px;
     }
 
     form, head{

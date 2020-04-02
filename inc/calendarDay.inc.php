@@ -138,21 +138,21 @@
         <tr>
             <th class="menu">
                 <?php
-                    if (basename($_SERVER['PHP_SELF']) == "private.php") {
+                    if (basename($_SERVER['PHP_SELF']) == "privateDay.php") {
                         ?>
-                        <a href="public.php?day=<?php echo $inputDay; ?>"> -</a>
-                        <a href="private.php?day=<?php echo $prevDay; ?>"> <</a>
-                        <a href="private.php"> i dag</a>
-                        <a href="private.php?day=<?php echo $nextDay; ?>"> ></a>
+                        <a href="publicDay.php?day=<?php echo $inputDay; ?>"> -</a>
+                        <a href="privateDay.php?day=<?php echo $prevDay; ?>"> <</a>
+                        <a href="privateDay.php"> i dag</a>
+                        <a href="privateDay.php?day=<?php echo $nextDay; ?>"> ></a>
                         <?php
                         echo $inputDay;
                     }
                     else {
                         ?>
-                        <a href="private.php?day=<?php echo $inputDay; ?>"> +</a>
-                        <a href="public.php?day=<?php echo $prevDay; ?>"> <</a>
-                        <a href="public.php"> i dag</a>
-                        <a href="public.php?day=<?php echo $nextDay; ?>"> ></a>
+                        <a href="privateDay.php?day=<?php echo $inputDay; ?>"> +</a>
+                        <a href="publicDay.php?day=<?php echo $prevDay; ?>"> <</a>
+                        <a href="publicDay.php"> i dag</a>
+                        <a href="publicDay.php?day=<?php echo $nextDay; ?>"> ></a>
                         <?php
                         echo $inputDay;
                     }
@@ -186,7 +186,7 @@
                         }
 
                         if ($empty) { // hvis det ikke er en event i ruta
-                            echo "<td onclick=\"location.href='private.php?day=$inputDay&hrs=$hrs&qrt=$qrt'\"> </td>";
+                            echo "<td onclick=\"location.href='privateDay.php?day=$inputDay&hrs=$hrs&qrt=$qrt'\"> </td>";
                         }
                         else { //ellers er det plass til en event
                             foreach ($events as $affair) { // for hver event

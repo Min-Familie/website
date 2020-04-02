@@ -139,8 +139,8 @@
     <head>
         <title>Kalender - Dag</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css"  href="../css/day.css">
-        <link rel="stylesheet" type="text/css"  href="../css/new.css">
+        <link rel="stylesheet" type="text/css"  href="../css/calendarDay.css">
+        <link rel="stylesheet" type="text/css"  href="../css/calendarSingleEvent.css">
         <link rel="stylesheet" type="text/css"  href="../css/visuals.css">
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
     </head>
@@ -150,7 +150,7 @@
 
         <section id="map"></section>
 
-        <form action="private.php?day=<?php echo $inputDay;?>"  method="post"   id="eventForm">
+        <form action="privateDay.php?day=<?php echo $inputDay;?>"  method="post"   id="eventForm">
             <input  type="hidden"    name="action"   value="saveEvent">
             <input  type="text"      name="title"    placeholder="tittel">
 
@@ -180,7 +180,7 @@
         <?php
             // kun navenene
             $family = array_map(function($i) {return $i[0];}, $family);
-            require "../inc/day.inc.php";
+            require "../inc/calendarDay.inc.php";
             echo "</article>";
             include "../visuals/footer.html";
         ?>
