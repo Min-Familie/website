@@ -1,5 +1,4 @@
 <?php
-
     require '../inc/db.inc.php';
     $status = $_GET['s'];
     $id = $_GET['id'];
@@ -8,5 +7,4 @@
     else{               $sql = "UPDATE shoppingItems SET time = null, status = $status WHERE id = $id";}
 
     $con -> query($sql);
-
- ?>
+?>
