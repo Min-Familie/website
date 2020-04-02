@@ -32,7 +32,7 @@
         }
 
         if($delete == false){
-          echo "<li id=\"entity$id\">";
+          echo "<li class=\"todoEntry\" id=\"entity$id\">";
           echo "<section class=\"wrapper\">";
           echo "<input type=\"checkbox\" class=\"checkbox\" id=\"item$id\" onclick=\"check(this.id, $id, window.location);\" $checked autocomplete=\"off\">";
           echo "<label class= \"text\" id=\"text$id\" for=\"item$id\">$text</label><br>";
