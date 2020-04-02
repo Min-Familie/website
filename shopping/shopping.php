@@ -5,6 +5,7 @@
     <head>
         <meta charset="utf-8">
         <title>Handleliste</title>
+        <link rel="icon"       href="../visuals/logo.png" type="image/png">
         <link rel="stylesheet" href="../css/shopping.css">
         <link rel="stylesheet" href="../css/visuals.css">
     </head>
