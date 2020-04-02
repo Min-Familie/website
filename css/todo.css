@@ -22,7 +22,7 @@ main{
     margin: auto;
 }
 
-form{
+#nyItemForm{
     background-color: white;
     align-items: center;
     display: flex;
