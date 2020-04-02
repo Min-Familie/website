@@ -64,10 +64,3 @@ a:hover {
     background-color: black;
     color: #f1f1f1;
 }
-
-/*footer til bunns*/
-@media (max-height: 800px) {
-    article {
-        margin: 0 auto -100px;
-    }
-}

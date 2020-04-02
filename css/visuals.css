@@ -67,29 +67,23 @@ img, .openbtn, header p {
 
 
 
-
 /*footer ned til bunnen*/
-article {
-    min-height: 100%;
-    margin: 0 auto -200px;
+main {
+    min-height: calc(100vh - 100px - 100px);
 }
-html, body {
-    height: 100%;
-    margin: 0;
-}
+
 
 /*footer*/
-footer ul {
-    list-style: none;
-}
 footer {
-    margin-top: 100px;
     position: absolute;
     text-align: center;
     font-weight: bold;
     width: 100%;
     display: inline-block;
     background-color: #474350;
+}
+footer ul {
+    list-style: none;
 }
 footer .author {
     width: 40%;
@@ -99,7 +93,6 @@ footer .interactive {
     width: 60%;
     float: left;
 }
-
 footer .author, .interactive a {
     color: #FBFEF9;
     line-height: 100px;
@@ -107,27 +100,21 @@ footer .author, .interactive a {
 footer .author {
     letter-spacing: 1px;
 }
-
 .interactive a {
     float: left;
     text-decoration: none;
     transition: 0.5s;
 }
-
 .interactive a:hover {
     background-color: black;
     transition: 0.5s;
 }
-
 a, #main {
     transition: 0.5s;
-    transition: margin-left 0.5s;
 }
-
 .top, .start, .feedback, footer .author p{
     font-size: 1em;
 }
-
 .top {
     background-color: #4BA3C2;
     width: 30%;
@@ -140,7 +127,6 @@ a, #main {
     background-color: #175676;
     width: 40%;
 }
-
 @media (max-width: 1100px) {
     footer .author, footer .interactive {
         width: 100%;

@@ -1,9 +1,9 @@
 /* kalender */
 table {
     width: 100%;
+    margin-bottom: 10px;
     border-spacing: 0;
     border-collapse: separate;
-    margin-bottom: 100px;
     table-layout: fixed;
 }
 table thead tr th {
