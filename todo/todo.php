@@ -34,6 +34,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <link rel="icon"       href="../visuals/logo.png" type="image/png">
         <link rel="stylesheet" href="../css/todo.css">
         <link rel="stylesheet" href="../css/visuals.css">
         <title>Todo</title>
