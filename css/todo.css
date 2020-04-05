@@ -1,19 +1,13 @@
 html{
     height: 100%;
 }
-body{
+.todo{
     font-family: 'Roboto';
     height: 100%;
     margin: 0;
     background-color: #58A4B0;
 }
-h1{
-    text-align: center;
-    color: white;
-    font-size: 40px;
-    font-weight: 1000;
-}
-main{
+.todoMain{
     width: 30%;
     height: 80%;
     display: flex;
@@ -21,17 +15,56 @@ main{
     flex-direction: column;
     margin: auto;
 }
-
+.todoTitle{
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    font-weight: 1000;
+}
 #nyItemForm{
     background-color: white;
-    align-items: center;
-    display: flex;
+    display: grid;
     margin-bottom: 10px;
+    height: 60px;
+    width: 100%;
+    grid-template-columns: 50% 25% 25%;
+}
+#nyItem{
+    padding: 5px 10px;
+    /* height: 30px; */
+    border: none;
+    font-size: 130%;
+    background: white;
+    color: #2f4f4f;
+    width: 100%;
+
+}
+#permission{
+    text-align: center;
+    background: #f4f2f2;
+
+    padding: 2px;
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+
+
+}
+#nyButton{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    height: 100%;
+    background-color: #E5E5E5;
 }
 .items{
     background-color: white;
     overflow: auto;
     max-height: 50%;
+
 }
 label{
     align-self: center;
@@ -66,30 +99,9 @@ label.text{
     color: white;
     width: 10%;
 }
-input#nyItem{
-    flex: 2;
-    padding: 20px;
-    /* height: 30px; */
-    outline: 0;
-    border: none;
-    font-size: 130%;
-    background: #fff;
-    color: #2f4f4f;
-}
+
 .wrapper{
     align-self: center;
-}
-#nyButton{
-    font-size: 1.5em;
-    flex: 1;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    outline: 0;
-    border: none;
-    height: 100%;
-    padding: 20px;
-    background-color: #E5E5E5;
 }
 input[type="checkbox"]:checked + label.text{
     text-decoration: line-through;
