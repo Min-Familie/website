@@ -1,13 +1,13 @@
-html{
+html {
     height: 100%;
 }
-.todo{
+.todo {
     font-family: 'Roboto';
     height: 100%;
     margin: 0;
     background-color: #58A4B0;
 }
-.todoMain{
+.todoMain {
     width: 30%;
     height: 80%;
     display: flex;
@@ -15,13 +15,13 @@ html{
     flex-direction: column;
     margin: auto;
 }
-.todoTitle{
+.todoTitle {
     text-align: center;
     color: white;
     font-size: 40px;
     font-weight: 1000;
 }
-#nyItemForm{
+#nyItemForm {
     background-color: white;
     display: grid;
     margin-bottom: 10px;
@@ -29,7 +29,7 @@ html{
     width: 100%;
     grid-template-columns: 50% 25% 25%;
 }
-#nyItem{
+#nyItem {
     padding: 5px 10px;
     /* height: 30px; */
     border: none;
@@ -39,7 +39,7 @@ html{
     width: 100%;
 
 }
-#permission{
+#permission {
     text-align: center;
     background: #f4f2f2;
 
@@ -48,10 +48,8 @@ html{
     -webkit-appearance: none;
     -moz-appearance: none;
     border: none;
-
-
 }
-#nyButton{
+#nyButton {
     background-color: white;
     color: black;
     cursor: pointer;
@@ -60,13 +58,13 @@ html{
     height: 100%;
     background-color: #E5E5E5;
 }
-.items{
+.items {
     background-color: white;
     overflow: auto;
     max-height: 50%;
 
 }
-label{
+label {
     align-self: center;
 }
 
@@ -83,15 +81,15 @@ label{
     border-bottom: 2px solid lightblue;
 }
 
-input.checkbox{
+input.checkbox {
     width: 15px;
     height: 15px;
 }
-label.text{
+label.text {
     font-size: 140%;
     margin-left: 5px;
 }
-.delButton{
+.delButton {
     background-color: red;
     border: 0;
     font-size: 30px;
@@ -100,12 +98,20 @@ label.text{
     width: 10%;
 }
 
-.wrapper{
+.wrapper {
     align-self: center;
 }
-input[type="checkbox"]:checked + label.text{
+input[type="checkbox"]:checked + label.text {
     text-decoration: line-through;
 }
-input[type="checkbox"] + label.text{
+input[type="checkbox"] + label.text {
     text-decoration: none;
+}
+
+
+@media (max-width: 800px) {
+    .todoMain {
+        padding: 10px;
+        width: calc(100% - 20px);
+    }
 }
