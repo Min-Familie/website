@@ -1,9 +1,9 @@
 /* kalender*/
 #calendarMonth {
+    margin: 10px;
+    width: calc(100% - 20px);
     border: 1px solid #424A4F;
     border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 10px;
     table-layout: fixed;
     color: whitesmoke;
 }

@@ -2,7 +2,7 @@
     width: 100%;
     height: 300px;
 }
-#eventForm, head {  
+#eventForm, head {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
