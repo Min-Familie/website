@@ -39,7 +39,7 @@
 }
 
 @media (max-width: 800px) {
-    #eventForm input, #eventForm label {
+    #eventForm input, #eventForm label, #eventForm select {
         margin: 10px;
     }
 
