@@ -3,8 +3,11 @@
     width: calc(100% - 20px);
     height: 300px;
 }
+#eventForm {
+    margin: 0 10px;
+    width: calc(100% - 20px);
+}
 #eventForm, head {
-    width: 100%;
     display: flex;
     justify-content: space-evenly;
     flex-flow: row wrap;

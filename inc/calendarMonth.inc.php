@@ -41,7 +41,7 @@
 ?>
 
 
-<table>
+<table id="calendarMonth">
     <caption> 
         <a href="publicMonth.php?month=<?php echo $prevMonth; ?>"> <</a>
         <a href="publicMonth.php"> i dag</a>
