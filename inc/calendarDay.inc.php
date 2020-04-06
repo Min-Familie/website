@@ -138,7 +138,7 @@
         <tr>
             <th id="calendarNav">
                 <?php
-                    if (basename($_SERVER['PHP_SELF']) == "privateDay.php") {
+                    if (basename($_SERVER["PHP_SELF"]) == "privateDay.php") {
                         ?>
                         <a href="publicDay.php?day=<?php echo $inputDay; ?>"> -</a>
                         <a href="privateDay.php?day=<?php echo $prevDay; ?>"> <</a>
@@ -147,7 +147,7 @@
                         <?php
                         echo $inputDay;
                     }
-                    else {
+                    else if (basename($_SERVER["PHP_SELF"]) == "publicDay.php"){
                         ?>
                         <a href="privateDay.php?day=<?php echo $inputDay; ?>"> +</a>
                         <a href="publicDay.php?day=<?php echo $prevDay; ?>"> <</a>
@@ -156,11 +156,17 @@
                         <?php
                         echo $inputDay;
                     }
+                    else { // dashboard
+                        ?>
+                        <a href="calendar/publicMonth.php"> Måned</a>
+                        <a href="calendar/publicDay.php"> Dag</a>
+                        <?php
+                    }
                 ?>
             </th>
             <?php
-                foreach ($family as $person){
-                    echo "<th>$person</th>";
+                foreach ($family as $username){
+                    echo "<th>$username</th>";
                 }
             ?>
         </tr>  
