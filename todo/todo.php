@@ -43,7 +43,6 @@
         <script src="../js/todo.js"></script>
         <script src="../js/checkmark.js"></script>
         <script src="../js/checkempty.js"></script>
-        <script src="../js/sidebar.js">
 
         </script>
             <?php include '../visuals/header.html'; ?>
