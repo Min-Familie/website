@@ -2,12 +2,11 @@ html {
     height: 100%;
 }
 .todo {
-    font-family: 'Roboto';
     height: 100%;
-    margin: 0;
     background-color: #58A4B0;
 }
 .todoMain {
+    padding: 10px 0 10px;
     width: 30%;
     height: 80%;
     display: flex;
