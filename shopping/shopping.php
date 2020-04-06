@@ -13,7 +13,7 @@
         <script src="../js/shopping.js"></script>
         <script src="../js/checkmark.js"></script>
         <script src="../js/checkempty.js"></script>
-        <script src="../js/sidebar.js">
+        <script src="../js/sidebar.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
@@ -24,9 +24,9 @@
             });
         });
         </script>
-      
+
         <?php include '../visuals/header.html'; ?>
-  
+
         <main>
         <section class="form">
             <form id="nyItemForm" onsubmit="return false">
