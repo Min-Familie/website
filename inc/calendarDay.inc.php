@@ -133,10 +133,10 @@
 
 
 
-<table>
+<table id="calendarDay">
     <thead>
         <tr>
-            <th class="menu">
+            <th id="calendarNav">
                 <?php
                     if (basename($_SERVER['PHP_SELF']) == "privateDay.php") {
                         ?>
