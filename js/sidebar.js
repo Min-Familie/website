@@ -14,6 +14,7 @@ function openNav() {
         // }
         // open = true;
     let nav = document.getElementById('sidebar');
+    nav.style.zIndex = 20;
     if (window.innerWidth <= 800) {
         nav.classList.toggle('sidebar_toggled_mobile');
         document.getElementById("main").style.marginLeft = "0";
