@@ -144,10 +144,6 @@
         ?>
 
 
-
-
-        <script type="text/javascript" src="../js/sidebar.js"></script>
-        
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
         <script type="text/javascript" src="../js/map.js"></script>
         
