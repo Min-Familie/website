@@ -6,7 +6,7 @@ html {
     background-color: #58A4B0;
 }
 .todoMain {
-    padding: 10px 0 10px;
+    padding: 10px 0;
     width: 30%;
     height: 80%;
     display: flex;
