@@ -12,7 +12,8 @@ CREATE TABLE users (
 
 CREATE TABLE families (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    family_name VARCHAR(255)
+    family_name VARCHAR(255),
+    administrator_user_id INT
 );
 
 CREATE TABLE memberships (
