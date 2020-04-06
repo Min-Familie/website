@@ -31,7 +31,7 @@
         <section class="form">
             <form id="nyItemForm" onsubmit="return false">
                 <input type="text" name="item" placeholder="Varen din..." id="nyItem">
-                <input type="number" name="amount" step="1" placeholder="Antall..." id="amount" required>
+                <input type="number" name="amount" step="1" placeholder="Antall..." id="amount" value=1>
                 <input type="number" name="price" placeholder="Pris (valgfritt)" id="price">
                 <input type="hidden" name="family_id" value="<?php echo $_GET['family']; ?>" id="family_id">
                 <button type="button" name="button" onclick="if(checkEmpty()){run();}">Legg til</button>
