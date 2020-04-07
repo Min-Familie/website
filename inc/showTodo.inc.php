@@ -33,7 +33,7 @@
         if($delete == false){
           echo "<li class=\"todoEntry\" id=\"entity$id\">";
           echo "<section class=\"wrapper\">";
-          echo "<input type=\"checkbox\" class=\"checkbox\" id=\"item$id\" onclick=\"check(this.id, $id, window.location);\" $checked autocomplete=\"off\">";
+          echo "<input type=\"checkbox\" class=\"checkbox\" id=\"item$id\" onclick=\"check(this.id, $id, 'todo');\" $checked autocomplete=\"off\">";
           echo "<label class= \"text\" id=\"text$id\" for=\"item$id\">$text</label><br>";
           echo "</section>";
           echo "<button class=\"delButton\" id=\"del$id\" onclick=\"delItem($id)\">&times;</button>";
@@ -55,8 +55,10 @@
         showTodo($result, $con);
       }
       else{
-        echo "Listen er visst tom. Du har enten gjort alt allerede, eller så er det fortsatt ting du kan legge til. ";
+        echo "<p class=\"todoError\">Listen er visst tom. Du har enten gjort alt allerede, eller så er det fortsatt ting du kan legge til. </p>";
       }
     }
+    echo "<ul id=\"entries\">";
     mainTodo($con, $user, $family);
+    echo "</ul>";
  ?>

@@ -6,6 +6,10 @@
         <link rel="stylesheet" href="css/master.css">
     </head>
     <body>
+        <script src="js/checkmark.js"></script>
+        <script src="js/todo.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="js/shoppingCheck.js"></script>
         <?php require 'visuals/header.html'; ?>
         <main>
             <?php
@@ -17,23 +21,35 @@
              ?>
 
             <section class="calendar">
-                <?php
-                    require 'inc/dashboardCal.inc.php';
-                 ?>
+                <section class="calendarWrapper">
+                    <?php
+                        require 'inc/dashboardCal.inc.php';
+                     ?>
+                </section>
             </section>
             <?php
             $user = $_GET['user'];
             $family = $_GET['family'];
              ?>
             <section class="todo">
+                <!-- <a class="todoDashboardTitle" href="todo/todo.php?user=<?php echo $user; ?>&family=<?php echo $family; ?>">Huskeliste</a> -->
                 <?php
                     require 'inc/showTodo.inc.php';
                  ?>
+                 <button class="todoLeggTil" type="button" name="button" onclick="location.href='todo/todo.php?user=<?php echo $user; ?>&family=<?php echo $family; ?>'">Legg til flere</button>
+                 <!-- <a class="todoLink" href="todo/todo.php?user=<?php echo $user; ?>&family=<?php echo $family; ?>">
+                 <section class="todoWrapper">
+                     <p class="todoTextLink">Legg til flere</p>
+                 </section>
+                 </a> -->
             </section>
             <section class="shopping">
+
                 <?php
                     require 'inc/showShopping.inc.php';
                  ?>
+                 <button class="shoppingLeggTil" type="button" name="button" onclick="location.href='shopping/shopping.php?family=<?php echo $family; ?>'">Legg til flere</button>
+
             </section>
             <section class="news">
                 <rssapp-wall id="DvxuYSPLia1qLCDF"></rssapp-wall><script src="https://widget.rss.app/v1/wall.js" type="text/javascript" async></script>

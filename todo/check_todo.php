@@ -1,6 +1,6 @@
 <?php
     date_default_timezone_set("Europe/Oslo");
-    require '../inc/db.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
     $status = $_GET['s'];
     $id = $_GET['id'];
 

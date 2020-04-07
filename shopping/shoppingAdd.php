@@ -1,5 +1,5 @@
 <?php
-    include "../inc/db.inc.php";
+    require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
     $title = $_GET['item'];
     $amount = $_GET['amount'];
     $family = $_GET['family_id'];

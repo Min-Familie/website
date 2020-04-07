@@ -1,5 +1,5 @@
 <?php
-    include '../inc/db.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
     if(isset($_GET['t'])){
         $todo = $_GET['t'];
         $family = $_GET['family'];

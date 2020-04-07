@@ -7,25 +7,78 @@
 header{
     margin-bottom: 20px;
 }
+
+body{
+    background: #1E1E1E;
+}
+
+
 .calendar {
     grid-area: calendar;
-    overflow: auto;
     margin-left: 20px;
+    height: 50vh;
+
+}
+.calendarWrapper{
+    display: inline-block;
+    max-height: 100%;
+    overflow-y: auto;
+}
+#calendarDay{
+    margin: 0;
+    width: 100%;
+
 }
 .todo {
+    text-align: center;
     grid-area: todo;
-    background-color: grey;
+    height: 50vh;
     overflow: auto;
     margin: 0 20px;
+
+    /* border: 1px solid black; */
+
+}
+#entries{
     border: 1px solid black;
+    background: white;
+    height: 90%;
+    /* margin: 10px; */
+}
+.todoLeggTil{
+    width: 100%;
+    background-color: white;
+    font-size: 20px;
+    height: 50px;
+    border: 1px solid black;
+    border-top: 0;
+}
+.todoLeggTil:hover{
+    background: #e5ebf3;
 }
 .shopping {
     grid-area: shopping;
     margin-right: 20px;
 }
+#varer{
+    margin: 0;
+    width: 100%;
+}
+.shoppingVare{
+    background-color: white;
+}
+.shoppingLeggTil{
+    width: 100%;
+    background-color: white;
+    height: 50px;
+
+    border: 0;
+}
+
 .news {
     grid-area: news;
     margin: 20px;
+    margin-right: 0;
 
 }
 .weather {
@@ -39,7 +92,7 @@ header{
 main {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    /* grid-template-rows: 25% 25% 25% 25%; */
+    grid-template-rows: 25% 25% 25% 25%;
     grid-template-areas:
     "calendar calendar todo shopping"
     "calendar calendar todo shopping"

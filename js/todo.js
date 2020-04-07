@@ -9,7 +9,7 @@ function onClick(){
 
       }
     };
-  xhttp.open("GET", `addItem.php?t="${text}"&user=${userID}&family=${familyID}`, true);
+  xhttp.open("GET", `/minfamilie/todo/addItem.php?t="${text}"&user=${userID}&family=${familyID}`, true);
   xhttp.send();
   document.getElementById("nyItemForm").reset();
 
@@ -23,6 +23,6 @@ function delItem(id){
         location.reload();
       }
     };
-  xhttp.open("GET", `../inc/delItem.inc.php?id=${id}`, true);
+  xhttp.open("GET", `/minfamilie/inc/delItem.inc.php?id=${id}`, true);
   xhttp.send();
 }

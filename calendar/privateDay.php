@@ -1,6 +1,6 @@
 <?php
     $user_id = 1;
-    require "../inc/db.inc.php";
+    require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
 
     // tidssone
     date_default_timezone_set("Europe/Oslo");
@@ -185,10 +185,10 @@
             echo "</main>";
             include "../visuals/footer.html";
         ?>
-        
+
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL3SfCco316MoS6PdhzqjIg0vII5_vcyM&parameters" type="text/javascript"></script>
         <script type="text/javascript" src="../js/map.js"></script>
-        
+
         <script type="text/javascript">
             var mapOptions = {
                 zoom: 14,

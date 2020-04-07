@@ -1,7 +1,7 @@
 html {
     height: 100%;
 }
-.todo {
+.todoBody {
     height: 100%;
     background-color: #58A4B0;
 }
@@ -79,7 +79,9 @@ label {
     justify-content: space-between;
     border-bottom: 2px solid lightblue;
 }
-
+.todoError{
+    padding: 10px;
+}
 input.checkbox {
     width: 15px;
     height: 15px;

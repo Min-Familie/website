@@ -9,8 +9,8 @@ function classStyle(cid, status, id){
 
 }
 function check(itemID, id, url, cid=null){
-    url = url.pathname.split("/").pop();
-    let add = `check_${url}`;
+    // url = url.pathname.split("/").pop();
+    let add = `check_${url}.php`;
     let xhttp = new XMLHttpRequest();
     if (document.getElementById(`${itemID}`).checked == false){
       xhttp.onreadystatechange = function() {
@@ -24,7 +24,7 @@ function check(itemID, id, url, cid=null){
             }
           }
         };
-      xhttp.open("GET", `${add}?id=${id}&s=0`, true);
+      xhttp.open("GET", `/minfamilie/${url}/${add}?id=${id}&s=0`, true);
       xhttp.send();
     }
     else if (document.getElementById(`${itemID}`).checked == true){
@@ -38,7 +38,7 @@ function check(itemID, id, url, cid=null){
             }
           }
         };
-      xhttp.open("GET", `${add}?id=${id}&s=1`, true);
+      xhttp.open("GET", `/minfamilie/${url}/${add}?id=${id}&s=1`, true);
       xhttp.send();
   }
 

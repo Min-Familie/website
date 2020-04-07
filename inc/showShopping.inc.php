@@ -40,10 +40,10 @@
             }
             if(!$delete){
                 echo "<tr id=\"row$id\" $class>";
-                echo "<td class=\"shoppingCell$id\" id=\"text$id\">" . $row['title'] . "</td>";
-                echo "<td class=\"shoppingCell$id\">" . $row['amount'] . "</td>";
-                echo "<td class=\"shoppingCell$id\">" . $price . "</td>";
-                echo "<td><input type=\"checkbox\" autocomplete=\"off\" id=\"shopping$id\" $check onclick=\"check(this.id, $id, window.location, 'row$id');\"></td>";
+                echo "<td class=\"shoppingCell$id shoppingVare\" id=\"text$id\">" . $row['title'] . "</td>";
+                echo "<td class=\"shoppingCell$id shoppingVare\">" . $row['amount'] . "</td>";
+                echo "<td class=\"shoppingCell$id shoppingVare\">" . $price . "</td>";
+                echo "<td class=\"shoppingVare\"><input type=\"checkbox\" autocomplete=\"off\" id=\"shopping$id\" $check onclick=\"check(this.id, $id, 'shopping', 'row$id');\"></td>";
                 echo "</tr>";
             }
         }
@@ -64,6 +64,8 @@
             echo "<tr><td id=\"empty\" colspan=\"4\">Ingen varer er lagt til.</td></tr>";
         }
     }
+    echo '<table id="varer">';
     mainShopping($con, $family);
+    echo '</table>';
 
  ?>

@@ -39,7 +39,7 @@
         <link rel="stylesheet" href="../css/visuals.css">
         <title>Todo</title>
     </head>
-    <body class="todo">
+    <body class="todoBody">
         <script src="../js/todo.js"></script>
         <script src="../js/checkmark.js"></script>
         <script src="../js/checkempty.js"></script>
@@ -64,9 +64,9 @@
                 </form>
                 <p id="errorMessage"></p>
                 <section class="items">
-                    <ul id="entries">
-                        <?php include '../inc/showTodo.inc.php'; ?>
-                    </ul>
+        
+                    <?php include '../inc/showTodo.inc.php'; ?>
+
                 </section>
         </main>
         <?php include '../visuals/footer.html'; ?>
