@@ -1,6 +1,4 @@
 <?php
-
-    include 'db.inc.php';
     function deleteShopping($id, $con){
         $sql = "DELETE FROM shoppingItems WHERE id = $id";
         $result = $con -> query($sql);

@@ -1,5 +1,4 @@
 <?php
-    include 'db.inc.php';
     date_default_timezone_set("Europe/Oslo");
 
     function deleteTodo($id, $con){

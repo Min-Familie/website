@@ -4,31 +4,33 @@
 @import url(calendarSingleEvent.css);
 @import url(shopping.css);
 @import url(todo.css);
-
+header{
+    margin-bottom: 20px;
+}
 .calendar {
     grid-area: calendar;
     overflow: auto;
-
+    margin-left: 20px;
 }
 .todo {
     grid-area: todo;
     background-color: grey;
-    margin: 20px;
     overflow: auto;
-    height: 50%;
+    margin: 0 20px;
     border: 1px solid black;
 }
 .shopping {
     grid-area: shopping;
+    margin-right: 20px;
 }
 .news {
     grid-area: news;
     margin: 20px;
-    background-color: lightgray;
 
 }
 .weather {
     grid-area: weather;
+    margin: 20px;
 }
 .family_members {
     grid-area: family_members;
@@ -37,7 +39,7 @@
 main {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    /*grid-template-rows: 25% 25% 25% 25%; */
+    /* grid-template-rows: 25% 25% 25% 25%; */
     grid-template-areas:
     "calendar calendar todo shopping"
     "calendar calendar todo shopping"

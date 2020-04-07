@@ -1,4 +1,4 @@
-<?php $family = $_GET['family']; ?>
+<?php $family = $_GET['family']; include '../inc/db.inc.php';?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

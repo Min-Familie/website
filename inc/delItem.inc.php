@@ -1,5 +1,4 @@
 <?php
-    include 'db.inc.php';
     $id = $_GET['id'];
 
     $sql = "DELETE FROM todo WHERE id = $id";
