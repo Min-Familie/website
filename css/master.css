@@ -4,11 +4,11 @@
 @import url(calendarSingleEvent.css);
 @import url(shopping.css);
 @import url(todo.css);
-header{
+header {
     margin-bottom: 20px;
 }
 
-body{
+body {
     background: #1E1E1E;
 }
 
@@ -19,12 +19,12 @@ body{
     height: 50vh;
 
 }
-.calendarWrapper{
+.calendarWrapper {
     display: inline-block;
     max-height: 100%;
     overflow-y: auto;
 }
-#calendarDay{
+#calendarDay {
     margin: 0;
     width: 100%;
 
@@ -39,13 +39,13 @@ body{
     /* border: 1px solid black; */
 
 }
-#entries{
+#entries {
     border: 1px solid black;
     background: white;
     height: 90%;
     /* margin: 10px; */
 }
-.todoLeggTil{
+.todoLeggTil {
     width: 100%;
     background-color: white;
     font-size: 20px;
@@ -53,21 +53,21 @@ body{
     border: 1px solid black;
     border-top: 0;
 }
-.todoLeggTil:hover{
+.todoLeggTil:hover {
     background: #e5ebf3;
 }
 .shopping {
     grid-area: shopping;
     margin-right: 20px;
 }
-#varer{
+#varer {
     margin: 0;
     width: 100%;
 }
-.shoppingVare{
+.shoppingVare {
     background-color: white;
 }
-.shoppingLeggTil{
+.shoppingLeggTil {
     width: 100%;
     background-color: white;
     height: 50px;
@@ -98,4 +98,15 @@ main {
     "calendar calendar todo shopping"
     "news news weather weather"
     "family_members family_members family_members family_members";
+}
+
+@media (max-width: 800px) {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+    main > section {
+        margin: 10px;
+        width: calc(100% - 40px);
+    }
 }
