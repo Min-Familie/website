@@ -1,10 +1,5 @@
 <?php
     // settings
-    $servername = "mysql.elev.stolav.it";
-    $username = "skaben";
-    $password = "M0a0Makrell";
-    $dbname = "stolav19_skaben";
-
     $servername = "localhost:3307";
     $username = "root";
     $password = "";
