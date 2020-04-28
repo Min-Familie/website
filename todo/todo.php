@@ -64,7 +64,7 @@
                 </form>
                 <p id="errorMessage"></p>
                 <section class="items">
-        
+
                     <?php include '../inc/showTodo.inc.php'; ?>
 
                 </section>
