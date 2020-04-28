@@ -1,5 +1,5 @@
 <?php
-    $user_id = 2;
+    $user_id = 1;
     require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
 
     // tidssone
