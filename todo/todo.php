@@ -1,8 +1,11 @@
 <?php
     include '../inc/db.inc.php';
 
-    $user = $_GET['user'];
-    $family = $_GET['family'];
+    $user = 1;
+    $family = 1;
+    if (isset($_GET['family'])) {
+        $family = $_GET['family'];
+    }
 
     function getFamilies($con, $user, $family) {
         $families = [];
@@ -54,7 +57,6 @@
                         <option value=0>Privat</option>
                         <?php
                             foreach ($families as $surname) { //surname=[navn, id]
-
                                 echo "<option value=\"$surname[1]\">$surname[0]</option>";
                             }
                         ?>
