@@ -1,4 +1,7 @@
-<?php $family = $_GET['family']; require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';?>
+<?php 
+    $family = 1; 
+    require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -25,7 +28,7 @@
                 <input type="text" name="item" placeholder="Varen din..." id="nyItem">
                 <input type="number" name="amount" step="1" min="1" placeholder="Antall..." id="amount" value=1>
                 <input type="number" name="price" min="0" placeholder="Pris (valgfritt)" id="price">
-                <input type="hidden" name="family_id" value="<?php echo $_GET['family']; ?>" id="family_id">
+                <input type="hidden" name="family_id" value="<?php echo $family; ?>" id="family_id">
                 <button type="button" name="button" onclick="if(checkEmpty()){run();}">Legg til</button>
             </form>
             <p id="errorMessage"></p>

@@ -1,3 +1,18 @@
+<?php
+    $user = 1;
+    $family = 1;
+    
+    if (isset($_GET['user'])) {
+        $user = $_GET['user'];
+    }
+    if (isset($_GET['family'])) {
+        $user = $_GET['family'];
+    }
+    
+    require 'inc/db.inc.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
@@ -12,14 +27,6 @@
         <script src="js/shoppingCheck.js"></script>
         <?php require 'visuals/header.html'; ?>
         <main>
-            <?php
-
-                $user = $_GET['user'];
-                $family = $_GET['family'];
-                require 'inc/db.inc.php';
-
-             ?>
-
             <section class="calendar">
                 <section class="calendarWrapper">
                     <?php
@@ -27,10 +34,17 @@
                      ?>
                 </section>
             </section>
-            <?php
-            $user = $_GET['user'];
-            $family = $_GET['family'];
-             ?>
+<?php
+    $user = 1;
+    $family = 1;
+    
+    if (isset($_GET['user'])) {
+        $user = $_GET['user'];
+    }
+    if (isset($_GET['family'])) {
+        $user = $_GET['family'];
+    }
+?>
             <section class="todo">
                 <!-- <a class="todoDashboardTitle" href="todo/todo.php?user=<?php echo $user; ?>&family=<?php echo $family; ?>">Huskeliste</a> -->
                 <?php
