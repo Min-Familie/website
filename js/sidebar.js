@@ -22,7 +22,7 @@ function openNav() {
     else {
         nav.classList.toggle('sidebar_toggled');
         if (nav.classList.contains('sidebar_toggled')) {
-            document.getElementById("main").style.marginLeft = "225px";
+            document.getElementById("main").style.marginLeft = "200px";
         }
         else{
             document.getElementById("main").style.marginLeft = "0";
