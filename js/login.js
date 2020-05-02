@@ -10,7 +10,7 @@ function onSignIn(googleUser) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          location.reload();
+          
         }
       };
     xhttp.open("GET", `/minfamilie/inc/check_token.inc.php?token=${id_token}`, true);

@@ -3,7 +3,7 @@
     <head>
         <title></title>
         <meta charset="utf-8">
-        <meta name="google-signin-client_id" content="280130080722-8ruhprpjaqt1vorhd8s245l9gtqgmr61">
+        <meta name="google-signin-client_id" content="280130080722-8ruhprpjaqt1vorhd8s245l9gtqgmr61.apps.googleusercontent.com">
         <link rel="stylesheet" type="text/css"  href="style.css">
         <link rel="icon"       type="image/png" href="favicon.png">
     </head>
