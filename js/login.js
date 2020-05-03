@@ -4,7 +4,12 @@ function onSignIn(googleUser) {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());
+
+    var name = profile.getName();
+    var image = profile.getImageUrl();
+    var email = profile.getEmail();
     var id_token = googleUser.getAuthResponse().id_token;
+
 
 
     let xhttp = new XMLHttpRequest();
@@ -13,7 +18,7 @@ function onSignIn(googleUser) {
             console.log("Login complete.");
         }
     };
-    xhttp.open("GET", `/test2/inc/check_token.inc.php?token=${id_token}`, true);
+    xhttp.open("GET", `/minfamilie/inc/check_token.inc.php?token=${id_token}&name=${name}&picture=${image}&email=${email}`, true);
     xhttp.send();
 }
 

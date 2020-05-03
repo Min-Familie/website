@@ -3,7 +3,7 @@
     require $_SERVER["DOCUMENT_ROOT"] . "/minfamilie/inc/db.inc.php";
 
 
-    
+
     // Forlate familie
     if (isset($_POST["action"]) && $_POST["action"] == "leave") {
         $family_id = $_POST["family_id"];
@@ -35,9 +35,9 @@
 
     // Opprette ny familie
     if (isset($_POST["action"]) && $_POST["action"] == "newFamily") {
-        $sql = "INSERT INTO families 
+        $sql = "INSERT INTO families
                 (family_name, administrator_user_id)
-                VALUES (\"".$_POST["familyName"]."\",".$_POST["adminUserId"].");";
+                VALUES (\"" . $_POST["familyName"] . "\"," . $_POST["adminUserId"] . ")";
         $result = $con -> query($sql);
 
         // familien sin id
@@ -51,7 +51,7 @@
         }
 
         // oppdatere memberships
-        $sql = "INSERT INTO memberships 
+        $sql = "INSERT INTO memberships
                 (family_id, user_id)
                 VALUES ($family_id, $user_id);";
         $result = $con -> query($sql);
@@ -63,7 +63,7 @@
     if (isset($_GET["family_id"])) {
         $family_id = $_GET["family_id"];
     }
-    // hvis den verken er i GET eller hvis familien er ny 
+    // hvis den verken er i GET eller hvis familien er ny
     else if (!(isset($_POST["action"]) && $_POST["action"] == "newFamily")) {
         $noFamilyIsSelected = True;
     }
@@ -92,11 +92,11 @@
 
         $search = $_POST["userSearch"];
 
-        $sql = "SELECT * FROM users WHERE 
+        $sql = "SELECT * FROM users WHERE
                 CONCAT(username, ' ', forename, ' ', surename)
                 LIKE \"%$search"."%\"
                 ORDER BY $sort;";
-        
+
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($users, [$row["id"], $row["username"], $row["forename"] ." ". $row["surename"]]);
@@ -113,7 +113,7 @@
         $sql = "INSERT INTO memberships
                 (family_id, user_id)
                 VALUES ($family_id, $user);";
-        
+
         $result = $con -> query($sql);
     }
 
