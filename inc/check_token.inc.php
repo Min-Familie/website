@@ -15,7 +15,7 @@
         $check_sql = "SELECT * FROM users WHERE username = \"$userid\"";
         $result = $con -> query($check_sql);
         if ($result -> num_rows < 1){
-            $sql = "INSERT INTO users (username, forename, surname, password) VALUES (\"$userid\", \"test\", \"test\", \"test\");";
+            $sql = "INSERT INTO users (id, username, forename, surname, picture_link, email) VALUES ($userid, \"test\", \"test\", \"test\", \"test\", \"test\");";
             if (!$result = $con -> query($sql)){
                 echo "wrong";
             }
