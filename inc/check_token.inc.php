@@ -1,7 +1,7 @@
 <?php
     require '../vendor/autoload.php';
 
-    require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/test2/inc/db.inc.php';
 
     $token = $_GET['token'];
 
@@ -14,9 +14,9 @@
         $userid = $payload['sub'];
         $check_sql = "SELECT * FROM users WHERE username = \"$userid\"";
         $result = $con -> query($check_sql);
-        if($result -> num_rows < 1){
-            $sql = "INSERT INTO users (username, forename, surname, password) VALUES(\"$userid\", \"test\", \"test\", \"test\");";
-            if(!$result = $con -> query($sql)){
+        if ($result -> num_rows < 1){
+            $sql = "INSERT INTO users (username, forename, surname, password) VALUES (\"$userid\", \"test\", \"test\", \"test\");";
+            if (!$result = $con -> query($sql)){
                 echo "wrong";
             }
         }
@@ -27,5 +27,5 @@
         echo "no";
     }
 
-
+    echo $sql;
 ?>
