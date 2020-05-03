@@ -108,7 +108,7 @@
             <primary-key>False</primary-key>
           </column>
           <column>
-            <name>surename</name>
+            <name>surname</name>
             <data-type>VARCHAR(255)</data-type>
             <required>False</required>
             <primary-key>False</primary-key>
