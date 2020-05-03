@@ -4,10 +4,11 @@ USE minfamilie;
 
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    pseudonym VARCHAR(255),
+    username VARCHAR(255),
     forename VARCHAR(255),
     surname VARCHAR(255),
-    password VARCHAR(255) -- midlertidig
+    picture_link VARCHAR(255),
+    email VARCHAR(255)
 );
 
 CREATE TABLE families (
