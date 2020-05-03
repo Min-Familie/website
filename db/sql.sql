@@ -3,7 +3,7 @@ CREATE DATABASE minfamilie;
 USE minfamilie;
 
 CREATE TABLE users (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     username VARCHAR(255),
     forename VARCHAR(255),
     surname VARCHAR(255),
