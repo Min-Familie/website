@@ -10,10 +10,10 @@ function onSignIn(googleUser) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          
+            console.log("Login complete.");
         }
-      };
-    xhttp.open("GET", `/minfamilie/inc/check_token.inc.php?token=${id_token}`, true);
+    };
+    xhttp.open("GET", `/test2/inc/check_token.inc.php?token=${id_token}`, true);
     xhttp.send();
 }
 
