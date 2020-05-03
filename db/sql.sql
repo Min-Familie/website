@@ -3,7 +3,12 @@ CREATE DATABASE minfamilie;
 USE minfamilie;
 
 CREATE TABLE users (
+<<<<<<< HEAD
     id INT PRIMARY KEY,
+=======
+    id FLOAT PRIMARY KEY,
+    username VARCHAR(255),
+>>>>>>> 3c822c81796cf05cb61be5bd6f6d4564dd6c8e34
     forename VARCHAR(255),
     surname VARCHAR(255),
     picture_link VARCHAR(255),
