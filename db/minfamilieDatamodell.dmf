@@ -91,7 +91,7 @@
         <column-list>
           <column>
             <name>id</name>
-            <data-type>INTEGER</data-type>
+            <data-type>FLOAT</data-type>
             <required>True</required>
             <primary-key>True</primary-key>
           </column>
