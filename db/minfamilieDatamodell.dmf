@@ -82,8 +82,8 @@
     </item>
     <item type="database-table" id="{c711be58-696a-4a43-bb57-f974497168b0}" >
       <position>
-        <x>165.867</x>
-        <y>280.133</y>
+        <x>160.867</x>
+        <y>270.8</y>
       </position>
       <table>
         <name>users</name>
@@ -102,19 +102,25 @@
             <primary-key>False</primary-key>
           </column>
           <column>
-            <name>forename</name>
+            <name>forname</name>
             <data-type>VARCHAR(255)</data-type>
             <required>False</required>
             <primary-key>False</primary-key>
           </column>
           <column>
-            <name>surname</name>
+            <name>surename</name>
             <data-type>VARCHAR(255)</data-type>
             <required>False</required>
             <primary-key>False</primary-key>
           </column>
           <column>
-            <name>password</name>
+            <name>email</name>
+            <data-type>VARCHAR(255)</data-type>
+            <required>False</required>
+            <primary-key>False</primary-key>
+          </column>
+          <column>
+            <name>picture_link </name>
             <data-type>VARCHAR(255)</data-type>
             <required>False</required>
             <primary-key>False</primary-key>
@@ -328,7 +334,7 @@
           <connector>
             <position>
               <x>202.367</x>
-              <y>280.133</y>
+              <y>270.8</y>
             </position>
             <angle>90</angle>
             <hub owner="{c711be58-696a-4a43-bb57-f974497168b0}" />
@@ -393,7 +399,7 @@
           </connector>
           <connector>
             <position>
-              <x>238.867</x>
+              <x>243.867</x>
               <y>339.466</y>
             </position>
             <angle>0</angle>
@@ -492,8 +498,8 @@
           </connector>
           <connector>
             <position>
-              <x>238.867</x>
-              <y>309.8</y>
+              <x>243.867</x>
+              <y>305.133</y>
             </position>
             <angle>0</angle>
             <hub owner="{c711be58-696a-4a43-bb57-f974497168b0}" />
