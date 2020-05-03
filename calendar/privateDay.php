@@ -168,8 +168,8 @@
                 <option value="public">synlig for familiemedlemmer</option>
                 <option value="private">privat</option>
                 <?php
-                    foreach (array_slice($family, 1) as $surename) { //surename=[navn, id]
-                        echo "<option value=\"$surename[1]\">$surename[0]</option>";
+                    foreach (array_slice($family, 1) as $surname) { //surname=[navn, id]
+                        echo "<option value=\"$surname[1]\">$surname[0]</option>";
                     }
                 ?>
             </select>
