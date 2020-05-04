@@ -1,5 +1,6 @@
 <?php
-    $user_id = 1;
+    session_start();
+    $user_id = $_SESSION['id'];
     require $_SERVER["DOCUMENT_ROOT"] . "/minfamilie/inc/db.inc.php";
 
     function getFamilies ($con, $user_id) {
@@ -38,7 +39,7 @@
     </head>
     <body>
         <?php
-            include "../visuals/header.html";
+            include "../visuals/header.php";
             echo "<main>";
 
             if (isset($_GET["message"])) {
@@ -56,7 +57,7 @@
                 <input type="submit" value="Opprett">
             </fieldset>
         </form>
-        
+
         <!-- Velg en gammel familie -->
         <fieldset><legend>Velg en gammel familie</legend>
         <?php

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
     if(isset($_GET['t'])){
         $todo = $_GET['t'];

@@ -64,8 +64,13 @@
             echo "<tr><td id=\"empty\" colspan=\"4\">Ingen varer er lagt til.</td></tr>";
         }
     }
-    echo '<table id="varer">';
-    mainShopping($con, $family);
-    echo '</table>';
+    if ($family_id != 0){
+        echo '<table id="varer">';
+        mainShopping($con, $family_id);
+        echo '</table>';
+    }
+    else{
+        echo 'CREATE/JOIN A FAMILY FIRST';
+    }
 
  ?>

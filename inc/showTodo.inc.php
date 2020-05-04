@@ -59,6 +59,6 @@
       }
     }
     echo "<ul id=\"entries\">";
-    mainTodo($con, $user, $family);
+    mainTodo($con, $_SESSION['id'], $family_id);
     echo "</ul>";
  ?>

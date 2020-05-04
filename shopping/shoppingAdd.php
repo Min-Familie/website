@@ -1,8 +1,9 @@
 <?php
+    session_start();
     require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
     $title = $_GET['item'];
     $amount = $_GET['amount'];
-    $family = $_GET['family_id'];
+    $family = $_SESSION['family_id'];
     $price = $_GET['price'];
     if(empty($price)){
         $price = "null";

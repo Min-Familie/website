@@ -1,5 +1,6 @@
 <?php
-    $user_id = 1;
+    session_start();
+    $user_id = $_SESSION['id'];
     require $_SERVER["DOCUMENT_ROOT"] . "/minfamilie/inc/db.inc.php";
 
 
@@ -48,6 +49,7 @@
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $family_id = $row["id"];
+            $_SESSION['family_id'] = $family_id;
         }
 
         // oppdatere memberships
@@ -62,6 +64,7 @@
     // hvis familie_id fra GET
     if (isset($_GET["family_id"])) {
         $family_id = $_GET["family_id"];
+        $_SESSION['family_id'] = $family_id;
     }
     // hvis den verken er i GET eller hvis familien er ny
     else if (!(isset($_POST["action"]) && $_POST["action"] == "newFamily")) {

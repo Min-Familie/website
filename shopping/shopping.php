@@ -1,5 +1,11 @@
-<?php 
-    $family = 1; 
+<?php
+    session_start();
+    if (isset($_SESSION['family_id'])) {
+        $family = $_SESSION['family_id'];
+    }
+    else{
+        $family = 0;
+    }
     require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
 ?>
 
@@ -19,7 +25,7 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
         <script src="../js/shoppingCheck.js"></script>
 
-        <?php include '../visuals/header.html'; ?>
+        <?php include '../visuals/header.php'; ?>
 
         <main>
 

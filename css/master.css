@@ -36,6 +36,8 @@ body {
     overflow: auto;
     margin: 0 20px;
 
+    height: 100%;
+
     /* border: 1px solid black; */
 
 }
@@ -49,9 +51,11 @@ body {
     width: 100%;
     background-color: white;
     font-size: 20px;
-    height: 50px;
+    height: 55px;
     border: 1px solid black;
     border-top: 0;
+
+
 }
 .todoLeggTil:hover {
     background: #e5ebf3;
@@ -59,6 +63,14 @@ body {
 .shopping {
     grid-area: shopping;
     margin-right: 20px;
+
+}
+.shoppingError{
+    background-color: white;
+    height: 100%;
+    padding: 10px;
+    padding-bottom: 0;
+    padding-top: 0;
 }
 #varer {
     margin: 0;

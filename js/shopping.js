@@ -12,7 +12,7 @@ function run(){
           location.reload();
         }
       };
-    xhttp.open("GET", `/minfamilie/shopping/shoppingAdd.php?item="${item}"&amount=${amount}&price=${price}&family_id=${family_id}`, true);
+    xhttp.open("GET", `/minfamilie/shopping/shoppingAdd.php?item="${item}"&amount=${amount}&price=${price}`, true);
     xhttp.send();
     document.getElementById("nyItemForm").reset();
  }

@@ -1,10 +1,10 @@
 <?php
+    session_start();
     include '../inc/db.inc.php';
 
-    $user = 1;
-    $family = 1;
-    if (isset($_GET['family'])) {
-        $family = $_GET['family'];
+    $user = $_SESSION['id'];
+    if(isset($_SESSION['family_id'])){
+        $family = $_SESSION['family_id'];
     }
 
     function getFamilies($con, $user, $family) {
@@ -30,8 +30,14 @@
 
         return $families;
     }
+    if(isset($_SESSION['family_id'])){
+        $family_id = $_SESSION['family_id'];
+    }
+    else{
+        $family_id = 0;
+    }
+    $families = getFamilies($con, $user, 0);
 
-    $families = getFamilies($con, $user, $family);
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -48,7 +54,7 @@
         <script src="../js/checkempty.js"></script>
 
         </script>
-            <?php include '../visuals/header.html'; ?>
+            <?php include '../visuals/header.php'; ?>
         <main class="todoMain">
             <h1 class="todoTitle">HUSKELISTE</h1>
                 <form id="nyItemForm" onsubmit="return false">

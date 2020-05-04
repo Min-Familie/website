@@ -34,8 +34,7 @@
                     SELECT m1.family_id
                     FROM memberships m1
                     WHERE m1.user_id = $user
-                );";
-
+                )";
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($family, $row["family_name"]);
@@ -100,7 +99,7 @@
                         WHERE m1.user_id = $user
                     )
                 )
-                AND day = '$inputDay';";
+                AND day = '$inputDay'";
 
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
@@ -122,9 +121,15 @@
 
 
     // familiemedlemmer fra db
-    $family = getFamily($con, $user);
+    if(isset($_SESSION['id'])){
+        $id = $_SESSION['id'];
+    }
+    else{
+        $id = 0;
+    }
+    $family = getFamily($con, $id);
     // events fra db
-    $events = getEvents($con, $user, $inputDay);
+    $events = getEvents($con, $id, $inputDay);
 
 require "calendarDay.inc.php";
 

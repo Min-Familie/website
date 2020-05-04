@@ -13,7 +13,6 @@ function onClick(){
   xhttp.send();
   document.getElementById("nyItemForm").reset();
 
-  // addedFeedback(text);
 }
 function delItem(id){
   let xhttp = new XMLHttpRequest();
