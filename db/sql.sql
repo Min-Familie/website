@@ -4,7 +4,6 @@ USE minfamilie;
 
 CREATE TABLE users (
     id VARCHAR(255) PRIMARY KEY,
-    username VARCHAR(255),
     forename VARCHAR(255),
     surname VARCHAR(255),
     picture_link VARCHAR(255),

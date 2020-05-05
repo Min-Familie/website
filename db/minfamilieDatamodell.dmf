@@ -83,7 +83,7 @@
     <item type="database-table" id="{c711be58-696a-4a43-bb57-f974497168b0}" >
       <position>
         <x>160.867</x>
-        <y>270.8</y>
+        <y>280.133</y>
       </position>
       <table>
         <name>users</name>
@@ -91,15 +91,9 @@
         <column-list>
           <column>
             <name>id</name>
-            <data-type>FLOAT</data-type>
+            <data-type>VARCHAR(255)</data-type>
             <required>True</required>
             <primary-key>True</primary-key>
-          </column>
-          <column>
-            <name>username</name>
-            <data-type>VARCHAR(255)</data-type>
-            <required>False</required>
-            <primary-key>False</primary-key>
           </column>
           <column>
             <name>forname</name>
@@ -108,7 +102,7 @@
             <primary-key>False</primary-key>
           </column>
           <column>
-            <name>surename</name>
+            <name>surname</name>
             <data-type>VARCHAR(255)</data-type>
             <required>False</required>
             <primary-key>False</primary-key>
@@ -334,7 +328,7 @@
           <connector>
             <position>
               <x>202.367</x>
-              <y>270.8</y>
+              <y>280.133</y>
             </position>
             <angle>90</angle>
             <hub owner="{c711be58-696a-4a43-bb57-f974497168b0}" />
@@ -400,7 +394,7 @@
           <connector>
             <position>
               <x>243.867</x>
-              <y>339.466</y>
+              <y>339.467</y>
             </position>
             <angle>0</angle>
             <hub owner="{c711be58-696a-4a43-bb57-f974497168b0}" />
@@ -499,7 +493,7 @@
           <connector>
             <position>
               <x>243.867</x>
-              <y>305.133</y>
+              <y>309.8</y>
             </position>
             <angle>0</angle>
             <hub owner="{c711be58-696a-4a43-bb57-f974497168b0}" />
