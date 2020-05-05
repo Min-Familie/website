@@ -116,7 +116,7 @@ body {
 }
 
 .newsItem a:hover{
-    color: red;
+    text-decoration: underline;
 
 }
 .newsItem{
@@ -124,8 +124,9 @@ body {
     margin: 5px;
     overflow: auto;
     height: 100%;
-
-
+}
+.newsContent h4{
+    padding-top: 5px;
 }
 .newsContent{
     display: flex;
@@ -133,7 +134,7 @@ body {
     padding: 10px;
     padding-bottom: 0;
     padding-top: 0;
-    height: 35%;
+    height: 40%;
     justify-content: space-between;
 
 }
@@ -148,7 +149,6 @@ body {
 .imageContainer{
     height: 60%;
     width: 100%;
-    padding-bottom: 5%;
 
 }
 
