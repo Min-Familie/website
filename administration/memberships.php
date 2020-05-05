@@ -205,7 +205,27 @@
             }
         ?>
         </fieldset>
+        <ul class="familyMembers">
+        <?php
 
+        $sql = "SELECT DISTINCT u.forename, u.surname
+                FROM users u
+                JOIN memberships m
+                ON u.id = m.user_id
+                WHERE m.family_id IN
+                (
+                    SELECT m1.family_id
+                    FROM memberships m1
+                    WHERE m1.user_id = $user_id
+                )";
+
+        $result = $con -> query($sql);
+        while($row = $result -> fetch_assoc()){
+            $name = $row['forename'] . " " . $row['surname'];
+            echo "<li>$name</li>";
+        }
+         ?>
+        </ul>
         <!-- Forlat familien -->
         <form action="memberships.php" method="post" id="leaveForm">
             <fieldset><legend>Forlat Familien</legend>
