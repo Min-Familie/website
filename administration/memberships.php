@@ -3,6 +3,7 @@
     if (isset($_SESSION['id'])) {
         $user_id = $_SESSION['id'];
     } // else er neders i denne php snippeten
+    else {$user_id = 1;}
 
     require $_SERVER["DOCUMENT_ROOT"] . "/minfamilie/inc/db.inc.php";
 
@@ -99,13 +100,13 @@
         $search = $_POST["userSearch"];
 
         $sql = "SELECT * FROM users WHERE
-                CONCAT(username, ' ', forename, ' ', surename)
+                CONCAT(forename, ' ', surename)
                 LIKE \"%$search"."%\"
                 ORDER BY $sort;";
 
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
-            array_push($users, [$row["id"], $row["username"], $row["forename"] ." ". $row["surename"]]);
+            array_push($users, [$row["id"], $row["forename"] ." ". $row["surename"]]);
         }
     }
 
@@ -149,10 +150,10 @@
 
     if (isset($headerMessage)) {
         Header("Location: selectFamily.php?message=$headerMessage");
-    }
+    }/*
     if (!isset($_SESSION['id'])) {
         Header("Location: login.php");
-    }
+    }*/
 ?>
 
 
@@ -168,7 +169,7 @@
     </head>
     <body>
         <?php
-            include "../visuals/header.html";
+            include "../visuals/header.php";
             echo "<main>";
             echo "<h1>Familien $family_name</h1>";
         ?>
@@ -185,10 +186,10 @@
         <?php
             // søkeresultat
             if (isset($_POST["action"]) && $_POST["action"] == "userSearch") {
-                echo "<table><tr><th>Brukernavn</th><th>Navn</th></tr>";
+                echo "<table><tr><th>Navn</th></tr>";
 
                 foreach ($users as $user) {
-                    echo "<tr><td>".$user[1]."</td><td>".$user[2]."</td>";
+                    echo "<tr><td>".$user[1]."</td>";
                     echo "<td>";
                     ?>
                     <form action="memberships.php?family_id=<?php echo $family_id ?>" method="post">
@@ -196,7 +197,7 @@
                         <input type="hidden" name="user"   value="<?php echo $user[0] ?>">
                         <input type="hidden" name="family_id" value="<?php echo $family_id ?>">
                         <input type="submit" value="Legg til">
-                    </form> </td> </tr>
+                    </form> </td></tr>
                     <?php
                 }
                 echo "</table>";
