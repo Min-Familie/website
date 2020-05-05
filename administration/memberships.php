@@ -107,7 +107,7 @@
         $result = $con -> query($sql);
         echo $sql;
         while($row = $result -> fetch_assoc()){
-            array_push($users, [$row["id"], $row["forename"] ." ". $row["surename"]]);
+            array_push($users, [$row["id"], $row["forename"] ." ". $row["surname"]]);
         }
     }
 
