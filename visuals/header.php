@@ -1,22 +1,23 @@
-<!-- <?php session_start(); ?> -->
 <head>
-    <meta name="google-signin-client_id" content="71847374517-d19h9ttcihhtftg0q4ibjrpirdmjd71t.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="280130080722-8ruhprpjaqt1vorhd8s245l9gtqgmr61.apps.googleusercontent.com">
 </head>
+
 <nav id="sidebar" class="sidebar">
     <a href="/minfamilie/index.php?user=1&family=2">Dashboard</a>
     <a href="/minfamilie/calendar/publicMonth.php">Kalender</a>
-    <?php if(isset($_SESSION['family_id'])){
+    <?php if (isset($_SESSION['family_id'])) {
         echo '<a href="/minfamilie/shopping/shopping.php">Handleliste</a>';
     } ?>
     <a href="/minfamilie/todo/todo.php">Gjøremål</a>
     <a href="/minfamilie/administration/selectFamily.php">Administrering</a>
-    <?php if(isset($_SESSION['id'])){
+    <?php if (isset($_SESSION['id'])) {
         echo '<a href="#" onclick="signOut();">Sign out</a>';
     }
-    else{
+    else {
         echo '<a href="/minfamilie/login.php">Logg inn</a>';
     } ?>
 </nav>
+
 <script type="text/javascript" src="/minfamilie/js/sidebar.js"></script>
 <script src="js/login.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
@@ -31,18 +32,18 @@
         <img src="
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
-        if(isset($_SESSION['id'])){
+        if (isset($_SESSION['id'])) {
             $id = $_SESSION['id'];
             $sql = "SELECT picture_link from users WHERE id = $id";
-            if($result = $con -> query($sql)){
-                while($row = $result -> fetch_assoc()){
+            if ($result = $con -> query($sql)) {
+                while ($row = $result -> fetch_assoc()) {
                     echo $row['picture_link'];
 
                 }
             }
         }
 
-        else{
+        else {
             echo 'https://cdn-images-1.medium.com/max/1200/1*MccriYX-ciBniUzRKAUsAw.png';
         }
          ?>
