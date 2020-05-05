@@ -13,7 +13,7 @@
     if(!isset($name[1])){
         $name[1] = " ";
     }
-    $client = new Google_Client(['client_id' => '280130080722-8ruhprpjaqt1vorhd8s245l9gtqgmr61.apps.googleusercontent.com']);  // Specify the CLIENT_ID of the app that accesses the backend
+    $client = new Google_Client(['client_id' => '280130080722-8ruhprpjaqt1vorhd8s245l9gtqgmr61.apps.googleusercontent.com']);
     $payload = $client->verifyIdToken($token);
 
 
