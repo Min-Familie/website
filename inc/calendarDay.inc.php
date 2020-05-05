@@ -1,5 +1,4 @@
 <?php
-    session_start();
     function mergeEvets($event1, $event2) {
         $title = $event1["title"] ." + ". $event2["title"];
         $location = $event1["location"] ." + ". $event2["location"];

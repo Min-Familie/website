@@ -25,7 +25,7 @@
 
                 UNION
                 /*alle familiemedldmmer i alle familier som personen er med i*/
-                SELECT DISTINCT u.username, u.id
+                SELECT DISTINCT u.forename, u.id
                 FROM users u
                 JOIN memberships m
                 ON u.id = m.user_id
@@ -46,7 +46,7 @@
         $events = [];
 
         // private events fra personen
-        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, username
+        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, forename
                 FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
@@ -58,7 +58,7 @@
 
                 UNION
                 /*public events til alle familiemedlemmer i alle familier personen er med i*/
-                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, username
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, forename
                 FROM calendarEvents c
                 JOIN users u /*for å få navn, og ikke bare id fra calendar-tabellen*/
                 ON c.user_id = u.id
@@ -82,7 +82,7 @@
 
                 UNION
                 /*felles events til familiene peronen er med i*/
-                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS username
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS forename
                 FROM calendarEvents c
                 JOIN families f
                 ON c.family_id = f.id
@@ -102,9 +102,10 @@
                 AND day = '$inputDay'";
 
         $result = $con -> query($sql);
+
         while($row = $result -> fetch_assoc()){
             $affair = [
-                "author"      => $row["username"],
+                "author"      => $row["forename"],
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
@@ -119,18 +120,10 @@
         return $events;
     }
 
-
     // familiemedlemmer fra db
-    if(isset($_SESSION['id'])){
-        $id = $_SESSION['id'];
-    }
-    else{
-        $id = 0;
-    }
-    $family = getFamily($con, $id);
+    $family = getFamily($con, $user);
     // events fra db
-    $events = getEvents($con, $id, $inputDay);
+    $events = getEvents($con, $user, $inputDay);
 
-require "calendarDay.inc.php";
-
+    require "calendarDay.inc.php";
 ?>

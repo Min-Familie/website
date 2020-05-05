@@ -1,5 +1,4 @@
 <?php
-    session_start();
     function displayEvent($events, $date) {
         echo "<ul>";
         foreach($events as $key => $affair) {
