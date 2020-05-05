@@ -1,5 +1,13 @@
 <?php
-    $user_id = 1;
+    session_start();
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION['id'];
+    }
+    else {
+        // header("Location: ../login.php");
+        $user_id = 1;
+    }
+
     require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
 
     // tidssone
@@ -19,7 +27,7 @@
         $events = [];
 
         // private events fra personen
-        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, username
+        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, forename
                 FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
@@ -32,7 +40,7 @@
 
                 UNION
                 /*public events til alle familiemedlemmer i alle familier personen er med i*/
-                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, username
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, forename
                 FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
@@ -57,7 +65,7 @@
 
                 UNION
                 /*felles events til familiene peronen er med i*/
-                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS username
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS forename
                 FROM calendarEvents c
                 JOIN families f
                 ON c.family_id = f.id
@@ -81,9 +89,10 @@
                 ORDER BY day, startHour, startMinute;";
 
         $result = $con -> query($sql);
-        while($row = $result -> fetch_assoc()){
+
+        while ($row = $result -> fetch_assoc()) {
             $affair = [
-                "author"      => $row["username"],
+                "author"      => $row["forename"],
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
@@ -113,7 +122,7 @@
     </head>
     <body>
         <?php
-            include "../visuals/header.html";
+            include "../visuals/header.php";
             echo "<main>";
             require "../inc/calendarMonth.inc.php";
             echo "</main>";

@@ -1,5 +1,13 @@
 <?php
-    $user_id = 1;
+    session_start();
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION['id'];
+    }
+    else {
+        // header("Location: ../login.php");
+        $user_id = 1;
+    }
+
     require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
 
     // tidssone
@@ -54,11 +62,11 @@
     function getFamilies($con, $user_id) {
         $family = [];
         // brukernavnet er første kalender i arrayen
-        $sql = "SELECT username, id FROM users WHERE id = $user_id
+        $sql = "SELECT forename, id FROM users WHERE id = $user_id
 
                 UNION
                 /* navn på alle familiene som personen er med i*/
-                SELECT DISTINCT f.family_name AS username, f.id
+                SELECT DISTINCT f.family_name AS forename, f.id
                 FROM families f
                 JOIN memberships m
                 ON f.id = m.family_id
@@ -70,7 +78,7 @@
                 );";
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
-            array_push($family, [$row["username"], $row["id"]]);
+            array_push($family, [$row["forename"], $row["id"]]);
         }
 
         return $family;
@@ -81,7 +89,7 @@
     function getEvents($con, $user_id, $inputDay) {
         $events = [];
         // events fra personen
-        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, username
+        $sql = "SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, forename
                 FROM calendarEvents c
                 JOIN users u
                 ON c.user_id = u.id
@@ -91,7 +99,7 @@
 
                 UNION
                 /*felles events til familiene peronen er med i*/
-                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS username
+                SELECT c.id, title, location, day, startHour, startMinute, duration, user_id, family_id, private, family_name AS forename
                 FROM calendarEvents c
                 JOIN families f
                 ON c.family_id = f.id
@@ -113,7 +121,7 @@
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $affair = [
-                "author"      => $row["username"],
+                "author"      => $row["forename"],
                 "title"       => $row["title"],
                 "location"    => $row["location"],
                 "day"         => $row["day"],
@@ -145,7 +153,7 @@
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
     </head>
     <body>
-        <?php include "../visuals/header.html"; ?>
+        <?php include "../visuals/header.php"; ?>
         <main>
 
         <section id="map"></section>

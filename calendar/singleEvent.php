@@ -1,5 +1,13 @@
 <?php
-    $user_id = 1;
+    session_start();
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION['id'];
+    }
+    else {
+        // header("Location: ../login.php");
+        $user_id = 1;
+    }
+    
     require $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
 
     // slett event
@@ -103,7 +111,7 @@
     </head>
     <body>
         <?php
-            include "../visuals/header.html";
+            include "../visuals/header.php";
             echo "<main>";
 
             if (isset($event)) {
