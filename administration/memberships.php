@@ -100,11 +100,12 @@
         $search = $_POST["userSearch"];
 
         $sql = "SELECT * FROM users WHERE
-                CONCAT(forename, ' ', surename)
+                CONCAT(forename, ' ', surname)
                 LIKE \"%$search"."%\"
                 ORDER BY $sort;";
 
         $result = $con -> query($sql);
+        echo $sql;
         while($row = $result -> fetch_assoc()){
             array_push($users, [$row["id"], $row["forename"] ." ". $row["surename"]]);
         }
