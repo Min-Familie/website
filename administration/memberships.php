@@ -1,6 +1,9 @@
 <?php
     session_start();
-    $user_id = $_SESSION['id'];
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION['id'];
+    } // else er neders i denne php snippeten
+
     require $_SERVER["DOCUMENT_ROOT"] . "/minfamilie/inc/db.inc.php";
 
 
@@ -146,6 +149,9 @@
 
     if (isset($headerMessage)) {
         Header("Location: selectFamily.php?message=$headerMessage");
+    }
+    if (!isset($_SESSION['id'])) {
+        Header("Location: login.php");
     }
 ?>
 

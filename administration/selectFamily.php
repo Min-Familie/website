@@ -1,8 +1,17 @@
 <?php
     session_start();
-    $user_id = $_SESSION['id'];
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION['id'];
+    }
+    else {
+        // header("Location: ../login.php");
+        $user_id = 1;
+    }
+
     require $_SERVER["DOCUMENT_ROOT"] . "/minfamilie/inc/db.inc.php";
 
+
+    
     function getFamilies ($con, $user_id) {
         $families = [];
 
