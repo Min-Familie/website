@@ -19,7 +19,7 @@ function onSignIn(googleUser) {
             window.location.href = '/minfamilie/index.php';
         }
     };
-    xhttp.open("GET", `/minfamilie/inc/check_token.inc.php?token=${id_token}&name="${name}"&picture="${image}"&email="${email}"`, true);
+    xhttp.open("GET", `/minfamilie/inc/check_token.inc.php?token=${id_token}&name=${name}&picture="${image}"&email="${email}"`, true);
     xhttp.send();
 }
 

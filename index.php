@@ -1,7 +1,11 @@
 <?php
+    session_start();
     require 'inc/db.inc.php';
     if (isset($_SESSION['id'])) {
         $user = $_SESSION['id'];
+    }
+    else{
+        header('Location: login.php');
     }
     if (isset($_SESSION['family_id'])) {
         $family_id = $_SESSION['family_id'];
@@ -17,6 +21,7 @@
         <meta charset="utf-8">
         <title>Dashboard</title>
         <link rel="stylesheet" href="css/master.css">
+        <link rel="alternate" type="application/rss+xml" title="Subscribe to What's New" href="https://www.nrk.no/toppsaker.rss" />
     </head>
     <body>
         <script src="js/checkmark.js"></script>
@@ -45,14 +50,23 @@
 
             </section>
             <section class="weather">
-                <a class="weatherwidget-io" href="https://forecast7.com/en/58d855d73/sandnes/" data-label_1="SANDNES" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="original" >SANDNES WEATHER</a>
-                    <script>
-                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-                    </script>
+                <a class="weatherwidget-io" href="https://forecast7.com/no/58d975d73/stavanger/" data-label_1="STAVANGER" data-label_2="VÆR" data-theme="original" >STAVANGER VÆR</a>
+                <script>
+                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                </script>
+                <a class="weatherwidget-io" href="https://forecast7.com/no/59d9110d75/oslo/" data-label_1="OSLO" data-label_2="VÆR" data-theme="original" >OSLO VÆR</a>
+                <script>
+                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                </script>
             </section>
             <section class="news">
-                <rssapp-wall id="DvxuYSPLia1qLCDF"></rssapp-wall><script src="https://widget.rss.app/v1/wall.js" type="text/javascript" async></script>
-
+                <?php
+                    require 'rss/rss.php';
+                    $feed = new Rss('https://www.nrk.no/toppsaker.rss');
+                    $feed -> showFeed(4);
+                 ?>
+                <!-- <rssapp-wall id="DvxuYSPLia1qLCDF"></rssapp-wall><script src="https://widget.rss.app/v1/wall.js" type="text/javascript" async></script>
+                <a href="https://www.nrk.no/toppsaker.rss" target="_blank">Subscribe to What's New</a> -->
             </section>
             <section class="calendar">
                 <section class="calendarWrapper">

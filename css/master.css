@@ -93,6 +93,65 @@ body {
     margin-right: 0;
 
 }
+.newsRss{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+}
+.newsItem a{
+    text-decoration: none;
+    color: black;
+    /* display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start; */
+
+
+}
+.publishDate{
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+.newsItem a:hover{
+    color: red;
+
+}
+.newsItem{
+    background-color: white;
+    margin: 5px;
+    overflow: auto;
+    height: 100%;
+
+
+}
+.newsContent{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-bottom: 0;
+    padding-top: 0;
+    height: 35%;
+    justify-content: space-between;
+
+}
+
+.imageContainer img{
+
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+
+}
+.imageContainer{
+    height: 60%;
+    width: 100%;
+    padding-bottom: 5%;
+
+}
+
 .weather {
     grid-area: weather;
     margin: 20px;
