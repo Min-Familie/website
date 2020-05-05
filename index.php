@@ -78,7 +78,26 @@
 
 
             <section class="family_members">
+                <?php
+                    $user_id = $_SESSION['id'];
+                    $sql = "SELECT DISTINCT u.picture_link
+                            FROM users u
+                            JOIN memberships m
+                            ON u.id = m.user_id
+                            WHERE m.family_id IN
+                            (
+                                SELECT m1.family_id
+                                FROM memberships m1
+                                WHERE m1.user_id = $user_id
+                            )";
+                    $result = $con -> query($sql);
+                    while($row = $result -> fetch_assoc()){
+                        $img = $row['picture_link'];
 
+                        echo "<img src=\"$img\" alt=\"profile_picture\">";
+                    }
+
+                 ?>
             </section>
 
 

@@ -64,6 +64,7 @@
             echo "<tr><td id=\"empty\" colspan=\"4\">Ingen varer er lagt til.</td></tr>";
         }
     }
+    $family_id = $_SESSION['family_id'];
     if ($family_id != 0){
         echo '<table id="varer">';
         mainShopping($con, $family_id);

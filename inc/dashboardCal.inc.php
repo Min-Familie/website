@@ -121,9 +121,14 @@
     }
 
     // familiemedlemmer fra db
-    $family = getFamily($con, $user);
-    // events fra db
-    $events = getEvents($con, $user, $inputDay);
+    function main($con, $inputDay){
+        $user = $_SESSION['id'];
+        $family = getFamily($con, $user);
+        // events fra db
+        $events = getEvents($con, $user, $inputDay);
+        require "calendarDay.inc.php";
+    }
 
-    require "calendarDay.inc.php";
+    main($con, $inputDay);
+
 ?>
