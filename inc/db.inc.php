@@ -1,15 +1,11 @@
 <?php
     // settings
-    // $servername = "mysql.elev.stolav.it";
-    // $username = "skaben";
-    // $password = "M0a0Makrell";
-    // $dbname = "stolav19_skaben";
-
-    $servername = "localhost";
+/*
+    $servername = "localhost:3307";
     $username = "root";
-    $password = "ShayKing80";
-    $dbname = "project";
-
+    $password = "";
+    $dbname = "minfamilie";
+*/
     // the connection to db
     $con = mysqli_connect(
         $servername, $username, $password, $dbname

@@ -29,7 +29,7 @@
         <p> Min Familie</p>
         <p> Hele familiens knutepunkt!</p>
 
-        <img src="
+        <img id="profilepicture" src="
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . '/minfamilie/inc/db.inc.php';
         if (isset($_SESSION['id'])) {
