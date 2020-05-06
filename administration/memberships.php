@@ -140,7 +140,7 @@
 
     function getFamily($con, $user_id) {
         $family = [];
-        $sql = "SELECT DISTINCT u.id u.forename, u.surname
+        $sql = "SELECT DISTINCT u.id, u.forename, u.surname
                 FROM users u
                 JOIN memberships m
                 ON u.id = m.user_id
