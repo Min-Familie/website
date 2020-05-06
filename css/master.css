@@ -101,11 +101,6 @@ body {
 .newsItem a{
     text-decoration: none;
     color: black;
-    /* display: flex;
-    flex-direction: column;
-
-    justify-content: flex-start; */
-
 
 }
 .publishDate{
@@ -155,11 +150,22 @@ body {
     grid-area: weather;
     margin: 20px;
 }
+
+
 .family_members {
     grid-area: family_members;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    margin: 20px;
+    border: 2px solid white;
+    background-color: #ebedf2;
+    border-radius: 25px;
+    overflow-x: auto;
+
 }
 .family_members img {
-    border-radius: 35px;
+    border-radius: 50%;
 }
 
 main {
