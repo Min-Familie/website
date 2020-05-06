@@ -29,7 +29,7 @@
         <script src="js/shoppingCheck.js"></script>
         <?php require 'visuals/header.php'; ?>
         <main>
-            <section class="todo">
+            <section class="todo" <?php if($family_id == 0){echo "style=\"width: calc(200% - 50px)\";";} ?>>
                 <?php
                     require 'inc/showTodo.inc.php';
                  ?>
@@ -42,9 +42,9 @@
                     require 'inc/showShopping.inc.php';
                     echo '<button class="shoppingLeggTil" type="button" name="button" onclick="location.href=\'shopping/shopping.php\'">Legg til flere</button>';
                 }
-                else{
-                    echo '<h1 class="shoppingError">BLI MED ELLER LAG EN FAMILIE FOR Å FÅ TILGANG TIL HANDLELISTEN</h1>';
-                }
+                // else{
+                //     echo '<h1 class="shoppingError">BLI MED ELLER LAG EN FAMILIE FOR Å FÅ TILGANG TIL HANDLELISTEN</h1>';
+                // }
                  ?>
 
             </section>
