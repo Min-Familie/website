@@ -25,7 +25,7 @@
                     SELECT m1.family_id
                     FROM memberships m1
                     WHERE m1.user_id = $user_id
-                );";
+                )";
 
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){

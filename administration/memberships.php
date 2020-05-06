@@ -17,21 +17,21 @@
         // hvis admin, slett hele familien
         $sql = "SELECT * FROM families
                 WHERE id = $family_id
-                AND administrator_user_id = $user_id;";
+                AND administrator_user_id = $user_id";
         $result = $con -> query($sql);
         if (mysqli_num_rows($result) != 0) {
             $sql = "DELETE FROM families
-                    WHERE id = $family_id;";
+                    WHERE id = $family_id";
             $result = $con -> query($sql);
             $sql = "DELETE FROM memberships
-                    WHERE family_id = $family_id;";
+                    WHERE family_id = $family_id";
             $result = $con -> query($sql);
         }
 
         else {
             $sql = "DELETE FROM memberships
                     WHERE family_id = $family_id
-                    AND user_id = $user_id;";
+                    AND user_id = $user_id";
             $result = $con -> query($sql);
         }
     }
@@ -49,7 +49,7 @@
         $sql = "SELECT id FROM families
                 WHERE family_name = \"".$_POST["familyName"]."\"
                 AND administrator_user_id = ".$_POST["adminUserId"]."
-                ORDER BY id ASC;";
+                ORDER BY id ASC";
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $family_id = $row["id"];
@@ -59,7 +59,7 @@
         // oppdatere memberships
         $sql = "INSERT INTO memberships
                 (family_id, user_id)
-                VALUES ($family_id, $user_id);";
+                VALUES ($family_id, $user_id)";
         $result = $con -> query($sql);
     }
 
@@ -80,7 +80,7 @@
     // familiennavn
     if (isset($family_id)) {
         $sql = "SELECT family_name FROM families
-                WHERE id = $family_id;";
+                WHERE id = $family_id";
 
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
@@ -102,10 +102,9 @@
         $sql = "SELECT * FROM users WHERE
                 CONCAT(forename, ' ', surname)
                 LIKE \"%$search"."%\"
-                ORDER BY $sort;";
+                ORDER BY $sort";
 
         $result = $con -> query($sql);
-        echo $sql;
         while($row = $result -> fetch_assoc()){
             array_push($users, [$row["id"], $row["forename"] ." ". $row["surname"]]);
         }
@@ -120,7 +119,7 @@
 
         $sql = "INSERT INTO memberships
                 (family_id, user_id)
-                VALUES ($family_id, $user);";
+                VALUES ($family_id, $user)";
 
         $result = $con -> query($sql);
     }
@@ -131,7 +130,7 @@
     if (isset($family_id)) {
         $sql = "SELECT * FROM memberships
                 WHERE family_id = $family_id
-                AND user_id = $user_id;";
+                AND user_id = $user_id";
         $result = $con -> query($sql);
         $notMember = mysqli_num_rows($result) == 0;
     }
@@ -197,41 +196,49 @@
             include "../visuals/header.php";
             echo "<main>";
             echo "<h1>Familien $family_name</h1>";
+
+            // Hvis admin
+            $sql = "SELECT * FROM families
+                    WHERE id = $family_id
+                    AND administrator_user_id = $user_id";
+            $result = $con -> query($sql);
+            if (mysqli_num_rows($result) != 0) {
         ?>
 
-        <!-- Legg til et medlem -->
-        <fieldset><legend>Søk etter og til en bruker i familien</legend>
-        <!-- Søk etter brukere -->
-        <form action="memberships.php?family_id=<?php echo $family_id ?>" method="post" id="searchForm">
-            <input type="hidden" name="action" value="userSearch">
-            <input type="text"   name="userSearch"   placeholder="Søk etter brukernan eller navn">
-            <input type="submit" value="Søk">
-        </form>
+                <!-- Legg til et medlem -->
+                <fieldset><legend>Søk etter og til en bruker i familien</legend>
+                <!-- Søk etter brukere -->
+                <form action="memberships.php?family_id=<?php echo $family_id ?>" method="post" id="searchForm">
+                    <input type="hidden" name="action" value="userSearch">
+                    <input type="text"   name="userSearch"   placeholder="Søk etter brukernan eller navn">
+                    <input type="submit" value="Søk">
+                </form>
 
         <?php
-            // søkeresultat
-            if (isset($_POST["action"]) && $_POST["action"] == "userSearch") {
-                echo "<table><tr><th>Navn</th></tr>";
+                // søkeresultat
+                if (isset($_POST["action"]) && $_POST["action"] == "userSearch") {
+                    echo "<table><tr><th>Navn</th></tr>";
 
-                foreach ($users as $user) {
-                    echo "<tr><td>".$user[1]."</td>";
-                    echo "<td>";
-                    ?>
-                    <form action="memberships.php?family_id=<?php echo $family_id ?>" method="post">
-                        <input type="hidden" name="action" value="addMember">
-                        <input type="hidden" name="user"   value="<?php echo $user[0] ?>">
-                        <input type="hidden" name="family_id" value="<?php echo $family_id ?>">
-                        <input type="submit" value="Legg til">
-                    </form> </td></tr>
-                    <?php
+                    foreach ($users as $user) {
+                        echo "<tr><td>".$user[1]."</td>";
+                        echo "<td>";
+                        ?>
+                        <form action="memberships.php?family_id=<?php echo $family_id ?>" method="post">
+                            <input type="hidden" name="action" value="addMember">
+                            <input type="hidden" name="user"   value="<?php echo $user[0] ?>">
+                            <input type="hidden" name="family_id" value="<?php echo $family_id ?>">
+                            <input type="submit" value="Legg til">
+                        </form> </td></tr>
+                        <?php
+                    }
+                    echo "</table>";
                 }
-                echo "</table>";
             }
         ?>
         </fieldset>
 
         <ul class="familyMembers">
-        <fieldset>
+        <fieldset><legend>Familiemedlemmer</legend>
         <?php
             foreach ($family as $name) {
                 echo "<li>$name</li>";
