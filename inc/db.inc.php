@@ -1,9 +1,11 @@
 <?php
-    $servername = "localhost";
+    // settings
+/*
+    $servername = "localhost:3307";
     $username = "root";
-    $password = "ShayKing80";
-    $dbname = "project";
-
+    $password = "";
+    $dbname = "minfamilie";
+*/
     // the connection to db
     $con = mysqli_connect(
         $servername, $username, $password, $dbname

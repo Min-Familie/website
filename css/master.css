@@ -160,6 +160,9 @@ body {
 .family_members {
     grid-area: family_members;
 }
+.family_members img {
+    border-radius: 35px;
+}
 
 main {
     display: grid;

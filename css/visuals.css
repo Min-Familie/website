@@ -69,6 +69,10 @@ header img {
     width: auto;
     height: 70px;
 }
+#profilepicture {
+    border-radius: 35px;
+    border: 2px solid #474350;
+}
 @media (max-width: 800px) {
     header p {
         display: none;
