@@ -1,4 +1,5 @@
 <?php
+
     date_default_timezone_set("Europe/Oslo");
 
     function deleteTodo($id, $con){
@@ -58,7 +59,17 @@
         echo "<p class=\"todoError\">Listen er visst tom. Du har enten gjort alt allerede, eller så er det fortsatt ting du kan legge til. </p>";
       }
     }
+    if(isset($_GET['family_id']) && isset($_GET['user_id'])){
+        $family_id = $_GET['family_id'];
+        $user_id = $_GET['user_id'];
+        require 'db.inc.php';
+
+    }
+    if(isset($_SESSION['id'])){
+        $user_id = $_SESSION['id'];
+    }
+    
     echo "<ul id=\"entries\">";
-    mainTodo($con, $_SESSION['id'], $family_id);
+    mainTodo($con, $user_id, $family_id);
     echo "</ul>";
  ?>

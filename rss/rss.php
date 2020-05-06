@@ -21,6 +21,9 @@
                 if($item -> enclosure['type'] == 'image/jpeg'){
                     $image = $item -> enclosure['url'];
                 }
+                else{
+                    $image = "https://info.nrk.no/wp-content/uploads/2019/09/NRK.jpg";
+                }
 
                 $pubdate = $this -> timeDiff($pubdate);
                 $parsed[] = "

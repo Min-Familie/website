@@ -36,7 +36,7 @@
     else{
         $family_id = 0;
     }
-    $families = getFamilies($con, $user, 0);
+    $families = getFamilies($con, $user, $family_id);
 
 ?>
 <!DOCTYPE html>
@@ -52,6 +52,7 @@
         <script src="../js/todo.js"></script>
         <script src="../js/checkmark.js"></script>
         <script src="../js/checkempty.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 
         </script>
             <?php include '../visuals/header.php'; ?>
@@ -59,19 +60,20 @@
             <h1 class="todoTitle">HUSKELISTE</h1>
                 <form id="nyItemForm" onsubmit="return false">
                     <input type="text" id="nyItem" placeholder="E.g. Støvsuge huset...">
-                    <select id="permission">
-                        <option value=0>Privat</option>
+                    <select id="permission" onchange="changeView(this.value, <?php echo $_SESSION['id']; ?>);">
                         <?php
-                            foreach ($families as $surname) { //surname=[navn, id]
+                            foreach ($families as $surname) {
                                 echo "<option value=\"$surname[1]\">$surname[0]</option>";
                             }
                         ?>
+                        <option value=0>Privat</option>
+
                     </select>
                     <button type="button" id="nyButton" name="button" onclick="if(checkEmpty()){onClick();}">Legg til</button>
                     <input type="hidden" id="user" value="<?php echo $user; ?>">
                 </form>
                 <p id="errorMessage"></p>
-                <section class="items">
+                <section id="items">
 
                     <?php include '../inc/showTodo.inc.php'; ?>
 

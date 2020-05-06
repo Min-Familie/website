@@ -19,8 +19,8 @@
             else{
                 $check = $style = $class = "";
             }
-            if(isset($row['price'])){
-                $price = "Totalt: " . (int)$row['price'] * $row['amount'] . " kr" . " | " . $row['price'] . " kr/stk";
+            if(isset($row['price']) && $row['price'] != 0){
+                $price = "Totalt: " . round($row['price']) . " kr" . " | " . round($row['price']/$row['amount']) . " kr/stk";
             }
             else{
                 $price = "Ikke oppgitt pris";
@@ -43,7 +43,7 @@
                 echo "<td class=\"shoppingCell$id shoppingVare\" id=\"text$id\">" . $row['title'] . "</td>";
                 echo "<td class=\"shoppingCell$id shoppingVare\">" . $row['amount'] . "</td>";
                 echo "<td class=\"shoppingCell$id shoppingVare\">" . $price . "</td>";
-                echo "<td class=\"shoppingVare\"><input type=\"checkbox\" autocomplete=\"off\" id=\"shopping$id\" $check onclick=\"check(this.id, $id, 'shopping', 'row$id');\"></td>";
+                echo "<td class=\"shoppingVare\"><input type=\"checkbox\" autocomplete=\"off\" id=\"shopping$id\" $check onclick=\"check(this.id, $id, 'shopping', 'row$id');\"><button class=\"shoppingDelete\" onclick=\"delShopping($id);\">&#128465;</button></td>";
                 echo "</tr>";
             }
         }
@@ -53,7 +53,7 @@
                 <th>Vare</th>
                 <th>Antall</th>
                 <th>Pris*</th>
-                <th>Kjøpt</th>
+
             </tr>";
         $sql = "SELECT id, time, title, amount, price, status FROM shoppingItems WHERE family_id = $family";
         $result = $con -> query($sql);
@@ -63,6 +63,15 @@
         else{
             echo "<tr><td id=\"empty\" colspan=\"4\">Ingen varer er lagt til.</td></tr>";
         }
+        echo "<tr class=\"emptyRow\"><td colspan=\"4\"></td></tr>";
+        echo "<tr class=\"emptyRow\"><td colspan=\"4\"></td></tr>";
+        $sql = "SELECT ROUND(SUM(price)) AS sum FROM shoppingItems";
+        $result = $con -> query($sql);
+        while($row = $result -> fetch_assoc()){
+            $total = $row['sum'];
+        }
+        echo "<tr class=\"sumShopping\"><td>Totalt:</td><td>$total kr</td></tr>";
+
     }
     $family_id = $_SESSION['family_id'];
     if ($family_id != 0){

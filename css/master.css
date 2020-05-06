@@ -124,6 +124,7 @@ body {
     margin: 5px;
     overflow: auto;
     height: 100%;
+    width: 100%;
 }
 .newsContent h4{
     padding-top: 5px;

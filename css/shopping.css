@@ -47,10 +47,13 @@
     margin: 10px;
     width: calc(100% - 20px);
 }
+#varer td{
 
+}
 #varer td, #varer th {
     border: 1px solid #ddd;
     padding: 8px;
+
 }
 
 #varer tr:nth-child(even){
@@ -72,6 +75,15 @@
     text-align: center;
     font-size: 2rem;
 }
+#varer .emptyRow td{
+    border: 0;
+}
+.emptyRow{
+    visibility: hidden;
+}
+.sumShopping{
+    background-color: white;
+}
 tr.line_through td{
     position:relative
 }
@@ -80,4 +92,18 @@ tr.line_through td:before{
     position: absolute;
     left: 0; top: 50%; width: 100%;
     border-bottom: 1px solid #000;
+}
+.shoppingDelete{
+    float: right;
+    background: white;
+    width: 40px;
+    outline: 0;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 20px;
+}
+input[type="checkbox"]{
+    margin-top: 10px;
 }

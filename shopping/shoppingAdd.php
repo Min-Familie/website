@@ -8,6 +8,7 @@
     if(empty($price)){
         $price = "null";
     }
+    $price = round($price) * $amount;
 
     $sql = "INSERT INTO shoppingItems(title, status, family_id, amount, price) VALUES($title, 0, $family, $amount, $price)";
     echo $sql;

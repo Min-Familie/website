@@ -57,7 +57,7 @@ html {
     height: 100%;
     background-color: #E5E5E5;
 }
-.items {
+#items {
     background-color: white;
     overflow: auto;
     max-height: 50%;
