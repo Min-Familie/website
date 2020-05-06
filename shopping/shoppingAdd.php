@@ -14,5 +14,5 @@
     if(!$result = $con -> query($sql)){
         echo "wrong";
     }
-    $con->close();
+
 ?>

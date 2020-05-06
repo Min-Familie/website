@@ -6,5 +6,5 @@
     if($status != 0){   $sql = "UPDATE shoppingItems SET time = NOW(), status = $status WHERE id = $id";}
     else{               $sql = "UPDATE shoppingItems SET time = null, status = $status WHERE id = $id";}
 
-    $con -> query($sql);
+
 ?>

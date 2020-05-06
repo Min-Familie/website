@@ -104,4 +104,3 @@
         <?php require 'visuals/footer.html' ?>
     </body>
 </html>
-<?php $con->close(); ?>

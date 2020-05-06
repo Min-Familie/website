@@ -72,5 +72,5 @@
     echo "<ul id=\"entries\">";
     mainTodo($con, $user_id, $family_id);
     echo "</ul>";
-    $con->close();
+    
  ?>

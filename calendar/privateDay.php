@@ -209,5 +209,3 @@
         </script>
     </body>
 </html>
-
-<?php $con -> close(); ?>

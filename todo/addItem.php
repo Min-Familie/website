@@ -23,5 +23,5 @@
     if ($con->query($sql) === FALSE) {
         echo "Error: " . $sql . "<br>" . $con->error;
     }
-    $con->close();
+
  ?>

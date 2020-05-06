@@ -11,7 +11,7 @@
     require $_SERVER["DOCUMENT_ROOT"] . "/minfamilie/inc/db.inc.php";
 
 
-    
+
     function getFamilies ($con, $user_id) {
         $families = [];
 
@@ -83,5 +83,3 @@
         ?>
     </body>
 </html>
-
-<?php $con -> close(); ?>

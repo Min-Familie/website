@@ -130,5 +130,5 @@
     }
 
     main($con, $inputDay);
-    $con->close();
+
 ?>
