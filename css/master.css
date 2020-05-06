@@ -32,19 +32,17 @@ body {
 .todo {
     text-align: center;
     grid-area: todo;
-    height: 50vh;
-    overflow: auto;
+
     margin: 0 20px;
 
-    height: 100%;
-
-    /* border: 1px solid black; */
 
 }
+
 #entries {
     border: 1px solid black;
     background: white;
-    height: 90%;
+    height: calc(50vh - 55px);
+    overflow: auto;
     /* margin: 10px; */
 }
 .todoLeggTil {

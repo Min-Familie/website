@@ -46,7 +46,7 @@
         <link rel="icon"       href="../visuals/logo.png" type="image/png">
         <link rel="stylesheet" href="../css/todo.css">
         <link rel="stylesheet" href="../css/visuals.css">
-        <title>Todo</title>
+        <title>Gjøremål</title>
     </head>
     <body class="todoBody">
         <script src="../js/todo.js"></script>
@@ -57,7 +57,7 @@
         </script>
             <?php include '../visuals/header.php'; ?>
         <main class="todoMain">
-            <h1 class="todoTitle">HUSKELISTE</h1>
+            <h1 class="todoTitle">GJØREMÅL</h1>
                 <form id="nyItemForm" onsubmit="return false">
                     <input type="text" id="nyItem" placeholder="E.g. Støvsuge huset...">
                     <select id="permission" onchange="changeView(this.value, <?php echo $_SESSION['id']; ?>);">
