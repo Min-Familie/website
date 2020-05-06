@@ -82,5 +82,5 @@
     else{
         echo 'CREATE/JOIN A FAMILY FIRST';
     }
-
+    $con->close();
  ?>

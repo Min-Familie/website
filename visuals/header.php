@@ -50,3 +50,4 @@
          " alt="picture">
     </header>
 </section>
+<?php $con->close(); ?>

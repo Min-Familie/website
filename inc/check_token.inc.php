@@ -32,5 +32,5 @@
     else {
         echo "no";
     }
-
+    $con->close();
 ?>

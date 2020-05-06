@@ -233,3 +233,4 @@
         ?>
     </tbody>
 </table>
+<?php $con->close(); ?>

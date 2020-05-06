@@ -21,7 +21,6 @@
         <meta charset="utf-8">
         <title>Dashboard</title>
         <link rel="stylesheet" href="css/master.css">
-        <link rel="alternate" type="application/rss+xml" title="Subscribe to What's New" href="https://www.nrk.no/toppsaker.rss" />
     </head>
     <body>
         <script src="js/checkmark.js"></script>
@@ -65,8 +64,6 @@
                     $feed = new Rss('https://www.nrk.no/toppsaker.rss');
                     $feed -> showFeed(4);
                  ?>
-                <!-- <rssapp-wall id="DvxuYSPLia1qLCDF"></rssapp-wall><script src="https://widget.rss.app/v1/wall.js" type="text/javascript" async></script>
-                <a href="https://www.nrk.no/toppsaker.rss" target="_blank">Subscribe to What's New</a> -->
             </section>
             <section class="calendar">
                 <section class="calendarWrapper">
@@ -107,3 +104,4 @@
         <?php require 'visuals/footer.html' ?>
     </body>
 </html>
+<?php $con->close(); ?>

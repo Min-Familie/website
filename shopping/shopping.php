@@ -48,3 +48,4 @@
         <?php include '../visuals/footer.html'; ?>
     </body>
 </html>
+<?php $con->close(); ?>
