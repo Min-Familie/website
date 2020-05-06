@@ -138,6 +138,30 @@
 
 
 
+    function getFamily($con, $user_id) {
+        $family = [];
+        $sql = "SELECT DISTINCT u.id u.forename, u.surname
+                FROM users u
+                JOIN memberships m
+                ON u.id = m.user_id
+                WHERE m.family_id IN
+                (
+                    SELECT m1.family_id
+                    FROM memberships m1
+                    WHERE m1.user_id = $user_id
+                )";
+        $result = $con -> query($sql);
+        while($row = $result -> fetch_assoc()){
+            $name = $row["forename"] . " " . $row["surname"];
+            array_push($family, $name);
+        }
+        return $family;
+    }
+
+    $family = getFamily($con, $user_id);
+
+
+
     // ut av siden?
     if (isset($_POST["action"]) && $_POST["action"] == "leave") {
         $headerMessage = "Du%20har%20forlatt%20familien.";
@@ -205,27 +229,17 @@
             }
         ?>
         </fieldset>
+
         <ul class="familyMembers">
+        <fieldset>
         <?php
-
-        $sql = "SELECT DISTINCT u.forename, u.surname
-                FROM users u
-                JOIN memberships m
-                ON u.id = m.user_id
-                WHERE m.family_id IN
-                (
-                    SELECT m1.family_id
-                    FROM memberships m1
-                    WHERE m1.user_id = $user_id
-                )";
-
-        $result = $con -> query($sql);
-        while($row = $result -> fetch_assoc()){
-            $name = $row['forename'] . " " . $row['surname'];
-            echo "<li>$name</li>";
-        }
-         ?>
+            foreach ($family as $name) {
+                echo "<li>$name</li>";
+            }
+        ?>
+        </fieldset>
         </ul>
+
         <!-- Forlat familien -->
         <form action="memberships.php" method="post" id="leaveForm">
             <fieldset><legend>Forlat Familien</legend>
