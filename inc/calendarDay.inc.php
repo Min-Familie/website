@@ -86,27 +86,27 @@
                     // hvis event starter
                     $now = $hrs==$affair["startHour"] && $qrt==intdiv($affair["startMinute"], 15);
                     if ($affair["author"]==$person && $now) {
-
+                        
                         $y1 = $hrs;
                         $y2 = $qrt;
                         for ($i=0; $i<intdiv($affair["duration"], 15); $i++) { // for hver celle eventen tar opp
-
+                            
                             $coords = array_map(function($i) {return $i[0];}, $occupied);
                             // hvis den allerede er der, slå sammen eventsene
                             if (in_array([$y1, $y2, $person], $coords)) {
                                 // slå sammen events
                                 $key = array_search([$y1, $y2, $person], $coords);
                                 $event2 = $occupied[$key][1];
-                                array_push($events, mergeEvets($affair, $event2));
+                                array_push($events, mergeEvets($affair, $event2)); 
 
                                 // fjern $event2 og $affair fra events
-                                $key = array_search($event2, $events);
+                                $key = array_search($event2, $events); 
                                 unset($events[$key]);
-                                $key = array_search($affair, $events);
+                                $key = array_search($affair, $events); 
                                 unset($events[$key]);
 
                                 // begyn på ny, fordi arrayen $events er endret
-                                goto occupationTest;
+                                goto occupationTest; 
                             }
 
                             // plass til event
@@ -169,7 +169,7 @@
                     echo "<th>$username</th>";
                 }
             ?>
-        </tr>
+        </tr>  
     </thead>
 
     <tbody>
@@ -180,7 +180,7 @@
 
                 for ($qrt=0; $qrt<4; $qrt++) { // for hvert kvarter: fyll opp de 4 kolonne
                     if ($qrt!=0) {echo "<tr>";} // første gang er den allerede echoet
-
+                    
                     foreach ($family as $person) { // for hver row => for hver celle
                         $empty = ! in_array([$hrs, $qrt, $person], $occupied);
                         $empty = True;
@@ -192,11 +192,16 @@
                         }
 
                         if ($empty) { // hvis det ikke er en event i ruta
-                            echo "<td onclick=\"location.href='privateDay.php?day=$inputDay&hrs=$hrs&qrt=$qrt'\"> </td>";
+                            if (basename($_SERVER["PHP_SELF"]) == "index.php") { //hvis dashboard 
+                                echo "<td onclick=\"location.href='calendar/privateDay.php?day=$inputDay&hrs=$hrs&qrt=$qrt'\"> </td>";
+                            }
+                            else {
+                                echo "<td onclick=\"location.href='privateDay.php?day=$inputDay&hrs=$hrs&qrt=$qrt'\"> </td>";
+                            }
                         }
                         else { //ellers er det plass til en event
                             foreach ($events as $affair) { // for hver event
-                                // hvis ny event
+                                // hvis ny event 
                                 $now = $hrs==$affair["startHour"] && $qrt==intdiv($affair["startMinute"], 15);
                                 if ($affair["author"]==$person && $now) {
 
@@ -205,16 +210,25 @@
                                     $endM = $hrs+$affair["duration"] - intdiv($affair["duration"]+$affair["startMinute"], 60)*60;
                                     $timeEnd = substr("0$endH:", -3).substr("0$endM", -2);
 
-                                    echo "<td class=\"event\" rowspan=\"".intdiv($affair["duration"], 15)."\"
-                                    onclick=\"location.href='singleEvent.php?event_id=".$affair["id"]."&event_family_id=".$affair["family_id"]."'\">
-                                            <ul>
-                                                <li class=\"title\">".$affair["title"]."</li>
-                                                <li>$time0 - $timeEnd</li>";
-
-                                    if ($affair["duration"]>15) {
-                                        echo   "<li><a href=\"https://www.google.com/maps/place/".$affair["location"]."\" target=\"_blank\">kart</a></li>";
+                                    if (basename($_SERVER["PHP_SELF"]) == "index.php") {
+                                        echo "<td class=\"event\" rowspan=\"".intdiv($affair["duration"], 15)."\"
+                                        onclick=\"location.href='calendar/singleEvent.php?event_id=".$affair["id"]."&event_family_id=".$affair["family_id"]."'\"> 
+                                                <ul>
+                                                    <li class=\"title\">".$affair["title"]."</li>
+                                                    <li>$time0 - $timeEnd</li>";
+                                    }
+                                    else {
+                                        echo "<td class=\"event\" rowspan=\"".intdiv($affair["duration"], 15)."\"
+                                        onclick=\"location.href='singleEvent.php?event_id=".$affair["id"]."&event_family_id=".$affair["family_id"]."'\"> 
+                                                <ul>
+                                                    <li class=\"title\">".$affair["title"]."</li>
+                                                    <li>$time0 - $timeEnd</li>";
                                     }
 
+                                    if ($affair["duration"]>15) {
+                                        echo   "<li><a href=\"https://www.google.com/maps/place/".$affair["location"]."\" target=\"_blank\">kart</a></li>"; 
+                                    }
+                                    
                                     echo       "</ul>
                                         </td>
                                     ";
@@ -223,7 +237,7 @@
                                 }
                             }
                         }
-
+                        
                     }
                     echo "</tr>";
 
@@ -233,4 +247,3 @@
         ?>
     </tbody>
 </table>
-<?php $con->close(); ?>
