@@ -120,9 +120,9 @@
         return $events;
     }
 
-    // familiemedlemmer fra db
     function main($con, $inputDay){
         $user = $_SESSION['id'];
+        // familiemedlemmer fra db
         $family = getFamily($con, $user);
         // events fra db
         $events = getEvents($con, $user, $inputDay);
@@ -130,5 +130,4 @@
     }
 
     main($con, $inputDay);
-
 ?>
