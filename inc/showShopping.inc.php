@@ -52,7 +52,7 @@
         echo "<tr>
                 <th>Vare</th>
                 <th>Antall</th>
-                <th>Pris*</th>
+                <th colspan=\"2\">Pris*</th>
 
             </tr>";
         $sql = "SELECT id, time, title, amount, price, status FROM shoppingItems WHERE family_id = $family";
