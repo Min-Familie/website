@@ -33,7 +33,7 @@ function signOut() {
         xhttp.send('logout=true');
 
     });
-    window.location.href = '/minfamilie/index.php';
+    window.location.href = '/minfamilie/login.html';
 }
 function onLoad() {
      gapi.load('auth2', function() {
