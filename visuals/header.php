@@ -10,12 +10,7 @@
     } ?>
     <a href="/minfamilie/todo/todo.php">Gjøremål</a>
     <a href="/minfamilie/administration/selectFamily.php">Administrering</a>
-    <?php if (isset($_SESSION['id'])) {
-        echo '<a href="#" onclick="signOut();">Logg ut</a>';
-    }
-    else {
-        echo '<a href="/minfamilie/login.php">Logg inn</a>';
-    } ?>
+    <a href="#" onclick="signOut();">Logg ut</a>
 </nav>
 
 <script type="text/javascript" src="/minfamilie/js/sidebar.js"></script>
