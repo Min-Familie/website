@@ -4,7 +4,7 @@
         $user_id = $_SESSION['id'];
     }
     else {
-        header("Location: ../login.php");
+        header("Location: ../login.html");
         //$user_id = 1;
     }
 
