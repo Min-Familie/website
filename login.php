@@ -9,12 +9,14 @@
         <link rel="icon"       type="image/png" href="visuals/logo.png">
     </head>
     <body>
-        <?php include "visuals/header.php"; ?>
         <main>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <section id="loginSection">
+                <h1>Velkommen til Min Familie!</h1>
+                <p>Her kan du få orden og oversikt over familien din! Planlegg til den minste detalj, sett gjøremål, og lag en handleliste. Fra nå av kan det kun gå en vei!</p>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <section>
         </main>
-        <?php include "visuals/footer.html"; ?>
-
+        
         <script src="js/login.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
     </body>
