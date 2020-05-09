@@ -10,13 +10,19 @@
     </head>
     <body>
         <main>
-            <section id="loginSection">
-                <h1>Velkommen til Min Familie!</h1>
-                <p>Her kan du få orden og oversikt over familien din! Planlegg til den minste detalj, sett gjøremål, og lag en handleliste. Fra nå av kan det kun gå en vei!</p>
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
-            <section>
+            <section class="loginSection">
+                <img src="visuals/logo.png" alt="logo">
+                <h1>Velkommen tilbake!<br>Vennligst logg inn med Google-brukeren din.</h1>
+                <div class="g-signin2" data-onsuccess="onSignIn" data-width="300" data-height="50" data-longtitle="true"></div>
+            </section>
+            <section class="loginInfo">
+                <section class="text">
+                    <h1>Velkommen til Min Familie</h1>
+                    <p>Her kan du få orden og oversikt over familien din! Planlegg til den minste detalj, sett gjøremål, og lag en handleliste. Fra nå av kan det kun gå en vei!</p>
+                </section>
+            </section>
         </main>
-        
+
         <script src="js/login.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
     </body>
