@@ -208,9 +208,9 @@
         ?>
 
                 <!-- Legg til et medlem -->
-                <fieldset><legend>Søk etter og til en bruker i familien</legend>
                 <!-- Søk etter brukere -->
                 <form action="memberships.php?family_id=<?php echo $family_id ?>" method="post" id="searchForm">
+                    <h2>Søk etter og til en bruker i familien</h2>
                     <input type="hidden" name="action" value="userSearch">
                     <input type="text"   name="userSearch"   placeholder="Søk etter brukernan eller navn">
                     <input type="submit" value="Søk">
@@ -219,7 +219,7 @@
         <?php
                 // søkeresultat
                 if (isset($_POST["action"]) && $_POST["action"] == "userSearch") {
-                    echo "<table><tr><th>Navn</th></tr>";
+                    echo "<table id=\"searchResults\"><tr><th>Navn</th><th>Add</th></tr>";
 
                     foreach ($users as $user) {
                         echo "<tr><td>".$user[1]."</td>";
@@ -239,24 +239,22 @@
         ?>
         </fieldset>
 
-        <ul class="familyMembers">
-        <fieldset><legend>Familiemedlemmer</legend>
+        <h2 id="familiesListHeader">Familiemedlemmer</h2>
+        <ul id="familiesList">
         <?php
             foreach ($family as $name) {
                 echo "<li>$name</li>";
             }
         ?>
-        </fieldset>
         </ul>
 
         <!-- Forlat familien -->
         <form action="memberships.php" method="post" id="leaveForm">
-            <fieldset><legend>Forlat Familien</legend>
-                <input type="hidden" name="action"    value="leave">
-                <input type="hidden" name="user_id"   value="<?php echo $user_id ?>">
-                <input type="hidden" name="family_id" value="<?php echo $family_id ?>">
-                <input type="submit" value="Forlat">
-            </fieldset>
+            <h2>Forlat Familien</h2>
+            <input type="hidden" name="action"    value="leave">
+            <input type="hidden" name="user_id"   value="<?php echo $user_id ?>">
+            <input type="hidden" name="family_id" value="<?php echo $family_id ?>">
+            <input type="submit" value="Forlat">
         </form>
 
         <?php
