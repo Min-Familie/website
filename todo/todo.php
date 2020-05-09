@@ -1,8 +1,12 @@
 <?php
     session_start();
     include '../inc/db.inc.php';
-
-    $user = $_SESSION['id'];
+    if (isset($_SESSION['id'])) {
+        $user = $_SESSION['id'];
+    }
+    else {
+        header("Location: ../login.html");
+    }
     if(isset($_SESSION['family_id'])){
         $family = $_SESSION['family_id'];
     }
