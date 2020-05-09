@@ -5,7 +5,7 @@
         $user = $_SESSION['id'];
     }
     else{
-        header('Location: login.php');
+        header('Location: login.html');
     }
     if (isset($_SESSION['family_id'])) {
         $family_id = $_SESSION['family_id'];
