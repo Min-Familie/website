@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if (!isset($_SESSION['id'])) {
+        header("Location: ../login.html");
+    }
     if (isset($_SESSION['family_id'])) {
         $family = $_SESSION['family_id'];
     }
