@@ -1,5 +1,5 @@
 <head>
-    <meta name="google-signin-client_id" content="71847374517-d19h9ttcihhtftg0q4ibjrpirdmjd71t.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="280130080722-8ruhprpjaqt1vorhd8s245l9gtqgmr61.apps.googleusercontent.com">
 </head>
 
 <nav id="sidebar" class="sidebar">
