@@ -1,5 +1,3 @@
-var open = false;
-
 function openNav() {
     let nav = document.getElementById('sidebar');
     nav.style.zIndex = 20;
