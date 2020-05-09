@@ -58,26 +58,21 @@
 
         <!-- Ny familie -->
         <form action="memberships.php" method="post" id="newFamilyForm">
-            <fieldset>
-                <legend>Stift en ny familie</legend>
-                <input type="hidden" name="action"      value="newFamily">
-                <input type="hidden" name="adminUserId" value="<?php echo $user_id ?>">
-                <input type="text"   name="familyName"  placeholder="Familienavn">
-                <input type="submit" value="Opprett">
-            </fieldset>
+            <h2>Stift en ny familie</h2>
+            <input type="hidden" name="action"      value="newFamily">
+            <input type="hidden" name="adminUserId" value="<?php echo $user_id ?>">
+            <input type="text"   name="familyName"  placeholder="Familienavn">
+            <input type="submit" value="Opprett">
         </form>
 
         <!-- Velg en gammel familie -->
-        <fieldset><legend>Velg en gammel familie</legend>
+        <h2 id="familiesListHeader">Velg en gammel familie</h2>
         <?php
             echo "<ul id=\"familiesList\">";
-            echo "<li>Familienavn</li>";
-
             foreach ($families as $family) {
                 echo "<li> <a href=\"memberships.php?family_id=".$family[0]."\">".$family[1]."</a></li>";
             }
-            echo "</table>";
-            echo "</fieldset>";
+            echo "</ul>";
             echo "</main>";
             include "../visuals/footer.html";
         ?>
