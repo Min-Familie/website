@@ -159,6 +159,8 @@
 
     $family = getFamily($con, $user_id);
 
+    $_SESSION["family_id"] = $family_id;
+
 
 
     // ut av siden?

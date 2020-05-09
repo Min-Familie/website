@@ -39,6 +39,7 @@
 }
 #eventForm input[type=submit]:hover {
     background-color: black;
+    transition: 0.5s;
 }
 
 @media (max-width: 800px) {
