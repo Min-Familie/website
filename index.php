@@ -27,6 +27,7 @@
         <script src="js/todo.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
         <script src="js/shoppingCheck.js"></script>
+        <script src="js/shopping.js"></script>
         <?php require 'visuals/header.php'; ?>
         <main>
             <section class="todo">
