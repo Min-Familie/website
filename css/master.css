@@ -65,10 +65,22 @@ body {
 }
 .shoppingError{
     background-color: white;
-    height: 100%;
-    padding: 10px;
-    padding-bottom: 0;
-    padding-top: 0;
+    text-align: center;
+    justify-content: center;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+    ". logo ."
+    "shoppingError shoppingError shoppingError";
+}
+.shoppingError img{
+    grid-area: logo;
+    width: 400px;
+}
+.shoppingError h1{
+    grid-area: shoppingError;
 }
 #varer {
     margin: 0;

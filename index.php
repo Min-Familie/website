@@ -29,22 +29,25 @@
         <script src="js/shoppingCheck.js"></script>
         <?php require 'visuals/header.php'; ?>
         <main>
-            <section class="todo" <?php if($family_id == 0){echo "style=\"width: calc(200% - 50px)\";";} ?>>
+            <section class="todo">
+                <!-- <?php if($family_id == 0){echo "style=\"width: calc(200% - 50px)\";";} ?> -->
                 <?php
                     require 'inc/showTodo.inc.php';
                  ?>
                  <button class="todoLeggTil" type="button" name="button" onclick="location.href='todo/todo.php'">Legg til flere</button>
             </section>
-            <section class="shopping">
-
                 <?php
                 if($family_id != 0){
+                    echo '<section class="shopping">';
                     require 'inc/showShopping.inc.php';
                     echo '<button class="shoppingLeggTil" type="button" name="button" onclick="location.href=\'shopping/shopping.php\'">Legg til flere</button>';
                 }
-                // else{
-                //     echo '<h1 class="shoppingError">BLI MED ELLER LAG EN FAMILIE FOR Å FÅ TILGANG TIL HANDLELISTEN</h1>';
-                // }
+                else{
+                    echo '<section class="shoppingError shopping">';
+                    echo '<img src="visuals/logo.png" alt="logo">';
+                    echo '<h1>BLI MED ELLER LAG EN FAMILIE FOR Å FÅ TILGANG TIL HANDLELISTEN</h1>';
+                    echo '</section>';
+                }
                  ?>
 
             </section>
