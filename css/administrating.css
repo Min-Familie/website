@@ -1,4 +1,4 @@
-#newFamilyForm {
+#newFamilyForm, #searchForm, #leaveForm {
     margin: auto;
     width: calc(100% - 20px);
     display: flex;
@@ -6,7 +6,7 @@
     flex-flow: row wrap;
     align-items: center;
 }
-#newFamilyForm input {
+#newFamilyForm input, #searchForm input{
     vertical-align: middle;
     text-align: center;
     margin: 5px 10px 5px 0;
@@ -14,17 +14,26 @@
     background-color: #FBFEF9;
     border: 1px solid #424A4F;
 }
-#newFamilyForm input[type=submit] {
+#searchForm input[type=text] {
+    width: 180px;
+}
+#newFamilyForm input[type=submit], #searchForm input[type=submit], #leaveForm input[type=submit]{
     padding: 10px 20px;
     background-color: #1C5D99;
     border: 1px solid #424A4F;
     color: #FBFEF9;
     cursor: pointer;
 }
-#newFamilyForm input[type=submit]:hover {
+#newFamilyForm input[type=submit]:hover, #searchForm input[type=submit]:hover, #leaveForm input[type=submit]:hover {
     background-color: black;
     transition: 0.5s;
 }
+#leaveForm {
+    margin-top: 100px;
+}
+
+
+
 
 
 #familiesListHeader {
@@ -48,8 +57,26 @@
 }
 
 
+#searchResults {
+    border-collapse: collapse; 
+    overflow: hidden;
+    max-width: 1100px;
+    width: calc(100% - 40px);
+    margin: auto;
+    text-align: left;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0px 0px 15px lightgray;
+}
+#searchResults th, #searchResults td {padding: 10px;}
+#searchResults tr:nth-child(odd) {background-color: #FBFEF9;}
+#searchResults th {background: #8BBFB8;}
+
+
+
+
 @media (max-width: 800px) {
-    #familiesList input {
+    #familiesList input, #searchForm input {
         margin: 10px;
     }
 
@@ -62,7 +89,16 @@
         text-align: center;
     }
 
-    #familiesListHeader {
+    #familiesListHeader, #leaveForm {
         margin-top: 25px;
     }
+}
+
+
+
+
+
+
+h1 {
+    text-align: center;
 }
