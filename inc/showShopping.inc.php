@@ -52,8 +52,8 @@
         echo "<tr>
                 <th>Vare</th>
                 <th>Antall</th>
-                <th colspan=\"2\">Pris*</th>
-
+                <th>Pris*</th>
+                <th>Endre status</th>
             </tr>";
         $sql = "SELECT id, time, title, amount, price, status FROM shoppingItems WHERE family_id = $family";
         $result = $con -> query($sql);
