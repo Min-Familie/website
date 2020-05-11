@@ -31,7 +31,6 @@
         <?php require 'visuals/header.php'; ?>
         <main>
             <section class="todo">
-                <!-- <?php if($family_id == 0){echo "style=\"width: calc(200% - 50px)\";";} ?> -->
                 <?php
                     require 'inc/showTodo.inc.php';
                  ?>
