@@ -21,6 +21,7 @@
         <meta charset="utf-8">
         <title>Dashboard</title>
         <link rel="stylesheet" href="css/master.css">
+        <link rel="icon"       type="image/png" href="visuals/logo.png">
     </head>
     <body>
         <script src="js/checkmark.js"></script>
