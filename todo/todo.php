@@ -65,13 +65,19 @@
                 <form id="nyItemForm" onsubmit="return false">
                     <input type="text" id="nyItem" placeholder="E.g. Støvsuge huset...">
                     <select id="permission" onchange="changeView(this.value, <?php echo $_SESSION['id']; ?>);">
-                        <?php
+                        <?php if($family_id == 0){
+                            echo '<option value=0>Privat</option>';
                             foreach ($families as $surname) {
                                 echo "<option value=\"$surname[1]\">$surname[0]</option>";
                             }
-                        ?>
-                        <option value=0>Privat</option>
 
+                        }
+                        else{
+                            foreach ($families as $surname) {
+                                echo "<option value=\"$surname[1]\">$surname[0]</option>";
+                            }
+                            echo '<option value=0>Privat</option>';
+                        }?>
                     </select>
                     <button type="button" id="nyButton" name="button" onclick="if(checkEmpty()){onClick();}">Legg til</button>
                     <input type="hidden" id="user" value="<?php echo $user; ?>">
