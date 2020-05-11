@@ -77,7 +77,7 @@ body {
 }
 .shoppingError img{
     grid-area: logo;
-    width: 400px;
+    width: 100%;
 }
 .shoppingError h1{
     grid-area: shoppingError;
