@@ -44,8 +44,7 @@
         }
         function timeDiff($time){
             $time = array_filter(explode(' ', explode(',', $time)[1]));
-            $time = date('d/m/Y', strtotime("$time[1] $time[2] $time[3]")) . " $time[4]";
-
+            $time = date('Y-m-d', strtotime("$time[3] $time[2] $time[1]")) . " $time[4]";
             $dt1 = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
             $dt2 = new DateTime($time, new DateTimeZone('GMT'));
             $dt2 -> setTimezone(new DateTimeZone(date_default_timezone_get()));
