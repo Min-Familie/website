@@ -12,9 +12,9 @@
                 max-width: 90%;
             }
             main {
-	            display: flex;
-	            align-items: center;
-                height: calc(100vh - 300px)
+	        display: flex;
+	        align-items: center;
+            	height: calc(100vh - 300px);
             }
             @media (max-width: 1100px) {
                 main {
