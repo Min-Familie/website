@@ -50,7 +50,6 @@
       else{
         $sql = "SELECT * FROM todo WHERE family_id = $family ORDER BY time DESC";
       }
-
       $result = $con -> query($sql);
       if ($result -> num_rows > 0){
         showTodo($result, $con);
