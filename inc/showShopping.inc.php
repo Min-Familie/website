@@ -65,7 +65,7 @@
         }
         echo "<tr class=\"emptyRow\"><td colspan=\"4\"></td></tr>";
         echo "<tr class=\"emptyRow\"><td colspan=\"4\"></td></tr>";
-        $sql = "SELECT ROUND(SUM(price)) AS sum FROM shoppingItems";
+        $sql = "SELECT ROUND(SUM(price)) AS sum FROM shoppingItems WHERE family_id = $family";
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             $total = $row['sum'];
