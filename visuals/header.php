@@ -14,7 +14,7 @@
 </nav>
 
 <script type="text/javascript" src="/minfamilie/js/sidebar.js"></script>
-<script type="text/javascript" src="<?php echo $_SERVER['DOCUMENT_ROOT']; ?>minfamilie/js/login.js"></script>
+<script type="text/javascript" src="/minfamilie/js/login.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
 <section id="main">
