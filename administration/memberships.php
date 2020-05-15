@@ -137,27 +137,23 @@
 
 
 
-    function getFamily($con, $user_id) {
+    function getFamily($con, $user_id, $family_id) {
         $family = [];
-        $sql = "SELECT DISTINCT u.id, u.forename, u.surname
+        $sql = "SELECT DISTINCT u.id, CONCAT(u.forename, ' ', u.surname) AS name
                 FROM users u
                 JOIN memberships m
                 ON u.id = m.user_id
-                WHERE m.family_id IN
-                (
-                    SELECT m1.family_id
-                    FROM memberships m1
-                    WHERE m1.user_id = $user_id
-                )";
+                WHERE m.family_id = $family_id";
+
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
-            $name = $row["forename"] . " " . $row["surname"];
+            $name = $row["name"];
             array_push($family, $name);
         }
         return $family;
     }
 
-    $family = getFamily($con, $user_id);
+    $family = getFamily($con, $user_id, $family_id);
 
     $_SESSION["family_id"] = $family_id;
 
