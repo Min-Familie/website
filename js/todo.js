@@ -19,22 +19,20 @@ function onClick(){
 }
 function delItem(id){
     let time = new Date().getTime();        // hindre cache
-    let userID = document.getElementById("user").value;
-    let familyID = document.getElementById("permission").value;
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         document.getElementById(`entity${id}`).remove();
-        if(this.responseText == "empty"){
-            changeView(familyID, userID);
+        if(document.querySelectorAll("#entries li").length == 0){
+            location.reload();
         }
       }
     };
-    xhttp.open("GET", `/minfamilie/inc/delItem.inc.php?id=${id}&m=todo&user_id=${userID}&family_id=${familyID}&time=${time}`, true);
+    xhttp.open("GET", `/minfamilie/inc/delItem.inc.php?id=${id}&m=todo&time=${time}`, true);
     xhttp.send();
 }
 
-function changeView(id, user){
+function changeView(family, user){
     let time = new Date().getTime();        // hindre cache
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -42,7 +40,7 @@ function changeView(id, user){
             document.getElementById('items').innerHTML = this.responseText;
         }
       };
-    xhttp.open("GET", `/minfamilie/inc/showTodo.inc.php?family_id=${id}&user_id=${user}&time=${time}`, true);
+    xhttp.open("GET", `/minfamilie/inc/showTodo.inc.php?family_id=${family}&user_id=${user}&time=${time}`, true);
     xhttp.send();
 
 

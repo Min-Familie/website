@@ -14,7 +14,7 @@
     function getFamilies($con, $user, $family) {
         $families = [];
 
-        // navn på alle familiene+id som personen er med i
+        // Navn på alle familiene+id som personen er med i
         $sql = "SELECT DISTINCT
                 IF($family=f.id, 'Denne familien', f.family_name) AS family_name, f.id
                 FROM families f
@@ -64,7 +64,11 @@
             <h1 class="todoTitle">GJØREMÅL</h1>
                 <form id="nyItemForm" onsubmit="return false">
                     <input type="text" id="nyItem" placeholder="E.g. Støvsuge huset...">
+
+                     <!-- Lager en select -->
                     <select id="permission" onchange="changeView(this.value, <?php echo $_SESSION['id']; ?>);">
+
+                        <!-- Dersom en ikke har valg familie, vil "Privat" vises først, og så navnene til de ulike familiene -->
                         <?php if($family_id == 0){
                             echo '<option value=0>Privat</option>';
                             foreach ($families as $surname) {
@@ -72,10 +76,21 @@
                             }
 
                         }
+
+                        // Ellers vil "Denne familien" vises først, og så de ulike familiene, og "Privat" til slutt
                         else{
+                            $values = [];
                             foreach ($families as $surname) {
-                                echo "<option value=\"$surname[1]\">$surname[0]</option>";
+                                $values[$surname[0]] = $surname[1];
                             }
+                            $dennefamilie = $values['Denne familien'];
+                            echo "<option value=\"$dennefamilie\">Denne familien</option>";
+                            foreach($values as $name => $val){
+                                if($name != 'Denne familien'){
+                                    echo "<option value=\"$val\">$name</option>";
+                                }
+                            }
+
                             echo '<option value=0>Privat</option>';
                         }?>
                     </select>

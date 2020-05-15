@@ -13,8 +13,6 @@
     }
 
     if($_GET['m'] == 'todo'){
-        $user_id = $_GET['user_id'];
-        $family_id = $_GET['family_id'];
         $sql = delTodo($id);
     }
     else{
@@ -23,7 +21,5 @@
     if ($con -> query($sql) === FALSE) {
         echo "Error: " . $sql . "<br>" . $con->error;
     }
-    if($con -> query("SELECT * FROM todo WHERE user_id = $user_id AND family_id = $family_id") -> num_rows == 0){
-        echo 'empty';
-    }
+
  ?>
