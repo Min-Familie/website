@@ -9,7 +9,7 @@
         echo '<a href="/minfamilie/shopping/shopping.php">Handleliste</a>';
     } ?>
     <a href="/minfamilie/todo/todo.php">Gjøremål</a>
-    <a href="/minfamilie/administration/selectFamily.php">Administrering</a>
+    <a href="/minfamilie/administration/selectFamily.php">Velg familie</a>
     <a href="#" onclick="signOut();">Logg ut</a>
 </nav>
 
