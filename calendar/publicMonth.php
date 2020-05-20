@@ -114,7 +114,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Kalender - Dag</title>
+        <title>Kalender - Måned</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css"  href="../css/calendarMonth.css">
         <link rel="stylesheet" type="text/css"  href="../css/visuals.css">
