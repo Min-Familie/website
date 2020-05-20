@@ -96,7 +96,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Kalender - Dag</title>
+        <title>Kalender - Event</title>
         <link rel="icon"       type="image/png" href="../visuals/logo.png">
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css"  href="../css/calendarSingleEvent.css">
