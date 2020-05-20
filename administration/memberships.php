@@ -183,7 +183,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Kalender - Dag</title>
+        <title>Administrer familien</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css"  href="../css/administrating.css">
         <link rel="stylesheet" type="text/css"  href="../css/visuals.css">
