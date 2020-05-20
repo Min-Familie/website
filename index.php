@@ -65,7 +65,7 @@
             <section class="news">
                 <?php
                     require 'rss/rss.php';
-                    $feed = new Rss('https://www.nrk.no/toppsaker.rss');
+                    $feed = new Rss('https://www.nrk.no/viten/toppsaker.rss'); // https://www.nrk.no/rss/
                     $feed -> showFeed(4);
                  ?>
             </section>
