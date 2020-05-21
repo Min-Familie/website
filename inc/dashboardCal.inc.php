@@ -6,35 +6,28 @@
     if (isset($_GET["day"])) {$inputDay = $_GET["day"];}
     else                     {$inputDay = date("Y-m-d");}
 
-    function getFamily($con, $user) {
+    function getFamily($con, $user, $family_id) {
         $family = [];
 
         // navn på alle familiene som personen er med i
-        $sql = "SELECT DISTINCT f.family_name, f.id
-                FROM families f
-                JOIN memberships m
-                ON f.id = m.family_id
-                WHERE m.family_id IN
-                (
-                    SELECT m1.family_id
-                    FROM memberships m1
-                    WHERE m1.user_id = $user
-                )
-
-
+        $sql = "SELECT family_name
+                FROM families
+                WHERE id = $family_id
+                
+                UNION
+                SELECT forename
+                FROM users
+                WHERE id = $user
 
                 UNION
                 /*alle familiemedldmmer i alle familier som personen er med i*/
-                SELECT DISTINCT u.forename, u.id
+                SELECT u.forename
                 FROM users u
                 JOIN memberships m
                 ON u.id = m.user_id
-                WHERE m.family_id IN
-                (
-                    SELECT m1.family_id
-                    FROM memberships m1
-                    WHERE m1.user_id = $user
-                )";
+                WHERE m.family_id = $family_id
+                AND NOT u.id = $user";
+        
         $result = $con -> query($sql);
         while($row = $result -> fetch_assoc()){
             array_push($family, $row["family_name"]);
@@ -42,7 +35,7 @@
         return $family;
     }
 
-    function getEvents($con, $user, $inputDay) {
+    function getEvents($con, $user, $family_id, $inputDay) {
         $events = [];
 
         // private events fra personen
@@ -68,12 +61,7 @@
                     FROM users u
                     JOIN memberships m
                     ON u.id = m.user_id
-                    WHERE m.family_id IN
-                    ( /*familiene personen er med i*/
-                        SELECT m1.family_id
-                        FROM memberships m1
-                        WHERE m1.user_id = $user
-                    )
+                    WHERE m.family_id = $family_id
                 )
                 AND NOT private /*filtrering*/
                 AND day = '$inputDay'
@@ -92,12 +80,7 @@
                     FROM families f1
                     JOIN memberships m
                     ON f1.id = m.family_id
-                    WHERE m.family_id IN
-                    (
-                        SELECT m1.family_id
-                        FROM memberships m1
-                        WHERE m1.user_id = $user
-                    )
+                    WHERE m.family_id = $family_id
                 )
                 AND day = '$inputDay'";
 
@@ -120,15 +103,15 @@
         return $events;
     }
 
-    function main($con, $inputDay){
+    function main($con, $inputDay, $family_id){
         $user = $_SESSION['id'];
         // familiemedlemmer fra db
-        $family = getFamily($con, $user);
+        $family = getFamily($con, $user, $family_id);
         // events fra db
-        $events = getEvents($con, $user, $inputDay);
+        $events = getEvents($con, $user, $family_id, $inputDay);
         require "calendarDay.inc.php";
     }
 
-    main($con, $inputDay);
+    main($con, $inputDay, $family_id);
 
 ?>
