@@ -148,6 +148,7 @@
                 echo "<p>Du har ikke tilgang til å redigere denne eventen.</p>";
                 echo "<script type=\"text/javascript\" src=\"../js/time.js\"></script>";
             }
+        
             echo "</main>";
             include "../visuals/footer.html";
         ?>
